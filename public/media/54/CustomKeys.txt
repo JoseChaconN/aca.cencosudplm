@@ -1,0 +1,399 @@
+// Eat Tree
+[Aeat]
+Hotkey=E
+Tip=Eat Tree (|cffffcc00E|r)
+
+// Entangle Gold Mine
+[Aent]
+Hotkey=R
+Tip=Entangle Gold Mine (|cffffcc00R|r)
+
+// Cargo Load Entangled Mine
+[Slo2]
+Hotkey=E
+Tip=Cargo Load Entangled Mine (|cffffcc00E|r)
+
+// Cargo Unload Entangled Mine
+[Adri]
+Hotkey=R
+Tip=Cargo Unload Entangled Mine (|cffffcc00R|r)
+
+// Replenish Mana and Life
+[Ambt]
+Hotkey=E
+Tip=Replenish Mana and Life (|cffffcc00E|r)
+
+// Battle Stations
+[Abtl]
+Hotkey=E
+Tip=Battle Stations (|cffffcc00E|r)
+
+// Stand Down
+[Astd]
+Hotkey=R
+Tip=Stand Down (|cffffcc00R|r)
+
+// Flame Strike
+[AHfs]
+Hotkey=E
+Tip=Flame Strike (|cffffcc00E|r)
+Researchhotkey=E
+
+// Banish
+[AHbn]
+Hotkey=R
+Tip=Banish (|cffffcc00R|r)
+Researchhotkey=R
+
+// Blizzard
+[AHbz]
+Hotkey=E
+Tip=Blizzard (|cffffcc00E|r)
+Researchhotkey=E
+
+// Summon Water Elemental
+[AHwe]
+Hotkey=R
+Tip=Summon Water Elemental (|cffffcc00R|r)
+Researchhotkey=R
+
+// Storm Bolt
+[AHtb]
+Hotkey=E
+Tip=Storm Bolt (|cffffcc00E|r)
+Researchhotkey=E
+
+// Thunder Clap
+[AHtc]
+Hotkey=R
+Tip=Thunder Clap (|cffffcc00R|r)
+Researchhotkey=R
+
+// Holy Light
+[AHhb]
+Hotkey=E
+Tip=Holy Light (|cffffcc00E|r)
+Researchhotkey=E
+
+// Divine Shield
+[AHds]
+Hotkey=R
+Tip=Divine Shield (|cffffcc00R|r)
+Researchhotkey=R
+
+// Wind Walk
+[AOwk]
+Hotkey=E
+Tip=Wind Walk (|cffffcc00E|r)
+Researchhotkey=E
+
+// Mirror Image
+[AOmi]
+Hotkey=R
+Tip=Mirror Image (|cffffcc00R|r)
+Researchhotkey=R
+
+// Chain Lightning
+[AOcl]
+Hotkey=E
+Tip=Chain Lightning (|cffffcc00E|r)
+Researchhotkey=E
+
+// Far Sight
+[AOfs]
+Hotkey=R
+Tip=Far Sight (|cffffcc00R|r)
+Researchhotkey=R
+
+// Healing Wave
+[AOhw]
+Hotkey=E
+Tip=Healing Wave (|cffffcc00E|r)
+Researchhotkey=E
+
+// Hex
+[AOhx]
+Hotkey=R
+Tip=Hex (|cffffcc00R|r)
+Researchhotkey=R
+
+// Shockwave
+[AOsh]
+Hotkey=E
+Tip=Shockwave (|cffffcc00E|r)
+Researchhotkey=E
+
+// War Stomp
+[AOws]
+Hotkey=R
+Tip=War Stomp (|cffffcc00R|r)
+Researchhotkey=R
+
+// Mana Burn
+[AEmb]
+Hotkey=E
+Tip=Mana Burn (|cffffcc00E|r)
+Researchhotkey=E
+
+// Immolation
+[AEim]
+Hotkey=R
+Tip=Immolation (|cffffcc00R|r)
+Researchhotkey=R
+Unhotkey=R
+
+// Entangling Roots
+[AEer]
+Hotkey=E
+Tip=Entangling Roots (|cffffcc00E|r)
+Researchhotkey=E
+
+// Force of Nature
+[AEfn]
+Hotkey=R
+Tip=Force of Nature (|cffffcc00R|r)
+Researchhotkey=R
+
+// Scout
+[AEst]
+Hotkey=E
+Tip=Scout (|cffffcc00E|r)
+Researchhotkey=E
+
+// Searing Arrows
+[AHfa]
+Hotkey=R
+Tip=Searing Arrows (|cffffcc00R|r)
+Researchhotkey=R
+
+// Blink
+[AEbl]
+Hotkey=R
+Tip=Blink (|cffffcc00R|r)
+Researchhotkey=R
+
+// Fan of Knives
+[AEfk]
+Hotkey=E
+Tip=Fan of Knives (|cffffcc00E|r)
+Researchhotkey=E
+
+// Spirit of Vengeance
+[Avng]
+Hotkey=E
+Tip=Spirit of Vengeance (|cffffcc00E|r)
+
+// Impale
+[AUim]
+Hotkey=E
+Tip=Impale (|cffffcc00E|r)
+Researchhotkey=E
+
+// Spiked Carapace
+[AUts]
+Hotkey=R
+Tip=Spiked Carapace (|cffffcc00R|r)
+Researchhotkey=R
+
+// Death Coil
+[AUdc]
+Hotkey=E
+Tip=Death Coil (|cffffcc00E|r)
+Researchhotkey=E
+
+// Death Pact
+[AUdp]
+Hotkey=R
+Tip=Death Pact (|cffffcc00R|r)
+Researchhotkey=R
+
+// Carrion Swarm
+[AUcs]
+Hotkey=E
+Tip=Carrion Swarm (|cffffcc00E|r)
+Researchhotkey=E
+
+// Sleep
+[AUsl]
+Hotkey=R
+Tip=Sleep (|cffffcc00R|r)
+Researchhotkey=R
+
+// Frost Nova
+[AUfn]
+Hotkey=E
+Tip=Frost Nova (|cffffcc00E|r)
+Researchhotkey=E
+
+// Frost Armor
+[AUfu]
+Hotkey=R
+Tip=Frost Armor (|cffffcc00R|r)
+Researchhotkey=R
+
+// Forked Lightning
+[ANfl]
+Hotkey=E
+Tip=Forked Lightning (|cffffcc00E|r)
+Researchhotkey=E
+
+// Frost Arrows
+[ANfa]
+Hotkey=R
+Tip=Frost Arrows (|cffffcc00R|r)
+Researchhotkey=R
+
+// Howl of Terror
+[ANht]
+Hotkey=R
+Tip=Howl of Terror (|cffffcc00R|r)
+Researchhotkey=R
+
+// Rain of Fire
+[ANrf]
+Hotkey=E
+Tip=Rain of Fire (|cffffcc00E|r)
+Researchhotkey=E
+
+// Dispel Magic
+[Adsm]
+Hotkey=E
+Tip=Dispel Magic (|cffffcc00E|r)
+
+// War Stomp
+[Awrs]
+Hotkey=R
+Tip=War Stomp (|cffffcc00R|r)
+
+// Breath of Fire
+[ANbf]
+Hotkey=E
+Tip=Breath of Fire (|cffffcc00E|r)
+Researchhotkey=E
+
+// Drunken Haze
+[ANdh]
+Hotkey=R
+Tip=Drunken Haze (|cffffcc00R|r)
+Researchhotkey=R
+
+// Cyclone
+[ACcy]
+Hotkey=R
+Tip=Cyclone (|cffffcc00R|r)
+
+// Dispel Magic
+[Adsm]
+Hotkey=E
+Tip=Dispel Magic (|cffffcc00E|r)
+
+// Taunt
+[ANta]
+Hotkey=R
+Tip=Taunt (|cffffcc00R|r)
+
+// Summon Bear
+[ANsg]
+Hotkey=E
+Tip=Summon Bear (|cffffcc00E|r)
+Researchhotkey=E
+
+// Summon Quilbeast
+[ANsq]
+Hotkey=R
+Tip=Summon Quilbeast (|cffffcc00R|r)
+Researchhotkey=R
+
+// Blink
+[ANbl]
+Hotkey=E
+Tip=Blink (|cffffcc00E|r)
+
+// Frenzy
+[Afzy]
+Hotkey=E
+Tip=Frenzy (|cffffcc00E|r)
+
+// Black Arrow
+[ANba]
+Hotkey=R
+Tip=Black Arrow (|cffffcc00R|r)
+Researchhotkey=R
+
+// Silence
+[ANsi]
+Hotkey=E
+Tip=Silence (|cffffcc00E|r)
+Researchhotkey=E
+
+// Pocket Factory
+[ANsy]
+Hotkey=E
+Tip=Pocket Factory (|cffffcc00E|r)
+Researchhotkey=E
+[ANs1]
+Hotkey=E
+Tip=Pocket Factory (|cffffcc00E|r)
+Researchhotkey=E
+[ANs2]
+Hotkey=E
+Tip=Pocket Factory (|cffffcc00E|r)
+Researchhotkey=E
+[ANs3]
+Hotkey=E
+Tip=Pocket Factory (|cffffcc00E|r)
+Researchhotkey=E
+
+// Cluster Rockets
+[ANcs]
+Hotkey=R
+Tip=Cluster Rockets (|cffffcc00R|r)
+Researchhotkey=R
+[ANc1]
+Hotkey=R
+Tip=Cluster Rockets (|cffffcc00R|r)
+Researchhotkey=R
+[ANc2]
+Hotkey=R
+Tip=Cluster Rockets (|cffffcc00R|r)
+Researchhotkey=R
+[ANc3]
+Hotkey=R
+Tip=Cluster Rockets (|cffffcc00R|r)
+Researchhotkey=R
+
+// Kaboom!
+[Asdg]
+Hotkey=E
+Tip=Kaboom! (|cffffcc00E|r)
+[Asd2]
+Hotkey=E
+Tip=Kaboom! (|cffffcc00E|r)
+[Asd3]
+Hotkey=E
+Tip=Kaboom! (|cffffcc00E|r)
+
+// Healing Spray
+[ANhs]
+Hotkey=E
+Tip=Healing Spray (|cffffcc00E|r)
+Researchhotkey=E
+
+// Chemical Rage
+[ANcr]
+Hotkey=R
+Tip=Chemical Rage (|cffffcc00R|r)
+Researchhotkey=R
+
+// Soul Burn
+[ANso]
+Hotkey=E
+Tip=Soul Burn (|cffffcc00E|r)
+Researchhotkey=E
+
+// Summon Lava Spawn
+[ANlm]
+Hotkey=R
+Tip=Summon Lava Spawn (|cffffcc00R|r)
+Researchhotkey=R
+
