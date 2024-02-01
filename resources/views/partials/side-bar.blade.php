@@ -28,26 +28,35 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        @hasanyrole('admin|administrador|aca')
+        @hasanyrole('aca|aca importado')
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProspectosProductos"
                 aria-expanded="true" aria-controls="collapseProspectosProductos">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Prospectos Productos</span>
             </a>
-            <div id="collapseProspectosProductos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                @hasanyrole('admin|administrador|aca')
+            <div id="collapseProspectosProductos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">                
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Prospectos Productos:</h6>
-                    @hasanyrole('comercial')
-                        <a class="collapse-item" href="{{route('prospectos.create')}}">Nueva Solicitud</a>
-                    @endhasanyrole
-                    @hasanyrole('comercial|calidad')
-                        <a class="collapse-item" href="{{route('prospectos.list.proceso')}}">Solicitudes en Proceso</a>
-                        <a class="collapse-item" href="{{route('prospectos.list.cerrado')}}">Solicitudes Cerradas</a>
-                    @endhasanyrole
+                    @role('aca')
+                        @role('comercial')
+                            <a class="collapse-item" href="{{route('prospectos.create')}}">Nueva Solicitud</a>
+                        @endrole
+                        @hasanyrole('comercial|calidad')
+                            <a class="collapse-item" href="{{route('prospectos.list.proceso')}}">Solicitudes en Proceso</a>
+                            <a class="collapse-item" href="{{route('prospectos.list.cerrado')}}">Solicitudes Cerradas</a>
+                        @endhasanyrole
+                    @endrole
+                    @role('aca importado')
+                        @role('comercial')
+                            <a class="collapse-item" href="{{route('prospectos-importados.create')}}">Nueva Solicitud</a>
+                        @endrole
+                        @hasanyrole('comercial|calidad')
+                            <a class="collapse-item" href="{{route('prospectos.importados.list.proceso')}}">Solicitudes en Proceso</a>
+                            <a class="collapse-item" href="{{route('prospectos.importados.list.cerrado')}}">Solicitudes Cerradas</a>
+                        @endhasanyrole
+                    @endrole
                 </div>
-                @endhasanyrole
             </div>
         </li>
         @endhasanyrole

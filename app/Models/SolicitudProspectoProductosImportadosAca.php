@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SolicitudProspectoProductosAca extends Model
+class SolicitudProspectoProductosImportadosAca extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'solicitud_prospectos_productos_aca';
+    protected $table = 'solicitud_prospecto_productos_importados_aca';
     protected $guarded = [];
 
     public function productos_solicitud_prospecto(): HasMany
     {
-        return $this->HasMany(ProductosSolicitudProspectosAca::class,'id_solicitud','id');
+        return $this->HasMany(ProductosSolicitudImportadosAca::class,'id_solicitud','id');
     }
     public function responsable_creador(): BelongsTo
     {
