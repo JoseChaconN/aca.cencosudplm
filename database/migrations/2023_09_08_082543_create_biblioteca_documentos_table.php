@@ -17,11 +17,13 @@ return new class extends Migration
             $table->softDeletes();
             $table->integer('id_user')->nullable();
             $table->integer('id_solicitud')->nullable();
+            $table->integer('id_solicitud_importado')->nullable();
             $table->integer('id_auditoria')->nullable();
             $table->integer('id_visita_inspectiva')->nullable();
             $table->integer('id_documento_biblioteca')->nullable();
             $table->integer('id_producto')->nullable();
             $table->integer('id_prospecto')->nullable();
+            $table->integer('id_prospecto_importado')->nullable();
             $table->integer('id_proveedor')->nullable();
             $table->integer('id_documento')->nullable();            
             $table->date('fecha_emision')->nullable();

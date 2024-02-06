@@ -73,6 +73,12 @@
                                 <input type="text" class="form-control form-control-sm" id="codigo_ean" name="codigo_ean" placeholder="Código de Barra (EAN)" value="{{ empty($request['codigo_ean']) ? '' : $request['codigo_ean'] }}">
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="codigo_ean">Código SAP:</label>
+                                <input type="text" class="form-control form-control-sm" id="codigo_sap" name="codigo_sap" placeholder="Código SAP" value="{{ empty($request['codigo_sap']) ? '' : $request['codigo_sap'] }}">
+                            </div>
+                        </div>
                         <!--div class="col-md-4">
                             <div class="form-group">
                                 <label for="rutProv">Código SAP:</label>
@@ -123,6 +129,7 @@
                                 <th>Rut del proveedor</th>
                                 <th>Producto</th>
                                 <th>Código de Barra (EAN)</th>
+                                <th>Código SAP</th>
                                 <th>Fecha vencimiento</th>
                                 <th>-</th>
                             </tr>
@@ -133,8 +140,9 @@
                                     <td>{{$documento->documento->nombre}}</td>
                                     <td>{{$documento->proveedor->nombre}}</td>
                                     <td>{{$documento->proveedor->rut}}</td>
-                                    <td>{{$documento->producto_prospecto->nombre_producto}}</td>
-                                    <td>{{$documento->producto_prospecto->codigo_barra}}</td>
+                                    <td>{{ !empty($documento->producto_prospecto->nombre_producto) ? $documento->producto_prospecto->nombre_producto : (!empty($documento->producto_prospecto_importado->product_name) ? $documento->producto_prospecto_importado->product_name : '') }}</td>
+                                    <td>{{ !empty($documento->producto_prospecto->codigo_barra) ? $documento->producto_prospecto->codigo_barra : (!empty($documento->producto_prospecto_importado->upc_bar_code) ? $documento->producto_prospecto_importado->upc_bar_code : '') }}</td>
+                                    <td>{{ !empty($documento->producto_prospecto->sap) ? $documento->producto_prospecto->sap : (!empty($documento->producto_prospecto_importado->sap) ? $documento->producto_prospecto_importado->sap : '') }}</td>
                                     <td>{{(!empty($documento->fecha_vencimiento)) ? date('d-m-Y',strtotime($documento->fecha_vencimiento)) : ''}}</td>
                                     <td>
                                         @if (!empty($adjunto_documentos[$documento->id]))

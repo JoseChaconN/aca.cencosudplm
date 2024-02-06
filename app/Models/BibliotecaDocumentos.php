@@ -35,16 +35,22 @@ class BibliotecaDocumentos extends Model implements HasMedia
     {
         return $this->HasOne(User::class,'id','id_user')->withDefault();
     }
+    public function producto_prospecto_importado(): HasOne
+    {
+        return $this->HasOne(ProductosSolicitudImportadosAca::class,'id','id_prospecto_importado')->withDefault();
+    }
 
-    public function prospecto()
+
+
+
+    /*public function prospecto()
     {
         return $this->belongsTo(Prospecto::class, 'id_prospecto', 'id');
     }
-
     public function documento_prospecto()
     {
         return $this->belongsTo(ListadoDocumentos::class, 'id_documento', 'id');
-    }
+    }*/
 
 
 }

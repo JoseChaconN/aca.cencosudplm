@@ -40,6 +40,7 @@ class BibliotecaDocumentosController extends Controller
         $area = $request->input('area');
         $nombre_producto = (!empty($request->input('nombre_producto'))) ? $request->input('nombre_producto') : '%';
         $codigo_ean = (!empty($request->input('codigo_ean'))) ? $request->input('codigo_ean') : '%';
+        $codigo_sap = (!empty($request->input('codigo_sap'))) ? $request->input('codigo_sap') : '%';
         $nombre_proveedor = (!empty($request->input('nombre_proveedor'))) ? $request->input('nombre_proveedor') : '%';
         $rut_proveedor = (!empty($request->input('rut_proveedor'))) ? $request->input('rut_proveedor') : '%';
         $data['request'] =$request;
@@ -50,7 +51,7 @@ class BibliotecaDocumentosController extends Controller
             foreach ($listado_documentos as $item) {
                 $id_documentos[]=$item->id;
             }
-            $documentos_query = BibliotecaDocumentos::with('proveedor','producto_prospecto','documento','responsable');
+            $documentos_query = BibliotecaDocumentos::with('proveedor','producto_prospecto','producto_prospecto_importado','documento','responsable');
             
             if($mes_creado == 99){
                 $documentos_query->where('created_at', 'LIKE' , "%$ano_creado%");
@@ -66,14 +67,38 @@ class BibliotecaDocumentosController extends Controller
                     $query->where('nombre', 'LIKE', "%$nombre_proveedor%");
                 });
             }
-            if($nombre_producto != '%' || $codigo_ean != '%' ){
-                $documentos_query->WhereHas('producto_prospecto', function ($query) use ($nombre_producto,$codigo_ean) {
-                    $query->where('nombre_producto', 'LIKE', "%$nombre_producto%");
+            if($nombre_producto != '%' || $codigo_ean != '%' || $codigo_sap != '%'){
+
+                /*$documentos_query->WhereHas('producto_prospecto', function ($query) use ($nombre_producto,$codigo_ean,$codigo_sap) {
+                    $query->orWhere('nombre_producto', 'LIKE', "%$nombre_producto%")
+                    ->orWhere('codigo_barra', 'LIKE', "%$codigo_ean%");
+                });
+                $documentos_query->WhereHas('producto_prospecto_importado', function ($query) use ($nombre_producto,$codigo_ean,$codigo_sap) {
+                    $query->orWhere('sap', 'LIKE', "%$codigo_sap%")
+                    ->orWhere('upc_bar_code', 'LIKE', "%$codigo_ean%")
+                    ->orWhere('sap', 'LIKE', "%$codigo_sap%");
+                });*/
+                $documentos_query->where(function ($query) use ($nombre_producto, $codigo_ean, $codigo_sap) {
+                    $query->orWhere(function ($subquery) use ($nombre_producto, $codigo_ean) {
+                        $subquery->whereHas('producto_prospecto', function ($subsubquery) use ($nombre_producto, $codigo_ean) {
+                            $subsubquery->where('nombre_producto', 'LIKE', "%$nombre_producto%")
+                                         ->Where('codigo_barra', 'LIKE', "%$codigo_ean%");
+                        });
+                    });
+                
+                    $query->orWhere(function ($subquery) use ($nombre_producto,$codigo_ean, $codigo_sap) {
+                        $subquery->whereHas('producto_prospecto_importado', function ($subsubquery) use ($nombre_producto,$codigo_ean, $codigo_sap) {
+                            $subsubquery->where('upc_bar_code', 'LIKE', "%$codigo_ean%")
+                                         ->Where('sap', 'LIKE', "%$codigo_sap%")
+                                         ->Where('product_name', 'LIKE', "%$nombre_producto%"); // Nombre diferente en esta tabla
+                        });
+                    });
                 });
             }
             
             $data['documentos'] = $documentos_query->get();
 
+            
             foreach ($data['documentos'] as $item) {
                 $doc=BibliotecaDocumentos::find($item->id);
                 $mediaItems = $doc->getMedia("*");

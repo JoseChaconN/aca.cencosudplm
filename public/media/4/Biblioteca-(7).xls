@@ -1,0 +1,219 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+    	<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body>
+		<table class="table table-bordered table-striped" border="1">
+			<thead>
+				<tr>
+					<th>N°</th>
+					<th>Producto</th>
+					<th>Código Producto</th>
+					<th>Proveedor</th>
+					<th>Rut Proveedor</th>
+					<th>Nombre Archivo</th>
+					<th>Fecha de Vencimiento</th>
+					<th>Certificación</th>
+					<th>Área</th>
+				</tr>
+			</thead>
+			<tbody>
+															<tr>
+							<td>1</td>
+							<td>GALL.MINI COCO SIN GLUTEN 30 GR</td>
+							<td>7803520002492</td>
+							<td>ECOVIDA S.A.</td>
+							<td>96630110</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>2</td>
+							<td>BARRA MASTIC COLOM FRESA CRUNCHY 360GR</td>
+							<td>7702011150295</td>
+							<td>PROSUD S A</td>
+							<td>78030690</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>3</td>
+							<td>DIP UNTABLE AJO BUKA 110GR</td>
+							<td>7804627651057</td>
+							<td>COMERCIAL BUENA MESA LTDA</td>
+							<td>76043907</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>4</td>
+							<td>DIP UNTABLE CHEDDAR BUKA 110GR</td>
+							<td>7804627651040</td>
+							<td>COMERCIAL BUENA MESA LTDA</td>
+							<td>76043907</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>5</td>
+							<td>DIP UNTABLE YOGURT CIBULETTE BUKA 110GR</td>
+							<td>7804627651064</td>
+							<td>COMERCIAL BUENA MESA LTDA</td>
+							<td>76043907</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>6</td>
+							<td>PAPA FRITA FLOW CORTE AMERICANO 130 GR</td>
+							<td>7804627650975</td>
+							<td>COMERCIAL BUENA MESA LTDA</td>
+							<td>76043907</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>7</td>
+							<td>GALLETAS SALMAS CAMOTE ZANAHORIA 90G</td>
+							<td>7750727013502</td>
+							<td>IDEAL S.A.</td>
+							<td>82623500</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>8</td>
+							<td>PAN MOLDE BLANCO NUTRISA 600G</td>
+							<td>7803500001108</td>
+							<td>NUTRICION Y ALIMENTOS S.A.</td>
+							<td>95214000</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>9</td>
+							<td>PAN MOLDE INTEGRAL NUTRISA 600G</td>
+							<td>7803500001101</td>
+							<td>NUTRICION Y ALIMENTOS S.A.</td>
+							<td>95214000</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>10</td>
+							<td>YOGURT BAT SOPROLE 120G MORA</td>
+							<td>7802900003890</td>
+							<td>COMERCIAL SANTA ELENA S.A.</td>
+							<td>84472400</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>11</td>
+							<td>Yog Soprole Next Colageno Frambuesa 155g</td>
+							<td>7802900003715</td>
+							<td>COMERCIAL SANTA ELENA S.A.</td>
+							<td>84472400</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>12</td>
+							<td>Yog Soprole Next Colageno Frutilla 155g</td>
+							<td>7802900003692</td>
+							<td>COMERCIAL SANTA ELENA S.A.</td>
+							<td>84472400</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>13</td>
+							<td>Yog Soprole Next Colageno Vainilla 155g</td>
+							<td>7802900003708</td>
+							<td>COMERCIAL SANTA ELENA S.A.</td>
+							<td>84472400</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>14</td>
+							<td>LECHE DESCREMADA SURLAT B.A. 1L	</td>
+							<td>7804617470309</td>
+							<td>QUILLAYES SURLAT COMERCIAL SPA</td>
+							<td>96954210</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>15</td>
+							<td>LECHE ENTERA SURLAT B.A. 1L	</td>
+							<td>7804617470286</td>
+							<td>QUILLAYES SURLAT COMERCIAL SPA</td>
+							<td>96954210</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>16</td>
+							<td>LECHE SEMIDESC SURLAT B.A. 1L	</td>
+							<td>7804617470293</td>
+							<td>QUILLAYES SURLAT COMERCIAL SPA</td>
+							<td>96954210</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																				<tr>
+							<td>17</td>
+							<td>PULPA JUGO FRUTILLA MVERDE 335 GR</td>
+							<td>7801220002163</td>
+							<td>ALIMENTOS Y FRUTOS S.A.</td>
+							<td>96557910</td>
+							<td>Libre de Gluten</td>
+							<td>-</td>
+							<td></td>
+						</tr>
+																											<tr>
+						<td>1</td>
+						<td>MAYONESA CASERA SIN GLUTEN/LACTOSA 426G</td>
+						<td>8410086315035</td>
+						<td>ACEITES YBARRA S.A.</td>
+						<td>9000103638</td>
+						<td>SAP 1976714_ mayones ligera 450ml_ GLUTEN Y LACTOSA.pdf</td>
+						<td>2024-07-19</td>
+						<td>
+																																																																																																																												Libre de Gluten																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																			
+						</td>
+						<td>Importados</td>
+					</tr>
+														<tr>
+						<td>2</td>
+						<td>MAYONESA LIVIANA SIN GLUTEN/LACTOSA 445G</td>
+						<td>8410086331059</td>
+						<td>ACEITES YBARRA S.A.</td>
+						<td>9000103638</td>
+						<td>SAP 1976714_ mayones ligera 450ml_ GLUTEN Y LACTOSA.pdf</td>
+						<td>2024-07-19</td>
+						<td>
+																																																																																																																												Libre de Gluten																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							
+						</td>
+						<td>Importados</td>
+					</tr>
+											</tbody>
+	</body>
+</html>

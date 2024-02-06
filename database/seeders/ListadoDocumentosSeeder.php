@@ -45,6 +45,8 @@ class ListadoDocumentosSeeder extends Seeder
             ['nombre' => 'Certificado Orgánico de Instalación', 'mostrar_prospecto' => '1', 'mostrar_auditoria' => '2', 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => 1],
             ['nombre' => 'Certificado Orgánico Master', 'mostrar_prospecto' => '1', 'mostrar_auditoria' => '2', 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => 1],
             ['nombre' => 'Certificado Orgánico Transacción', 'mostrar_prospecto' => '1', 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => 1],
+            ['nombre' => 'Libre de Gluten', 'mostrar_prospecto' => '1', 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => 1],
+            ['nombre' => 'Sin Lactosa', 'mostrar_prospecto' => '1', 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => 1],
             ['nombre' => 'Kosher', 'mostrar_prospecto' => '1', 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => 1],
             ['nombre' => 'Jalal', 'mostrar_prospecto' => '1', 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => 1],
             ['nombre' => 'Non GMO', 'mostrar_prospecto' => '1', 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => 1],
@@ -84,7 +86,18 @@ class ListadoDocumentosSeeder extends Seeder
             ['nombre' => 'Documentos Auditorias', 'mostrar_prospecto' => null, 'tipo_documento' => null, 'file' => null],
         ];
         ListadoDocumentos::insert($documentos_auditorias_visita_inspectivas);
-        
+        //////////////CERTIFICACIONES IMPORTADOS///////////////////////////
+        $certificaciones_fijas_importados = [
+            ['nombre' => 'Health', 'mostrar_prospecto' => NULL, 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            ['nombre' => 'Free of AFP', 'mostrar_prospecto' => NULL, 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            ['nombre' => 'Hidroxianthracene', 'mostrar_prospecto' => NULL, 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            ['nombre' => 'Aloine', 'mostrar_prospecto' => NULL, 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            ['nombre' => 'Flow Chart', 'mostrar_prospecto' => NULL, 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            ['nombre' => 'Label design', 'mostrar_prospecto' => NULL, 'mostrar_auditoria' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            
+        ];
+        ListadoDocumentos::insert($certificaciones_fijas_importados);
+
         $ListadoDocumentos = ListadoDocumentos::all();
         foreach ($ListadoDocumentos as $item) {
             Tag::findOrCreate($item->nombre);

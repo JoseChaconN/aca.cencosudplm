@@ -801,7 +801,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="custom-file">
-                                                                                        <input type="file" class="custom-file-input documento_planta">
+                                                                                        <input type="file" class="custom-file-input" name="health_certificate_file[{{ $producto->id }}]">
                                                                                         <label class="custom-file-label" >Buscar Archivo</label>
                                                                                       </div>
                                                                                 </div>
@@ -820,7 +820,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="custom-file">
-                                                                                        <input type="file" class="custom-file-input documento_planta">
+                                                                                        <input type="file" class="custom-file-input" name="organic_certification_file[{{ $producto->id }}]">
                                                                                         <label class="custom-file-label" >Buscar Archivo</label>
                                                                                       </div>
                                                                                 </div>
@@ -839,7 +839,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="custom-file">
-                                                                                        <input type="file" class="custom-file-input documento_planta">
+                                                                                        <input type="file" class="custom-file-input" name="free_afp_file[{{ $producto->id }}]">
                                                                                         <label class="custom-file-label" >Buscar Archivo</label>
                                                                                       </div>
                                                                                 </div>
@@ -1129,8 +1129,8 @@
                                                                                 <div class="col-sm-4">
                                                                                     <select class="form-control form-control-sm" name="product_type[{{ $producto->id }}]">
                                                                                         <option value="">Seleccione</option>
-                                                                                        <option {{ ($producto->gmo_information == 'ml') ? 'selected' : ''; }} value="ml">Liquido</option>
-                                                                                        <option {{ ($producto->gmo_information == 'gr') ? 'selected' : ''; }} value="gr">Solido</option>
+                                                                                        <option {{ ($producto->product_type == 'ml') ? 'selected' : ''; }} value="ml">Liquido</option>
+                                                                                        <option {{ ($producto->product_type == 'gr') ? 'selected' : ''; }} value="gr">Solido</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -1491,7 +1491,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="custom-file">
-                                                                                        <input type="file" class="custom-file-input documento_planta">
+                                                                                        <input type="file" class="custom-file-input" name="haccp_file[{{ $producto->id }}]">
                                                                                         <label class="custom-file-label" >Buscar Archivo</label>
                                                                                       </div>
                                                                                 </div>
@@ -1509,7 +1509,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="custom-file">
-                                                                                        <input type="file" class="custom-file-input documento_planta">
+                                                                                        <input type="file" class="custom-file-input" name="others_certifications_file[{{ $producto->id }}]">
                                                                                         <label class="custom-file-label" >Buscar Archivo</label>
                                                                                       </div>
                                                                                 </div>
@@ -1726,7 +1726,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="custom-file">
-                                                                                        <input type="file" class="custom-file-input documento_planta">
+                                                                                        <input type="file" class="custom-file-input" name="gluten_free_file[{{ $producto->id }}]">
                                                                                         <label class="custom-file-label" >Buscar Archivo</label>
                                                                                       </div>
                                                                                 </div>
@@ -1745,7 +1745,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="custom-file">
-                                                                                        <input type="file" class="custom-file-input documento_planta">
+                                                                                        <input type="file" class="custom-file-input" name="hidroxianthracene_file[{{ $producto->id }}]">
                                                                                         <label class="custom-file-label" >Buscar Archivo</label>
                                                                                       </div>
                                                                                 </div>
@@ -1764,7 +1764,7 @@
                                                                                 </div>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="custom-file">
-                                                                                        <input type="file" class="custom-file-input documento_planta">
+                                                                                        <input type="file" class="custom-file-input" name="aloine_file[{{ $producto->id }}]">
                                                                                         <label class="custom-file-label" >Buscar Archivo</label>
                                                                                       </div>
                                                                                 </div>
@@ -1777,7 +1777,7 @@
                                                                         </div>
                                                                         <div class="col-sm-8">
                                                                             <div class="custom-file">
-                                                                                <input type="file" class="custom-file-input documento_planta">
+                                                                                <input type="file" class="custom-file-input" name="flow_chart_file[{{ $producto->id }}]">
                                                                                 <label class="custom-file-label" >Buscar Archivo</label>
                                                                               </div>
                                                                         </div>
@@ -1788,7 +1788,7 @@
                                                                         </div>
                                                                         <div class="col-sm-8">
                                                                             <div class="custom-file">
-                                                                                <input type="file" class="custom-file-input documento_planta">
+                                                                                <input type="file" class="custom-file-input" name="label_design_file[{{ $producto->id }}]">
                                                                                 <label class="custom-file-label" >Buscar Archivo</label>
                                                                               </div>
                                                                         </div>

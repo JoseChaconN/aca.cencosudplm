@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExcelImport;
+use App\Models\BibliotecaDocumentos;
 use Spatie\Activitylog\Facades\LogBatch;
 
 use App\Models\Seccion;
@@ -183,7 +184,6 @@ class ProspectosAcaImportadosController extends Controller
                 if($user->hasRole('calidad')){
                     
                     #########SI EXISTE ARCHIVO EXCEL ESE SE GUARDA PRIMERO###############
-
 
                     #Variables
                         $observacion_solicitud = $request->input('observacion_solicitud');
@@ -529,6 +529,19 @@ class ProspectosAcaImportadosController extends Controller
                         $gluten_free_obs = $request->input('gluten_free_obs');
                         $hidroxianthracene_obs = $request->input('hidroxianthracene_obs');
                         $aloine_obs = $request->input('aloine_obs');
+                        
+                    ###VARIABLES ARCHIVOS
+                        $haccp_file=$request->file('haccp_file');
+                        $others_certifications_file = $request->file('others_certifications_file');
+                        $health_certificate_file = $request->file('health_certificate_file');
+                        $organic_certification_file = $request->file('organic_certification_file');
+                        $certification_free_afp_file = $request->file('certification_free_afp_file');
+                        $gluten_free_file = $request->file('gluten_free_file');
+                        $hidroxianthracene_file = $request->file('hidroxianthracene_file');
+                        $aloine_file = $request->file('aloine_file');
+                        $flow_chart_file = $request->file('flow_chart_file');
+                        $label_design_file = $request->file('label_design_file');
+
                     foreach ($id_producto as $key => $value) {
 
                         #########SI EXISTE ARCHIVO EXCEL ESE ES EL QUE GUARDA ###############
@@ -910,7 +923,138 @@ class ProspectosAcaImportadosController extends Controller
                             ->withProperties(['old_data' => $obs_old_data_prod, 'new_data' => $obs_producto])
                             ->log('Prospecto Solicitud editado OBS');
 
-                            
+                            //////////ARCHIVOS////////////
+                                
+                                ##health_certificate
+                                if(!empty($health_certificate_file[$value])){
+                                    $health_certificate_q=BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 60,
+                                    ]);
+                                    if ($health_certificate_file[$value]->isValid()) {
+                                        $health_certificate_q->addMedia($health_certificate_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
+                                ##organic_certification
+                                if(!empty($organic_certification_file[$value])){
+                                    $organic_certification_q=BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 23,
+                                    ]);
+                                    if ($organic_certification_file[$value]->isValid()) {
+                                        $organic_certification_q->addMedia($organic_certification_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
+                                ##certification_free_afp
+                                if(!empty($certification_free_afp_file[$value])){
+                                    $certification_free_afp_file_q=BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 61,
+                                    ]);
+                                    if ($certification_free_afp_file[$value]->isValid()) {
+                                        $certification_free_afp_file_q->addMedia($certification_free_afp_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
+                                ##haccp
+                                if(!empty($haccp_file[$value])){
+                                    $haccp_q=BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 37,
+                                    ]);
+                                    if ($haccp_file[$value]->isValid()) {
+                                        $haccp_q->addMedia($haccp_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
+                                ##others_certifications
+                                if(!empty($others_certifications_file[$value])){
+                                    $others_certifications_q=BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 22,
+                                    ]);
+                                    if ($others_certifications_file[$value]->isValid()) {
+                                        $others_certifications_q->addMedia($others_certifications_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
+                                ##gluten_free
+                                if(!empty($gluten_free_file[$value])){
+                                    $gluten_free_q=BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 27,
+                                    ]);
+                                    if ($gluten_free_file[$value]->isValid()) {
+                                        $gluten_free_q->addMedia($gluten_free_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
+                                ##hidroxianthracene
+                                if(!empty($hidroxianthracene_file[$value])){
+                                    $hidroxianthracene_q=BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 62,
+                                    ]);
+                                    if ($hidroxianthracene_file[$value]->isValid()) {
+                                        $hidroxianthracene_q->addMedia($hidroxianthracene_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
+                                ##aloine
+                                if(!empty($aloine_file[$value])){
+                                    $aloine_q = BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 63,
+                                    ]);
+                                    if ($aloine_file[$value]->isValid()) {
+                                        $aloine_q->addMedia($aloine_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
+                                ##flow_chart
+                                if(!empty($flow_chart_file[$value])){
+                                    $flow_chart_q = BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 64,
+                                    ]);
+                                    if ($flow_chart_file[$value]->isValid()) {
+                                        $flow_chart_q->addMedia($flow_chart_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
+                                ##label_design_file
+                                if(!empty($label_design_file[$value])){
+                                    $label_design_file_q = BibliotecaDocumentos::create([
+                                        'id_user' => Auth::user()->id,
+                                        'id_solicitud_importado' => $id,
+                                        'id_prospecto_importado' => $value,
+                                        'id_proveedor' => $producto->id_proveedor,
+                                        'id_documento' => 65,
+                                    ]);
+                                    if ($label_design_file[$value]->isValid()) {
+                                        $label_design_file_q->addMedia($label_design_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                    }
+                                }
                         }
                         /*if($estado_cl[$value] > 1){
                             $producto->update(['fecha_cierre' => date('Y-m-d')]);
@@ -997,7 +1141,27 @@ class ProspectosAcaImportadosController extends Controller
         return view('prospectos-importados.list-proceso-prospectos', $data);
     }
     public function list_prospectos_cerrado()
-    {}
+    {
+        $data['prospectos'] = SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto','responsable_comercial','responsable_calidad')
+                                                                    ->where('status',2)
+                                                                    ->where(function ($query) {
+                                                                        $query->where('id_creador', '!=' ,Auth::user()->id)
+                                                                                ->orWhere('id_comercial', '!=' ,Auth::user()->id)
+                                                                                ->orWhere('id_calidad', '!=' ,Auth::user()->id);
+                                                                    })->get();
+        $data['mis_prospectos'] = SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto','responsable_comercial','responsable_calidad')
+                                                                    ->where('status',2)
+                                                                    ->where(function ($query) {
+                                                                        $query->where('id_creador',Auth::user()->id)
+                                                                                ->orWhere('id_comercial',Auth::user()->id)
+                                                                                ->orWhere('id_calidad',Auth::user()->id);
+                                                                    })->get();
+        $data['sin_calidad_prospectos'] = SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto','responsable_comercial','responsable_calidad')
+                                                                    ->where('status',2)
+                                                                    ->orWhere('id_calidad',NULL)
+                                                                    ->get();
+        return view('prospectos-importados.list-cerrado-prospectos', $data);
+    }
     public function prospecto_PDF($id)
     {}
     public function planilla_solicitud_prospecto_excel(string $id){

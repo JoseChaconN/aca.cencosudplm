@@ -44,13 +44,13 @@
                                                             <form class="form-inline" id="deleteForm_{{$prospecto->id}}">
                                                                 @csrf
                                                                 <input type="hidden" name="id" value="{{$prospecto->id}}">
-                                                                <a class="btn btn-primary btn-circle btn-sm" href="{{route('prospectos.edit',$prospecto->id)}}">
+                                                                <a class="btn btn-primary btn-circle btn-sm" href="{{route('prospectos-importados.edit',$prospecto->id)}}">
                                                                     <i class="fa fa-check" title="Editar"></i>
                                                                 </a>
                                                                 <a class="ml-2 btn btn-primary btn-circle btn-sm" href="#" onclick="fnShowProductosModal({{$prospecto->id}},{{$prospecto->productos_solicitud_prospecto}})">
                                                                     <i class="fas fa-clipboard-list" title="Ver Productos"></i>
                                                                 </a>
-                                                                <button class="ml-2 btn btn-danger btn-circle btn-sm" type="button" onclick="fnDeleteData('{{route('prospectos.delete')}}',{{$prospecto->id}},'{{$prospecto->n_solicitud}}')">
+                                                                <button class="ml-2 btn btn-danger btn-circle btn-sm" type="button" onclick="fnDeleteData('{{route('prospectos-importados.delete')}}',{{$prospecto->id}},'{{$prospecto->n_solicitud}}')">
                                                                     <i class="fa fa-trash" title="Eliminar"></i>
                                                                 </button>
                                                             </form>
@@ -97,13 +97,13 @@
                                                             <form class="form-inline" id="deleteForm_{{$prospecto->id}}">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <a class="btn btn-primary btn-circle btn-sm" href="{{route('prospectos.edit',$prospecto->id)}}">
+                                                                <a class="btn btn-primary btn-circle btn-sm" href="{{route('prospectos-importados.edit',$prospecto->id)}}">
                                                                     <i class="fa fa-check" title="Editar"></i>
                                                                 </a>
                                                                 <a class="ml-2 btn btn-primary btn-circle btn-sm" href="#" onclick="fnShowProductosModal({{$prospecto->id}},{{$prospecto->productos_solicitud_prospecto}})">
                                                                     <i class="fas fa-clipboard-list" title="Ver Productos"></i>
                                                                 </a>
-                                                                <button class="ml-2 btn btn-danger btn-circle btn-sm" type="button" onclick="fnDeleteData('{{route('prospectos.delete')}}',{{$prospecto->id}},'{{$prospecto->n_solicitud}}')">
+                                                                <button class="ml-2 btn btn-danger btn-circle btn-sm" type="button" onclick="fnDeleteData('{{route('prospectos-importados.delete')}}',{{$prospecto->id}},'{{$prospecto->n_solicitud}}')">
                                                                     <i class="fa fa-trash" title="Eliminar"></i>
                                                                 </button>
                                                             </form>
@@ -150,13 +150,13 @@
                                                             <form class="form-inline" id="deleteForm_{{$prospecto->id}}">
                                                                 @csrf
                                                                 @method('delete')
-                                                                <a class="btn btn-primary btn-circle btn-sm" href="{{route('prospectos.edit',$prospecto->id)}}">
+                                                                <a class="btn btn-primary btn-circle btn-sm" href="{{route('prospectos-importados.edit',$prospecto->id)}}">
                                                                     <i class="fa fa-check" title="Editar"></i>
                                                                 </a>
                                                                 <a class="ml-2 btn btn-primary btn-circle btn-sm" href="#" onclick="fnShowProductosModal({{$prospecto->id}},{{$prospecto->productos_solicitud_prospecto}})">
                                                                     <i class="fas fa-clipboard-list" title="Ver Productos"></i>
                                                                 </a>
-                                                                <button class="ml-2 btn btn-danger btn-circle btn-sm" type="button" onclick="fnDeleteData('{{route('prospectos.delete')}}',{{$prospecto->id}},'{{$prospecto->n_solicitud}}')">
+                                                                <button class="ml-2 btn btn-danger btn-circle btn-sm" type="button" onclick="fnDeleteData('{{route('prospectos-importados.delete')}}',{{$prospecto->id}},'{{$prospecto->n_solicitud}}')">
                                                                     <i class="fa fa-trash" title="Eliminar"></i>
                                                                 </button>
                                                             </form>
