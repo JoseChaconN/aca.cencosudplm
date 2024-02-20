@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Seccion extends Model
 {
     use HasFactory;
-    protected $table = 'Secciones';
+    protected $table = 'secciones';
     protected $guarded = [];
     public function usuarios()
     {
