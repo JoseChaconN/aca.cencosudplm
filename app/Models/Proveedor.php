@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Proveedor extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'Proveedores';
+    protected $table = 'proveedores';
     protected $guarded = [];
     public function plantas(): HasMany
     {
