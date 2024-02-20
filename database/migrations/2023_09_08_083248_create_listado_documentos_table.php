@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('tipo_documento')->nullable()->comment('1: Vencimiento | 2: Fijas | 3: Solicitados Proveedor');
             $table->integer('mostrar_auditoria')->nullable();
             $table->integer('mostrar_prospecto')->nullable();
+            $table->integer('mostrar_prospecto_importados')->nullable();
             $table->integer('mostrar_visitas_inspectivas')->nullable();
             $table->integer('mostrar_agregar_documento_biblioteca')->default(1);
             $table->integer('validar_vencimiento')->default(0);

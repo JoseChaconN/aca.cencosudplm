@@ -30,4 +30,8 @@ class SolicitudProspectoProductosImportadosAca extends Model
     {
         return $this->belongsTo(User::class,'id_calidad', 'id')->withDefault()->withoutGlobalScopes();
     }
+    public function versiones()
+    {
+        return $this->hasMany(VersionesProductosSolicitudImportadosAca::class);
+    }
 }

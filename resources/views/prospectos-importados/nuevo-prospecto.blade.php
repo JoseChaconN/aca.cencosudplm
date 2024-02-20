@@ -31,7 +31,26 @@
                                 <div class="bs-stepper-content">
                                     <div id="test-l-1" class="content">
                                         <div class="col-md-12">
-                                            <h6 class="font-weight-bold text-primary">Buscar Proveedor</h6>
+                                            <h6 class="font-weight-bold text-primary">Proveedor Nuevo</h6>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 col-form-label font-weight-bold">Nombre proveedor:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control form-control-sm" name="nombre_proveedor" placeholder="Nombre proveedor" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 col-form-label font-weight-bold">Rut proveedor:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control form-control-sm" name="rut_proveedor" placeholder="Rut proveedor" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h6 class="font-weight-bold text-primary">Buscar un proveedor existente</h6>
                                             @error('id_proveedor')
                                                 <small class="text-danger font-weight-bold">*Debe seleccionar un proveedor</small>
                                             @enderror
@@ -62,6 +81,22 @@
                                                             <span class="text">Agregar Más</span>
                                                         </button>
                                                     </h6>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <a class="btn btn-primary btn-sm" href="{{ route('prospectos.importados.excel.formato-masivo') }}" target="_blank">Descargar formato carga masiva</a>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <h6 class="font-weight-bold text-primary">Cargar formato masivo</h6>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-8">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" name="formato_masivo">
+                                                                <label class="custom-file-label" >Buscar Archivo</label>
+                                                              </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-12" id="producto_" style="display: none" >
                                                     <div class="col-md-12">

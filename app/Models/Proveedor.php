@@ -11,7 +11,7 @@ class Proveedor extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'Proveedores';
-    
+    protected $guarded = [];
     public function plantas(): HasMany
     {
         return $this->HasMany(PlantasProveedor::class,'id_proveedor','id');

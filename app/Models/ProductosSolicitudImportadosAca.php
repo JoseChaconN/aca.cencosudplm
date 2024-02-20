@@ -24,4 +24,8 @@ class ProductosSolicitudImportadosAca extends Model implements HasMedia
     {
         return $this->hasOne(ProductosSolicitudImportadosAca2::class,'id_producto','id');
     }
+    public function versiones(): HasMany
+    {
+        return $this->hasMany(VersionesProductosSolicitudImportadosAca::class,'producto_id','id')->orderBy('created_at', 'desc');
+    }
 }

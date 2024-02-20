@@ -48,6 +48,10 @@
 										<label class="custom-control-label" for="customCheckboxInline2">Mostrar en Prospectos</label>
 									</div>
 									<div class="custom-control custom-checkbox custom-control-inline">
+										<input type="checkbox" id="customCheckboxInline7" name="mostrar_prospecto_importados" {{($documento->mostrar_prospecto_importados == 1) ? 'checked' : ''}} class="custom-control-input" value="1">
+										<label class="custom-control-label" for="customCheckboxInline7">Mostrar en Prospectos Importados</label>
+									</div>
+									<div class="custom-control custom-checkbox custom-control-inline">
 										<input type="checkbox" id="customCheckboxInline3" name="mostrar_visitas_inspectivas" {{($documento->mostrar_visitas_inspectivas == 1) ? 'checked' : ''}} class="custom-control-input" value="1">
 										<label class="custom-control-label" for="customCheckboxInline3">Mostrar en Visitas Inspectivas</label>
 									</div>

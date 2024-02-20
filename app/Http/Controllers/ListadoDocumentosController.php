@@ -52,6 +52,7 @@ class ListadoDocumentosController extends Controller
             'tipo_documento' => $request->input('tipo_documento'),
             'mostrar_auditoria' => $request->input('mostrar_auditoria'),
             'mostrar_prospecto' => $request->input('mostrar_prospecto'),
+            'mostrar_prospecto_importados' => $request->input('mostrar_prospecto_importados'),
             'file' => $request->input('file'),
         ]);
         if(!empty($request->tag)){
@@ -103,6 +104,7 @@ class ListadoDocumentosController extends Controller
             'tipo_documento' => $request->input('tipo_documento'),
             'mostrar_auditoria' => $request->input('mostrar_auditoria'),
             'mostrar_prospecto' => $request->input('mostrar_prospecto'),
+            'mostrar_prospecto_importados' => $request->input('mostrar_prospecto_importados'),
             'file' => $request->input('file'),
         ]);
         if(!empty($request->tag)){
