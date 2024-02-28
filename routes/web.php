@@ -78,6 +78,7 @@ Route::post('prospectos/delete',[ProspectosAcaController::class,'delete'])->name
 Route::resource('prospectos', ProspectosAcaController::class);
 
 //////////PROSPECTOS PRODUCTOS IMPORTADOS ACA///////////////
+Route::match(['get','post'],'prospectos-importados/fichas-tecnicas',[ProspectosAcaImportadosController::class,'buscar_fichas_tecnicas'])->name('prospectos.importados.fichas-tecnicas');
 Route::get('prospectos-importados/formato-masivo', [ProspectosAcaImportadosController::class, 'formato_masivo_productos_excel'])->name('prospectos.importados.excel.formato-masivo');
 Route::get('prospectos-importados/proceso',[ProspectosAcaImportadosController::class,'list_prospectos_proceso'])->name('prospectos.importados.list.proceso');
 Route::get('prospectos-importados/cerrado',[ProspectosAcaImportadosController::class,'list_prospectos_cerrado'])->name('prospectos.importados.list.cerrado');

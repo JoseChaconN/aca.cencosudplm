@@ -78,7 +78,7 @@ class ProspectosAcaImportadosController extends Controller
                 }else{
                     #PROVEEDOR NUEVO
                     $rut_proveedor =  str_replace(['.', '-', ','], '', $request->input('rut_proveedor'));
-                    $proveedor = Proveedor::where('nombre',strtoupper($request->input('nombre_proveedor')))->orWhere('rut',$rut_proveedor)->latest()->first();
+                    $proveedor = Proveedor::where('nombre',strtoupper($request->input('nombre_proveedor')))->where('rut',$rut_proveedor)->latest()->first();
                     if(empty($proveedor->id)){
                        $proveedor = Proveedor::create([
                             'nombre' => strtoupper($request->input('nombre_proveedor')),
@@ -156,6 +156,20 @@ class ProspectosAcaImportadosController extends Controller
         $data['paises'] = Pais::orderBy('nombre')->get();
         $data['prospecto'] = SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto.obs','productos_solicitud_prospecto.versiones')->findOrFail($id);
         $data['certificaciones_fijas'] = ListadoDocumentos::where('mostrar_prospecto_importados', 1)->where('tipo_documento', 2)->get();
+
+        foreach ($data['prospecto']->productos_solicitud_prospecto as $producto) {
+            $producto_q = ProductosSolicitudImportadosAca::find($producto->id);            
+            foreach ($data['certificaciones_fijas'] as $certificacion) {
+                $certificacion_exist = BibliotecaDocumentos::where('id_prospecto_importado',$producto->id)->where('id_documento',$certificacion->id)->latest()->first();
+                if(!empty($certificacion_exist->id_documento)){
+                    $data['certificaciones_fijas_producto'][$producto->id][$certificacion_exist->id_documento] = $certificacion_exist;
+                    $adjunto_certificacion_fija = $certificacion_exist->getMedia('certificaciones_fijas_producto_importado')->last();
+                    if(!empty($adjunto_certificacion_fija->id)){
+                        $data['adjunto_certificaciones_fijas_producto'][$producto->id][$certificacion_exist->id_documento] = ['id' => $adjunto_certificacion_fija->id , 'url' => $adjunto_certificacion_fija->getUrl()];
+                    }
+                }
+            }
+        }
         return view('prospectos-importados.edit-prospecto', $data);
     }
 
@@ -633,14 +647,11 @@ class ProspectosAcaImportadosController extends Controller
                         $aloine_obs = $request->input('aloine_obs');
                         
                     ###VARIABLES ARCHIVOS
-                        $haccp_file=$request->file('haccp_file');
-                        $others_certifications_file = $request->file('others_certifications_file');
-                        $health_certificate_file = $request->file('health_certificate_file');
-                        $organic_certification_file = $request->file('organic_certification_file');
-                        $certification_free_afp_file = $request->file('certification_free_afp_file');
-                        $gluten_free_file = $request->file('gluten_free_file');
-                        $hidroxianthracene_file = $request->file('hidroxianthracene_file');
-                        $aloine_file = $request->file('aloine_file');
+                        $id_certificacion_fija = $request->input('id_certificacion_fija');
+                        $id_exist_certificacion_fija = $request->input('id_exist_certificacion_fija');
+                        $nombre_laboratorio_f = $request->input('nombre_laboratorio_f');
+                        $numero_certificado_f = $request->input('numero_certificado_f');
+                        $adjunto_f = $request->file('adjunto_f');
                         $flow_chart_file = $request->file('flow_chart_file');
                         $label_design_file = $request->file('label_design_file');
 
@@ -1188,202 +1199,6 @@ class ProspectosAcaImportadosController extends Controller
                                 'estado_cl' => $estado_cl[$value],
                                 'observacion_solicitud' => $observacion_solicitud[$value],
                             ]);
-                            /*$producto->update([
-                                'observacion_solicitud' => $observacion_solicitud[$value],
-                                'estado_cl' => $estado_cl[$value],
-                                'sap' => $sap_producto[$value],
-                                'product_name' => $product_name[$value],
-                                'claims_origin' => $claims_origin[$value],
-                                'comments' => $comments[$value],
-                                'name_organic_certifying_number' => $name_organic_certifying_number[$value],
-                                'plant_number_factory' => $plant_number_factory[$value],
-                                'net_weight' => $net_weight[$value],
-                                'drained_weight' => $drained_weight[$value],
-                                'units_x_packaging' => $units_x_packaging[$value],
-                                'country' => $country[$value],
-                                'milking_country' => $milking_country[$value],
-                                'expiration_date' => $expiration_date[$value],
-                                'name_adress_manufacturer' => $name_adress_manufacturer[$value],
-                                'shelf_life' => $shelf_life[$value],
-                                'upc_bar_code' => $upc_bar_code[$value],
-                                'storage_conditions' => $storage_conditions[$value],
-                                'method_preparation' => $method_preparation[$value],
-                                'name_supplier' => $name_supplier[$value],
-                                'ingredients' => $ingredients[$value],
-                                'porcent_organic_ingredients' => $porcent_organic_ingredients[$value],
-                                'porcent_characterizing_ingredients' => $porcent_characterizing_ingredients[$value],
-                                'quantity_additive' => $quantity_additive[$value],
-                                'vegetable_oil_fat_used' => $vegetable_oil_fat_used[$value],
-                                'trans_fats_hydrogenated_origin' => $trans_fats_hydrogenated_origin[$value],
-                                'spices_herbs_used' => $spices_herbs_used[$value],
-                                'quantity_sweetener_per_100_gr_ml' => $quantity_sweetener_per_100_gr_ml[$value],
-                                'flavourings_aroma_natural_artificial' => $flavourings_aroma_natural_artificial[$value],
-                                'quantity_x_m_s_g' => $quantity_x_m_s_g[$value],
-                                'quantity_caffeine' => $quantity_caffeine[$value],
-                                'any_extract_used' => $any_extract_used[$value],
-                                'origin_gelatin' => $origin_gelatin[$value],
-                                'brix_final_product' => $brix_final_product[$value],
-                                'brix_final_product_without_added_sugar' => $brix_final_product_without_added_sugar[$value],
-                                'brix_fruit_greater_proportion_drink' => $brix_fruit_greater_proportion_drink[$value],
-                                'names_colourings' => $names_colourings[$value],
-                                'minimum_porcent_cocoa_solids' => $minimum_porcent_cocoa_solids[$value],
-                                'porcent_cocoa_butter_cocoa_mass' => $porcent_cocoa_butter_cocoa_mass[$value],
-                                'contain_potential_allergens' => $contain_potential_allergens[$value],
-                                'list_contain_potential_allergens' => $list_contain_potential_allergens[$value],
-                                'cereals_gluten' => $cereals_gluten[$value],
-                                'crustacean_products' => $crustacean_products[$value],
-                                'egg_derivatives' => $egg_derivatives[$value],
-                                'fish_derivatives' => $fish_derivatives[$value],
-                                'peanuts_soy_derivatives' => $peanuts_soy_derivatives[$value],
-                                'milk_dairy_derivatives' => $milk_dairy_derivatives[$value],
-                                'nuts_derivatives' => $nuts_derivatives[$value],
-                                'sulfites_derivatives' => $sulfites_derivatives[$value],
-                                'health_certificate' => $health_certificate[$value],
-                                'organic_certification' => $organic_certification[$value],
-                                'certification_free_afp' => $certification_free_afp[$value],
-                                'thermograph' => $thermograph[$value],
-                                'gmo_information' => $gmo_information[$value],
-                                'list_gmo_information' => $list_gmo_information[$value],
-                                'total_plate_count' => $total_plate_count[$value],
-                                'staphylococcus' => $staphylococcus[$value],
-                                'mold' => $mold[$value],
-                                'coliform' => $coliform[$value],
-                                'clostridium_perfringens' => $clostridium_perfringens[$value],
-                                'yeast' => $yeast[$value],
-                                'e_coli' => $e_coli[$value],
-                                'listeria_monocytogenes' => $listeria_monocytogenes[$value],
-                                'salmonella' => $salmonella[$value],
-                                'e_coli_0157_h7' => $e_coli_0157_h7[$value],
-                                'trichinella_spiralis' => $trichinella_spiralis[$value],
-                                'lactobacillus' => $lactobacillus[$value],
-                                'campylobacter' => $campylobacter[$value],
-                                'enterobacteria' => $enterobacteria[$value],
-                                'thermophilic_commercial_sterility' => $thermophilic_commercial_sterility[$value],
-                                'bacillus_cereus' => $bacillus_cereus[$value],
-                                'ph' => $ph[$value],
-                                'porcent_aw' => $porcent_aw[$value],
-                                'type_primary_packaging' => $type_primary_packaging[$value],
-                                'type_secundary_packaging' => $type_secundary_packaging[$value],
-                                'type_controls_sealing_air_tightness_primary_packaging' => $type_controls_sealing_air_tightness_primary_packaging[$value],
-                                'product_type' => $product_type[$value],
-                                'serving_size' => $serving_size[$value],
-                                'servings_per_container' => $servings_per_container[$value],
-                                'energy_100' => $energy_100[$value],
-                                'proteins_100' => $proteins_100[$value],
-                                'total_fat_100' => $total_fat_100[$value],
-                                'satured_fat_100' => $satured_fat_100[$value],
-                                'trans_fat_100' => $trans_fat_100[$value],
-                                'monosatured_fat_100' => $monosatured_fat_100[$value],
-                                'polyunsatured_fat_100' => $polyunsatured_fat_100[$value],
-                                'cholesterol_100' => $cholesterol_100[$value],
-                                'total_carbohydrate_100' => $total_carbohydrate_100[$value],
-                                'available_carbohydrates_100' => $available_carbohydrates_100[$value],
-                                'total_sugars_100' => $total_sugars_100[$value],
-                                'sucrose_100' => $sucrose_100[$value],
-                                'lactos_100' => $lactos_100[$value],
-                                'poliols_100' => $poliols_100[$value],
-                                'total_dietary_fiber_100' => $total_dietary_fiber_100[$value],
-                                'soluble_fiber_100' => $soluble_fiber_100[$value],
-                                'insoluble_fiber_100' => $insoluble_fiber_100[$value],
-                                'sodium_100' => $sodium_100[$value],
-                                'energy_serving' => $energy_serving[$value],
-                                'proteins_serving' => $proteins_serving[$value],
-                                'total_fat_serving' => $total_fat_serving[$value],
-                                'satured_fat_serving' => $satured_fat_serving[$value],
-                                'trans_fat_serving' => $trans_fat_serving[$value],
-                                'monosatured_fat_serving' => $monosatured_fat_serving[$value],
-                                'polyunsatured_fat_serving' => $polyunsatured_fat_serving[$value],
-                                'cholesterol_serving' => $cholesterol_serving[$value],
-                                'total_carbohydrate_serving' => $total_carbohydrate_serving[$value],
-                                'available_carbohydrates_serving' => $available_carbohydrates_serving[$value],
-                                'total_sugars_serving' => $total_sugars_serving[$value],
-                                'sucrose_serving' => $sucrose_serving[$value],
-                                'lactos_serving' => $lactos_serving[$value],
-                                'poliols_serving' => $poliols_serving[$value],
-                                'total_dietary_fiber_serving' => $total_dietary_fiber_serving[$value],
-                                'soluble_fiber_serving' => $soluble_fiber_serving[$value],
-                                'insoluble_fiber_serving' => $insoluble_fiber_serving[$value],
-                                'sodium_serving' => $sodium_serving[$value],
-                                'vitamin_a_100' => $vitamin_a_100[$value],
-                                'vitamin_c_100' => $vitamin_c_100[$value],
-                                'vitamin_d_100' => $vitamin_d_100[$value],
-                                'vitamin_e_100' => $vitamin_e_100[$value],
-                                'vitamin_b1_100' => $vitamin_b1_100[$value],
-                                'vitamin_b2_100' => $vitamin_b2_100[$value],
-                                'niacin_100' => $niacin_100[$value],
-                                'vitamin_b6_100' => $vitamin_b6_100[$value],
-                                'folic_acid_100' => $folic_acid_100[$value],
-                                'vitamin_b12_100' => $vitamin_b12_100[$value],
-                                'pantothenic_acid_100' => $pantothenic_acid_100[$value],
-                                'biotin_100' => $biotin_100[$value],
-                                'choline_100' => $choline_100[$value],
-                                'vitamin_k_100' => $vitamin_k_100[$value],
-                                'betacarotene_100' => $betacarotene_100[$value],
-                                'calcium_100' => $calcium_100[$value],
-                                'chromium_100' => $chromium_100[$value],
-                                'copper_100' => $copper_100[$value],
-                                'yodo_100' => $yodo_100[$value],
-                                'iron_100' => $iron_100[$value],
-                                'magnesium_100' => $magnesium_100[$value],
-                                'manganese_100' => $manganese_100[$value],
-                                'molybdenum_100' => $molybdenum_100[$value],
-                                'phosphorus_100' => $phosphorus_100[$value],
-                                'zinc_100' => $zinc_100[$value],
-                                'selenium_100' => $selenium_100[$value],
-                                'vitamin_a_serving' => $vitamin_a_serving[$value],
-                                'vitamin_c_serving' => $vitamin_c_serving[$value],
-                                'vitamin_d_serving' => $vitamin_d_serving[$value],
-                                'vitamin_e_serving' => $vitamin_e_serving[$value],
-                                'vitamin_b1_serving' => $vitamin_b1_serving[$value],
-                                'vitamin_b2_serving' => $vitamin_b2_serving[$value],
-                                'niacin_serving' => $niacin_serving[$value],
-                                'vitamin_b6_serving' => $vitamin_b6_serving[$value],
-                                'folic_acid_serving' => $folic_acid_serving[$value],
-                                'vitamin_b12_serving' => $vitamin_b12_serving[$value],
-                                'pantothenic_acid_serving' => $pantothenic_acid_serving[$value],
-                                'biotin_serving' => $biotin_serving[$value],
-                                'choline_serving' => $choline_serving[$value],
-                                'vitamin_k_serving' => $vitamin_k_serving[$value],
-                                'betacarotene_serving' => $betacarotene_serving[$value],
-                                'calcium_serving' => $calcium_serving[$value],
-                                'chromium_serving' => $chromium_serving[$value],
-                                'copper_serving' => $copper_serving[$value],
-                                'yodo_serving' => $yodo_serving[$value],
-                                'iron_serving' => $iron_serving[$value],
-                                'magnesium_serving' => $magnesium_serving[$value],
-                                'manganese_serving' => $manganese_serving[$value],
-                                'molybdenum_serving' => $molybdenum_serving[$value],
-                                'phosphorus_serving' => $phosphorus_serving[$value],
-                                'zinc_serving' => $zinc_serving[$value],
-                                'selenium_serving' => $selenium_serving[$value],
-                                'haccp' => $haccp[$value],
-                                'others_certifications' => $others_certifications[$value],
-                                'total_aflatoxins' => $total_aflatoxins[$value],
-                                'aflatoxina_m1' => $aflatoxina_m1[$value],
-                                'zearalenone' => $zearalenone[$value],
-                                'patulin' => $patulin[$value],
-                                'ochratoxin' => $ochratoxin[$value],
-                                'deoxynivalenol' => $deoxynivalenol[$value],
-                                'fumonisinas' => $fumonisinas[$value],
-                                'zn' => $zn[$value],
-                                'pb' => $pb[$value],
-                                'cd' => $cd[$value],
-                                'hg' => $hg[$value],
-                                'sn' => $sn[$value],
-                                'cu' => $cu[$value],
-                                'ars' => $ars[$value],
-                                'se' => $se[$value],
-                                'chloramphenicol' => $chloramphenicol[$value],
-                                'tetracycline' => $tetracycline[$value],
-                                'quinolones' => $quinolones[$value],
-                                'sulfonamides' => $sulfonamides[$value],
-                                'pesticides' => $pesticides[$value],
-                                'dioxin_furan' => $dioxin_furan[$value],
-                                'esteroides' => $esteroides[$value],
-                                'gluten_free' => $gluten_free[$value],
-                                'hidroxianthracene' => $hidroxianthracene[$value],
-                                'aloine' => $aloine[$value],
-                            ]);*/
                             if($estado_cl[$value] > 1){
                                 $producto->update(['fecha_cierre' => date('Y-m-d')]);
                             }
@@ -1439,7 +1254,6 @@ class ProspectosAcaImportadosController extends Controller
                                 'minimum_porcent_cocoa_solids' => (!empty($minimum_porcent_cocoa_solids_obs[$value])) ? $minimum_porcent_cocoa_solids_obs[$value] : NULL,
                                 'porcent_cocoa_butter_cocoa_mass' => (!empty($porcent_cocoa_butter_cocoa_mass_obs[$value])) ? $porcent_cocoa_butter_cocoa_mass_obs[$value] : NULL,
                                 'contain_potential_allergens' => (!empty($contain_potential_allergens_obs[$value])) ? $contain_potential_allergens_obs[$value] : NULL,
-                                ##'list_contain_potential_allergens' => (!empty($list_contain_potential_allergens_obs[$value])) ? $list_contain_potential_allergens_obs[$value] : NULL,
                                 'cereals_gluten' => (!empty($cereals_gluten_obs[$value])) ? $cereals_gluten_obs[$value] : NULL,
                                 'crustacean_products' => (!empty($crustacean_products_obs[$value])) ? $crustacean_products_obs[$value] : NULL,
                                 'egg_derivatives' => (!empty($egg_derivatives_obs[$value])) ? $egg_derivatives_obs[$value] : NULL,
@@ -1448,12 +1262,6 @@ class ProspectosAcaImportadosController extends Controller
                                 'milk_dairy_derivatives' => (!empty($milk_dairy_derivatives_obs[$value])) ? $milk_dairy_derivatives_obs[$value] : NULL,
                                 'nuts_derivatives' => (!empty($nuts_derivatives_obs[$value])) ? $nuts_derivatives_obs[$value] : NULL,
                                 'sulfites_derivatives' => (!empty($sulfites_derivatives_obs[$value])) ? $sulfites_derivatives_obs[$value] : NULL,
-                                #'health_certificate' => (!empty($health_certificate_obs[$value])) ? $health_certificate_obs[$value] : NULL,
-                                #'organic_certification' => (!empty($organic_certification_obs[$value])) ? $organic_certification_obs[$value] : NULL,
-                                #'certification_free_afp' => (!empty($certification_free_afp_obs[$value])) ? $certification_free_afp_obs[$value] : NULL,
-                                #'thermograph' => (!empty($thermograph_obs[$value])) ? $thermograph_obs[$value] : NULL,
-                                #'gmo_information' => (!empty($gmo_information_obs[$value])) ? $gmo_information_obs[$value] : NULL,
-                                #'list_gmo_information' => (!empty($list_gmo_information_obs[$value])) ? $list_gmo_information_obs[$value] : NULL,
                                 'total_plate_count' => (!empty($total_plate_count_obs[$value])) ? $total_plate_count_obs[$value] : NULL,
                                 'staphylococcus' => (!empty($staphylococcus_obs[$value])) ? $staphylococcus_obs[$value] : NULL,
                                 'mold' => (!empty($mold_obs[$value])) ? $mold_obs[$value] : NULL,
@@ -1462,9 +1270,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'yeast' => (!empty($yeast_obs[$value])) ? $yeast_obs[$value] : NULL,
                                 'e_coli' => (!empty($e_coli_obs[$value])) ? $e_coli_obs[$value] : NULL,
                                 'listeria_monocytogenes' => (!empty($listeria_monocytogenes_obs[$value])) ? $listeria_monocytogenes_obs[$value] : NULL,
-                                #'salmonella' => (!empty($salmonella_obs[$value])) ? $salmonella_obs[$value] : NULL,
                                 'e_coli_0157_h7' => (!empty($e_coli_0157_h7_obs[$value])) ? $e_coli_0157_h7_obs[$value] : NULL,
-                                #'trichinella_spiralis' => (!empty($trichinella_spiralis_obs[$value])) ? $trichinella_spiralis_obs[$value] : NULL,
                                 'lactobacillus' => (!empty($lactobacillus_obs[$value])) ? $lactobacillus_obs[$value] : NULL,
                                 'campylobacter' => (!empty($campylobacter_obs[$value])) ? $campylobacter_obs[$value] : NULL,
                                 'enterobacteria' => (!empty($enterobacteria_obs[$value])) ? $enterobacteria_obs[$value] : NULL,
@@ -1691,6 +1497,35 @@ class ProspectosAcaImportadosController extends Controller
                                     }
                                 }
                         }
+
+                        ///////////////////////////////////////
+                        ######INSERT CERTIFICACIONES FIJAS######
+                        foreach ($id_certificacion_fija[$value] as $k => $v) {
+                            if(empty($id_exist_certificacion_fija[$value][$v]) && (!empty($nombre_laboratorio_f[$value][$v]) || !empty($numero_certificado_f[$value][$v]))){
+                                $certificacion_fija = BibliotecaDocumentos::create([
+                                    'id_user' => Auth::user()->id,
+                                    'id_solicitud_importado' => $id,
+                                    'id_prospecto_importado' => $value,
+                                    'id_proveedor' => $producto->id_proveedor,
+                                    'id_documento' => $v,
+                                    'nombre_laboratorio' => $nombre_laboratorio_f[$value][$v],
+                                    'numero_certificado' => $numero_certificado_f[$value][$v],
+                                ]);
+                            }
+                            if(!empty($id_exist_certificacion_fija[$value][$v])){
+                                $certificacion_fija = BibliotecaDocumentos::find($id_exist_certificacion_fija[$value][$v]);
+                                $certificacion_fija->update([
+                                    'nombre_laboratorio' => $nombre_laboratorio_f[$value][$v],
+                                    'numero_certificado' => $numero_certificado_f[$value][$v],
+                                ]);
+                            }
+                            if(!empty($adjunto_f[$value][$v])){
+                                $adjunto_certificacion_f = $adjunto_f[$value][$v];
+                                if ($adjunto_certificacion_f->isValid()) {
+                                    $certificacion_fija->addMedia($adjunto_certificacion_f)->toMediaCollection('certificaciones_fijas_producto_importado');
+                                }
+                            }
+                        }
                         /*if($estado_cl[$value] > 1){
                             $producto->update(['fecha_cierre' => date('Y-m-d')]);
                         }
@@ -1829,5 +1664,49 @@ class ProspectosAcaImportadosController extends Controller
         $data['data']['secciones'] = Seccion::all();
         #$data['data']=[];
         return Excel::download(new FormatoCargaMasivaProductosImportadosExcel($data), 'Formato_carga_masiva.xlsx');
+    }
+    public function buscar_fichas_tecnicas(Request $request)
+    {
+        //
+        $data=[];       
+        $nombre_producto = (!empty($request->input('nombre_producto'))) ? $request->input('nombre_producto') : '%';
+        $codigo_ean = (!empty($request->input('codigo_ean'))) ? $request->input('codigo_ean') : '%';
+        $codigo_sap = (!empty($request->input('codigo_sap'))) ? $request->input('codigo_sap') : '%';
+        $nombre_proveedor = (!empty($request->input('nombre_proveedor'))) ? $request->input('nombre_proveedor') : '%';
+        $rut_proveedor = (!empty($request->input('rut_proveedor'))) ? $request->input('rut_proveedor') : '%';
+        $data['request'] =$request;
+        $data['fichas_tecnicas']=[];
+
+        if($nombre_proveedor != '%' || $rut_proveedor != '%' || $nombre_producto != '%' || $codigo_ean != '%' || $codigo_sap != '%'){
+            /*SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto')
+            ->whereHas('productos_solicitud_prospecto', function ($query) use ($nombre_producto) {
+                $query->where('nombre_producto', $nombre_producto);
+            })
+            ->where('nombre_proveedor', $nombre_proveedor)
+            ->get();*/
+            $fichas_query = SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto');
+            if($nombre_proveedor != '%'){
+                $fichas_query->where('nombre_proveedor','LIKE',"%$nombre_proveedor%");
+            }
+            if($rut_proveedor != '%' ){
+                $fichas_query->where('rut_proveedor','LIKE',"%$rut_proveedor%");
+            }
+            if($nombre_producto != '%'){
+                $fichas_query->whereHas('productos_solicitud_prospecto', function ($query) use ($nombre_producto) {
+                    if($nombre_producto != '%'){
+                        $query->where('product_name', 'LIKE', "%$nombre_producto%");
+                    }
+                    /*if($codigo_ean != '%'){
+                        $query->where('upc_bar_code', 'LIKE', "%$codigo_ean%");
+                    }
+                    if($codigo_sap != '%'){
+                        $query->where('sap', 'LIKE', "%$codigo_sap%");
+                    }*/
+                });               
+            }
+            $data['fichas_tecnicas'] = $fichas_query->get();
+        }
+        
+        return view('prospectos-importados.list-fichas-tecnicas',$data);
     }
 }

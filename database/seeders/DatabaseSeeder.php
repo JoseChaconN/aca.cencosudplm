@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OrganismoAuditorSeeder::class);
         $this->call(TagSeeders::class);
         $this->call(ListadoDocumentosSeeder::class);
+        $this->call(VitaminMineralFactorSeeder::class);
     }
 }

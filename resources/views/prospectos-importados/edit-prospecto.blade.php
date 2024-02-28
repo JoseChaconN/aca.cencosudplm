@@ -1252,109 +1252,97 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <div class="col-md-12">
+                                                                                            <!--div class="col-md-12">
                                                                                                 <div class="form-group row">
                                                                                                     <label class="col-sm-12 col-form-label font-weight-bold">List potential allergens:</label>
                                                                                                     <div class="col-sm-12">
                                                                                                        <textarea class="form-control" rows="3" name="list_contain_potential_allergens[{{ $producto->id }}]">{{ $producto->list_contain_potential_allergens }}</textarea>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-4 col-form-label font-weight-bold">Cereals with gluten:</label>
-                                                                                                    <div class="col-sm-4">
-                                                                                                        <select class="form-control form-control-sm" name="cereals_gluten[{{ $producto->id }}]">
-                                                                                                            <option value="">Seleccione</option>
-                                                                                                            <option {{ ($producto->cereals_gluten == 'sí') ? 'selected' : ''; }} value="sí">Sí</option>
-                                                                                                            <option {{ ($producto->cereals_gluten == 'no') ? 'selected' : ''; }} value="no">No</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-4 col-form-label font-weight-bold">Crustacean and products:</label>
-                                                                                                    <div class="col-sm-4">
-                                                                                                        <select class="form-control form-control-sm" name="crustacean_products[{{ $producto->id }}]">
-                                                                                                            <option value="">Seleccione</option>
-                                                                                                            <option {{ ($producto->crustacean_products == 'sí') ? 'selected' : ''; }} value="sí">Sí</option>
-                                                                                                            <option {{ ($producto->crustacean_products == 'no') ? 'selected' : ''; }} value="no">No</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-4 col-form-label font-weight-bold">Egg and derivatives:</label>
-                                                                                                    <div class="col-sm-4">
-                                                                                                        <select class="form-control form-control-sm" name="egg_derivatives[{{ $producto->id }}]">
-                                                                                                            <option value="">Seleccione</option>
-                                                                                                            <option {{ ($producto->egg_derivatives == 'sí') ? 'selected' : ''; }} value="sí">Sí</option>
-                                                                                                            <option {{ ($producto->egg_derivatives == 'no') ? 'selected' : ''; }} value="no">No</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-4 col-form-label font-weight-bold">Fish and derivatives:</label>
-                                                                                                    <div class="col-sm-4">
-                                                                                                        <select class="form-control form-control-sm" name="fish_derivatives[{{ $producto->id }}]">
-                                                                                                            <option value="">Seleccione</option>
-                                                                                                            <option {{ ($producto->fish_derivatives == 'sí') ? 'selected' : ''; }} value="sí">Sí</option>
-                                                                                                            <option {{ ($producto->fish_derivatives == 'no') ? 'selected' : ''; }} value="no">No</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-4 col-form-label font-weight-bold">Peanuts, Soy  and derivatives:</label>
-                                                                                                    <div class="col-sm-4">
-                                                                                                        <select class="form-control form-control-sm" name="peanuts_soy_derivatives[{{ $producto->id }}]">
-                                                                                                            <option value="">Seleccione</option>
-                                                                                                            <option {{ ($producto->peanuts_soy_derivatives == 'sí') ? 'selected' : ''; }} value="sí">Sí</option>
-                                                                                                            <option {{ ($producto->peanuts_soy_derivatives == 'no') ? 'selected' : ''; }} value="no">No</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-4 col-form-label font-weight-bold">milk and dairy derivatives:</label>
-                                                                                                    <div class="col-sm-4">
-                                                                                                        <select class="form-control form-control-sm" name="milk_dairy_derivatives[{{ $producto->id }}]">
-                                                                                                            <option value="">Seleccione</option>
-                                                                                                            <option {{ ($producto->milk_dairy_derivatives == 'sí') ? 'selected' : ''; }} value="sí">Sí</option>
-                                                                                                            <option {{ ($producto->milk_dairy_derivatives == 'no') ? 'selected' : ''; }} value="no">No</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-4 col-form-label font-weight-bold">Nuts and derivatives:</label>
-                                                                                                    <div class="col-sm-4">
-                                                                                                        <select class="form-control form-control-sm" name="nuts_derivatives[{{ $producto->id }}]">
-                                                                                                            <option value="">Seleccione</option>
-                                                                                                            <option {{ ($producto->nuts_derivatives == 'sí') ? 'selected' : ''; }} value="sí">Sí</option>
-                                                                                                            <option {{ ($producto->nuts_derivatives == 'no') ? 'selected' : ''; }} value="no">No</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-4 col-form-label font-weight-bold">Sulfites And derivatives (concentrations of more than 10mg):</label>
-                                                                                                    <div class="col-sm-4">
-                                                                                                        <select class="form-control form-control-sm" name="sulfites_derivatives[{{ $producto->id }}]">
-                                                                                                            <option value="">Seleccione</option>
-                                                                                                            <option {{ ($producto->sulfites_derivatives == 'sí') ? 'selected' : ''; }} value="sí">Sí</option>
-                                                                                                            <option {{ ($producto->sulfites_derivatives == 'no') ? 'selected' : ''; }} value="no">No</option>
-                                                                                                        </select>
-                                                                                                    </div>
-                                                                                                </div>
+                                                                                            </div-->
+                                                                                            <div class="col-md-12">
+                                                                                                <table class="table table-bordered table-stripped table-hover table-sm">
+                                                                                                    <thead>
+                                                                                                        <tr>
+                                                                                                            <th>Item</th>
+                                                                                                            <th>List</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <td>Cereals with gluten</td>
+                                                                                                            <td>
+                                                                                                                <input type="text" class="form-control" name="cereals_gluten[{{ $producto->id }}]" value="{{ $producto->cereals_gluten }}">
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea rows="2" class="form-control" name="cereals_gluten_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->cereals_gluten }}</textarea>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Crustacean and products</td>
+                                                                                                            <td>
+                                                                                                                <input type="text" class="form-control" name="crustacean_products[{{ $producto->id }}]" value="{{ $producto->crustacean_products }}">
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea rows="2" class="form-control" name="crustacean_products_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->crustacean_products }}</textarea>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Egg and derivatives</td>
+                                                                                                            <td>
+                                                                                                                <input type="text" class="form-control" name="egg_derivatives[{{ $producto->id }}]" value="{{ $producto->egg_derivatives }}">
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea rows="2" class="form-control" name="egg_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->egg_derivatives }}</textarea>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Fish and derivatives</td>
+                                                                                                            <td>
+                                                                                                                <input type="text" class="form-control" name="fish_derivatives[{{ $producto->id }}]" value="{{ $producto->fish_derivatives }}">
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea rows="2" class="form-control" name="fish_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->fish_derivatives }}</textarea>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Peanuts, Soy  and derivatives</td>
+                                                                                                            <td>
+                                                                                                                <input type="text" class="form-control" name="peanuts_soy_derivatives[{{ $producto->id }}]" value="{{ $producto->peanuts_soy_derivatives }}">
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea rows="2" class="form-control" name="peanuts_soy_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->peanuts_soy_derivatives }}</textarea>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Milk and dairy derivatives</td>
+                                                                                                            <td>
+                                                                                                                <input type="text" class="form-control" name="milk_dairy_derivatives[{{ $producto->id }}]" value="{{ $producto->milk_dairy_derivatives }}">
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea rows="2" class="form-control" name="milk_dairy_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->milk_dairy_derivatives }}</textarea>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Nuts and derivatives</td>
+                                                                                                            <td>
+                                                                                                                <input type="text" class="form-control" name="nuts_derivatives[{{ $producto->id }}]" value="{{ $producto->nuts_derivatives }}">
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea rows="2" class="form-control" name="nuts_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->nuts_derivatives }}</textarea>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Sulfites And derivatives (concentrations of more than 10mg)</td>
+                                                                                                            <td>
+                                                                                                                <input type="text" class="form-control" name="sulfites_derivatives[{{ $producto->id }}]" value="{{ $producto->sulfites_derivatives }}">
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea rows="2" class="form-control" name="sulfites_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->sulfites_derivatives }}</textarea>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
                                                                                             </div>
                                                                                         </div>
                                                                                         {{--
@@ -3637,8 +3625,10 @@
                                                                                                 <h6 class="mb-2 font-weight-bold text-primary">Certificaciones</h6>
                                                                                             </div>
                                                                                         </div>
-                                                                                        @foreach ($certificaciones_fijas as $certificacion)
-                                                                                            <div class="row">
+                                                                                        <div class="row">
+                                                                                            @foreach ($certificaciones_fijas as $certificacion)
+                                                                                                <input type="hidden" name="id_certificacion_fija[{{$producto->id}}][{{$certificacion->id}}]" value="{{$certificacion->id}}">
+                                                                                                <input type="hidden" name="id_exist_certificacion_fija[{{$producto->id}}][{{$certificacion->id}}]" value="{{!empty($certificaciones_fijas_producto[$producto->id][$certificacion->id]->id) ? $certificaciones_fijas_producto[$producto->id][$certificacion->id]->id : ''}}">
                                                                                                 <div class="col-md-12">
                                                                                                     <label for="" class="font-weight-bold">- {{$certificacion->nombre}}</label>
                                                                                                 </div>
@@ -3646,9 +3636,9 @@
                                                                                                     <div class="row">
                                                                                                         <div class="col-md-12 ml-3">
                                                                                                             <div class="form-group row">
-                                                                                                                <label class="col-sm-4 col-form-label">Nombre Laboratorio:</label>
+                                                                                                                <label class="col-sm-4 col-form-label">Nombre:</label>
                                                                                                                 <div class="col-sm-6">
-                                                                                                                    <input type="text" class="form-control form-control-sm" name="nombre_laboratorio_f[{{$producto->id}}][{{$certificacion->id}}]" placeholder="Nombre Laboratorio" >
+                                                                                                                    <input type="text" class="form-control form-control-sm" name="nombre_laboratorio_f[{{$producto->id}}][{{$certificacion->id}}]" placeholder="Nombre" value="{{!empty($certificaciones_fijas_producto[$producto->id][$certificacion->id]->nombre_laboratorio) ? $certificaciones_fijas_producto[$producto->id][$certificacion->id]->nombre_laboratorio : ''}}">
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         </div>
@@ -3656,31 +3646,7 @@
                                                                                                             <div class="form-group row">
                                                                                                                 <label class="col-sm-4 col-form-label">Número Certificado:</label>
                                                                                                                 <div class="col-sm-6">
-                                                                                                                    <input type="text" class="form-control form-control-sm" name="numero_certificado_f[{{$producto->id}}][{{$certificacion->id}}]" placeholder="Número Certificado" >
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <div class="col-md-12 ml-3">
-                                                                                                            <div class="form-group row">
-                                                                                                                <label class="col-sm-4 col-form-label">Fecha Análisis:</label>
-                                                                                                                <div class="col-sm-6">
-                                                                                                                    <input type="date" class="form-control form-control-sm" name="fecha_analisis_f[{{$producto->id}}][{{$certificacion->id}}]" placeholder="Fecha Análisis" >
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <div class="col-md-12 ml-3">
-                                                                                                            <div class="form-group row">
-                                                                                                                <label class="col-sm-4 col-form-label">Duración de validez:</label>
-                                                                                                                <div class="col-sm-6">
-                                                                                                                    <input type="text" class="form-control form-control-sm" name="duracion_validez_f[{{$producto->id}}][{{$certificacion->id}}]" placeholder="Duración de validez" >
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <div class="col-md-12 ml-3">
-                                                                                                            <div class="form-group row">
-                                                                                                                <label class="col-sm-4 col-form-label">Fecha vencimiento:</label>
-                                                                                                                <div class="col-sm-6">
-                                                                                                                    <input type="date" class="form-control form-control-sm" name="fecha_vencimiento_f[{{$producto->id}}][{{$certificacion->id}}]" placeholder="Fecha vencimiento" >
+                                                                                                                    <input type="text" class="form-control form-control-sm" name="numero_certificado_f[{{$producto->id}}][{{$certificacion->id}}]" placeholder="Número Certificado" value="{{!empty($certificaciones_fijas_producto[$producto->id][$certificacion->id]->numero_certificado) ? $certificaciones_fijas_producto[$producto->id][$certificacion->id]->numero_certificado : ''}}">
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         </div>
@@ -3698,14 +3664,15 @@
                                                                                                             </div>
                                                                                                         @endif
                                                                                                         @if (!empty($adjunto_certificaciones_fijas_producto[$producto->id][$certificacion->id]))
-                                                                                                            <div class="col-md-12" id="documento_fijo_{{ $item->id }}">
+                                                                                                            {{-- <div class="col-md-12" id="documento_fijo_{{ $item->id }}"> --}}
+                                                                                                            <div class="col-md-12" id="documento_fijo_">
                                                                                                                 <div class="row">
                                                                                                                     <div class="col-md-12">
                                                                                                                             <a class="btn btn-primary btn-sm" download="" href="{{$adjunto_certificaciones_fijas_producto[$producto->id][$certificacion->id]['url']}}" target="_blank">
                                                                                                                                 Descargar Adjunto
                                                                                                                             </a>
                                                                                                                             @if (($prospecto->estado_solicitud == 0 && Auth::user()->hasRole('comercial')) || Auth::user()->hasRole('calidad'))
-                                                                                                                                <button class="btn btn-danger btn-sm" type="button" onclick="fnDeleteBibliotecaFile_2('{{ route('biblioteca.delete') }}',{{ $item->id }},null,'documento_fijo_{{ $item->id }}')">Eliminar Adjunto</button>
+                                                                                                                                {{-- <button class="btn btn-danger btn-sm" type="button" onclick="fnDeleteBibliotecaFile_2('{{ route('biblioteca.delete') }}',{{ $item->id }},null,'documento_fijo_{{ $item->id }}')">Eliminar Adjunto</button>--}}
                                                                                                                             @endif
                                                                                                                     </div>
                                                                                                                 </div>
@@ -3716,8 +3683,8 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                            </div>
-                                                                                        @endforeach
+                                                                                            @endforeach
+                                                                                        </div>
                                                                                         <div class="row mt-4">
                                                                                             <div class="col-md-12">
                                                                                                 <h6 class="mb-2 font-weight-bold text-primary">14.- Flow chart</h6>

@@ -55,6 +55,7 @@
                             <a class="collapse-item" href="{{route('prospectos.importados.list.proceso')}}">Solicitudes en Proceso</a>
                             <a class="collapse-item" href="{{route('prospectos.importados.list.cerrado')}}">Solicitudes Cerradas</a>
                         @endhasanyrole
+                        <a class="collapse-item" href="{{route('prospectos.importados.fichas-tecnicas')}}">Fichas Tecnicas</a>
                     @endrole
                 </div>
             </div>
