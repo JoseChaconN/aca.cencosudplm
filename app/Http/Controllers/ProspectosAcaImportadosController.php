@@ -195,7 +195,6 @@ class ProspectosAcaImportadosController extends Controller
                     'rut_proveedor' => $request->input('rut_proveedor'),
                 ]);
                 /////////UPDATE PARA CALIDAD/////////
-                dd($estado_cl);
                 if($user->hasRole('calidad')){
                     if(!in_array(1,$estado_cl) && $request->input('status') != 1){
                         $solicitud->update([
