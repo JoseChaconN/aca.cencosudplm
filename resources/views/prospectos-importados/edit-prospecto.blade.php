@@ -1265,6 +1265,7 @@
                                                                                                     <thead>
                                                                                                         <tr>
                                                                                                             <th>Item</th>
+                                                                                                            <th>Si/No</th>
                                                                                                             <th>List</th>
                                                                                                         </tr>
                                                                                                     </thead>
@@ -1272,7 +1273,14 @@
                                                                                                         <tr>
                                                                                                             <td>Cereals with gluten</td>
                                                                                                             <td>
-                                                                                                                <input type="text" class="form-control" name="cereals_gluten[{{ $producto->id }}]" value="{{ $producto->cereals_gluten }}">
+                                                                                                                <select name="cereals_gluten[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->cereals_gluten == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->cereals_gluten == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea name="cereals_gluten_list[{{ $producto->id }}]" rows="2" class="form-control" style="resize: none">{{ $producto->cereals_gluten_list }}</textarea>
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <textarea rows="2" class="form-control" name="cereals_gluten_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->cereals_gluten }}</textarea>
@@ -1281,7 +1289,14 @@
                                                                                                         <tr>
                                                                                                             <td>Crustacean and products</td>
                                                                                                             <td>
-                                                                                                                <input type="text" class="form-control" name="crustacean_products[{{ $producto->id }}]" value="{{ $producto->crustacean_products }}">
+                                                                                                                <select name="crustacean_products[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->crustacean_products == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->crustacean_products == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea name="crustacean_products_list[{{ $producto->id }}]" rows="2" class="form-control" style="resize: none">{{ $producto->crustacean_products_list }}</textarea>
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <textarea rows="2" class="form-control" name="crustacean_products_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->crustacean_products }}</textarea>
@@ -1290,7 +1305,14 @@
                                                                                                         <tr>
                                                                                                             <td>Egg and derivatives</td>
                                                                                                             <td>
-                                                                                                                <input type="text" class="form-control" name="egg_derivatives[{{ $producto->id }}]" value="{{ $producto->egg_derivatives }}">
+                                                                                                                <select name="egg_derivatives[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->egg_derivatives == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->egg_derivatives == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea name="egg_derivatives_list[{{ $producto->id }}]" rows="2" class="form-control" style="resize: none">{{ $producto->egg_derivatives_list }}</textarea>
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <textarea rows="2" class="form-control" name="egg_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->egg_derivatives }}</textarea>
@@ -1299,7 +1321,14 @@
                                                                                                         <tr>
                                                                                                             <td>Fish and derivatives</td>
                                                                                                             <td>
-                                                                                                                <input type="text" class="form-control" name="fish_derivatives[{{ $producto->id }}]" value="{{ $producto->fish_derivatives }}">
+                                                                                                                <select name="fish_derivatives[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->fish_derivatives == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->fish_derivatives == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea name="fish_derivatives_list[{{ $producto->id }}]" rows="2" class="form-control" style="resize: none">{{ $producto->fish_derivatives_list }}</textarea>
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <textarea rows="2" class="form-control" name="fish_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->fish_derivatives }}</textarea>
@@ -1308,7 +1337,14 @@
                                                                                                         <tr>
                                                                                                             <td>Peanuts, Soy  and derivatives</td>
                                                                                                             <td>
-                                                                                                                <input type="text" class="form-control" name="peanuts_soy_derivatives[{{ $producto->id }}]" value="{{ $producto->peanuts_soy_derivatives }}">
+                                                                                                                <select name="peanuts_soy_derivatives[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->peanuts_soy_derivatives == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->peanuts_soy_derivatives == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea name="peanuts_soy_derivatives_list[{{ $producto->id }}]" rows="2" class="form-control" style="resize: none">{{ $producto->peanuts_soy_derivatives_list }}</textarea>
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <textarea rows="2" class="form-control" name="peanuts_soy_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->peanuts_soy_derivatives }}</textarea>
@@ -1317,7 +1353,14 @@
                                                                                                         <tr>
                                                                                                             <td>Milk and dairy derivatives</td>
                                                                                                             <td>
-                                                                                                                <input type="text" class="form-control" name="milk_dairy_derivatives[{{ $producto->id }}]" value="{{ $producto->milk_dairy_derivatives }}">
+                                                                                                                <select name="milk_dairy_derivatives[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->milk_dairy_derivatives == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->milk_dairy_derivatives == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea name="milk_dairy_derivatives_list[{{ $producto->id }}]" rows="2" class="form-control" style="resize: none">{{ $producto->milk_dairy_derivatives_list }}</textarea>
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <textarea rows="2" class="form-control" name="milk_dairy_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->milk_dairy_derivatives }}</textarea>
@@ -1326,7 +1369,14 @@
                                                                                                         <tr>
                                                                                                             <td>Nuts and derivatives</td>
                                                                                                             <td>
-                                                                                                                <input type="text" class="form-control" name="nuts_derivatives[{{ $producto->id }}]" value="{{ $producto->nuts_derivatives }}">
+                                                                                                                <select name="nuts_derivatives[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->nuts_derivatives == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->nuts_derivatives == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea name="nuts_derivatives_list[{{ $producto->id }}]" rows="2" class="form-control" style="resize: none">{{ $producto->nuts_derivatives_list }}</textarea>
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <textarea rows="2" class="form-control" name="nuts_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->nuts_derivatives }}</textarea>
@@ -1335,7 +1385,14 @@
                                                                                                         <tr>
                                                                                                             <td>Sulfites And derivatives (concentrations of more than 10mg)</td>
                                                                                                             <td>
-                                                                                                                <input type="text" class="form-control" name="sulfites_derivatives[{{ $producto->id }}]" value="{{ $producto->sulfites_derivatives }}">
+                                                                                                                <select name="sulfites_derivatives[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->sulfites_derivatives == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->sulfites_derivatives == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <textarea name="sulfites_derivatives_list[{{ $producto->id }}]" rows="2" class="form-control" style="resize: none">{{ $producto->sulfites_derivatives_list }}</textarea>
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <textarea rows="2" class="form-control" name="sulfites_derivatives_obs[{{ $producto->id }}]" placeholder="Observaciones" style="resize: none">{{ $producto->obs->sulfites_derivatives }}</textarea>
@@ -2176,6 +2233,10 @@
                                                                                                             <th colspan="4">Nutritional Facts</th>
                                                                                                         </tr>
                                                                                                         <tr>
+                                                                                                            <td>Home measure:</td>
+                                                                                                            <td colspan="3"><input type="text" class="form-control" name="home_measure[{{ $producto->id }}]" value="{{ $producto->home_measure }}"></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
                                                                                                             <td>Serving Size:</td>
                                                                                                             <td colspan="3"><input type="text" class="form-control" name="serving_size[{{ $producto->id }}]" value="{{ $producto->serving_size }}"></td>
                                                                                                         </tr>
@@ -2193,7 +2254,7 @@
                                                                                                     <tbody>
                                                                                                         <tr>
                                                                                                             <td>Energy ( kcal)</td>
-                                                                                                            <td><input type="text" class="form-control" name="energy_100[{{ $producto->id }}]" value="{{ $producto->energy_100 }}"></td>
+                                                                                                            <td><input type="text" class="form-control" name="energy_100[{{ $producto->id }}]" value="{{ intval($producto->energy_100) }}"></td>
                                                                                                             <td><input type="text" class="form-control" name="energy_serving[{{ $producto->id }}]" value="{{ $producto->energy_serving }}"></td>
                                                                                                             <td><textarea rows="3" class="form-control" name="energy_obs[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->energy }}</textarea></td>
                                                                                                         </tr>
@@ -2295,7 +2356,7 @@
                                                                                                         </tr>
                                                                                                         <tr>
                                                                                                             <td>Sodium (mg)</td>
-                                                                                                            <td><input type="text" class="form-control" name="sodium_100[{{ $producto->id }}]" value="{{ $producto->sodium_100 }}"></td>
+                                                                                                            <td><input type="text" class="form-control" name="sodium_100[{{ $producto->id }}]" value="{{ intval($producto->sodium_100) }}"></td>
                                                                                                             <td><input type="text" class="form-control" name="sodium_serving[{{ $producto->id }}]" value="{{ $producto->sodium_serving }}"></td>
                                                                                                             <td><textarea rows="3" class="form-control" name="sodium_obs[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->sodium }}</textarea></td>
                                                                                                         </tr>
@@ -2309,6 +2370,10 @@
                                                                                                     <thead>
                                                                                                         <tr>
                                                                                                             <th colspan="5">Nutritional Facts RECONSTITUTED</th>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Home measure:</td>
+                                                                                                            <td colspan="4"><input type="text" class="form-control" name="home_measure_reconstitued[{{ $producto->id }}]" value="{{ $producto->home_measure_reconstitued }}"></td>
                                                                                                         </tr>
                                                                                                         <tr>
                                                                                                             <td>Serving Size:</td>
@@ -2329,7 +2394,7 @@
                                                                                                     <tbody>
                                                                                                         <tr>
                                                                                                             <td>Energy ( kcal)</td>
-                                                                                                            <td><input type="text" class="form-control" name="energy_100_reconstitued[{{ $producto->id }}]" value="{{ $producto->energy_100_reconstitued }}"></td>
+                                                                                                            <td><input type="text" class="form-control" name="energy_100_reconstitued[{{ $producto->id }}]" value="{{ intval($producto->energy_100_reconstitued) }}"></td>
                                                                                                             <td><input type="text" class="form-control" name="energy_serving_reconstitued[{{ $producto->id }}]" value="{{ $producto->energy_serving_reconstitued }}"></td>
                                                                                                             <td><input type="text" class="form-control" name="energy_serving_reconstitued_r[{{ $producto->id }}]" value="{{ $producto->energy_serving_reconstitued_r }}"></td>
                                                                                                             <td><textarea rows="3" class="form-control" name="energy_obs_reconstitued[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->energy_reconstitued }}</textarea></td>
@@ -2448,7 +2513,7 @@
                                                                                                         </tr>
                                                                                                         <tr>
                                                                                                             <td>Sodium (mg)</td>
-                                                                                                            <td><input type="text" class="form-control" name="sodium_100_reconstitued[{{ $producto->id }}]" value="{{ $producto->sodium_100_reconstitued }}"></td>
+                                                                                                            <td><input type="text" class="form-control" name="sodium_100_reconstitued[{{ $producto->id }}]" value="{{ intval($producto->sodium_100_reconstitued) }}"></td>
                                                                                                             <td><input type="text" class="form-control" name="sodium_serving_reconstitued[{{ $producto->id }}]" value="{{ $producto->sodium_serving_reconstitued }}"></td>
                                                                                                             <td><input type="text" class="form-control" name="sodium_serving_reconstitued_r[{{ $producto->id }}]" value="{{ $producto->sodium_serving_reconstitued_r }}"></td>
                                                                                                             <td><textarea rows="3" class="form-control" name="sodium_obs_reconstitued[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->sodium }}</textarea></td>
@@ -3329,29 +3394,75 @@
                                                                                                 </table>
                                                                                             </div>
                                                                                             <div class="col-md-12">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-12 col-form-label font-weight-bold">Pesticides (mg/kg)</label>
-                                                                                                    <label class="col-sm-12 col-form-label font-weight-bold">Fresh fruits and vegetables, nuts, meat (pork, beef, sheep, poultry), milk, eggs, beans, oats, rice and wheat:</label>
-                                                                                                    <div class="col-sm-12">
-                                                                                                        <input type="text" class="form-control" name="pesticides[{{ $producto->id }}]" value="{{ $producto->pesticides }}">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-12">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-12 col-form-label font-weight-bold">Dioxin / furan(pg EQT/OMS/g fat):</label>
-                                                                                                    <div class="col-sm-12">
-                                                                                                        <input type="text" class="form-control" name="dioxin_furan[{{ $producto->id }}]" value="{{ $producto->dioxin_furan }}">
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="col-md-12">
-                                                                                                <div class="form-group row">
-                                                                                                    <label class="col-sm-12 col-form-label font-weight-bold">STEROIDS(ug/kg):</label>
-                                                                                                    <div class="col-sm-12">
-                                                                                                        <input type="text" class="form-control" name="steroids[{{ $producto->id }}]" value="{{ $producto->steroids }}">
-                                                                                                    </div>
-                                                                                                </div>
+                                                                                                <table class="table table-bordered table-stripped table-hover table-sm">
+                                                                                                    <thead>
+                                                                                                        <tr>
+                                                                                                            <th>Veterinary Drugs</th>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th width="20%">Campo</th>
+                                                                                                            <th width="40%">Valor</th>
+                                                                                                            <th width="40%">Observaciones</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <td>chloramphenicol(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="chloramphenicol[{{ $producto->id }}]" value="{{ $producto->chloramphenicol }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="chloramphenicol_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->chloramphenicol }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>sulfonamides(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="sulfonamides[{{ $producto->id }}]" value="{{ $producto->sulfonamides }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="sulfonamides_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->sulfonamides }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>tetracycline(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="tetracycline[{{ $producto->id }}]" value="{{ $producto->tetracycline }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="tetracycline_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->tetracycline }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>quinolones(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="quinolones[{{ $producto->id }}]" value="{{ $producto->quinolones }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="quinolones_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->quinolones }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>macrolides(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="macrolides[{{ $producto->id }}]" value="{{ $producto->macrolides }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="macrolides_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->macrolides }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>betalactams(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="betalactams[{{ $producto->id }}]" value="{{ $producto->betalactams }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="betalactams_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->betalactams }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>amphenicols(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="amphenicols[{{ $producto->id }}]" value="{{ $producto->amphenicols }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="amphenicols_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->amphenicols }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>steroids(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="steroids[{{ $producto->id }}]" value="{{ $producto->steroids }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="steroids_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->steroids }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>zeranol(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="zeranol[{{ $producto->id }}]" value="{{ $producto->zeranol }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="zeranol_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->zeranol }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>pesticides(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="pesticides[{{ $producto->id }}]" value="{{ $producto->pesticides }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="pesticides_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->pesticides }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>dioxin_furan(ug/kg)</td>
+                                                                                                            <td><input type="text" class="form-control" name="dioxin_furan[{{ $producto->id }}]" value="{{ $producto->dioxin_furan }}"></td>
+                                                                                                            <td><textarea rows="2" class="form-control" name="dioxin_furan_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->dioxin_furan }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -3499,6 +3610,11 @@
                                                                                                                 <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
                                                                                                             </tr>
                                                                                                             <tr>
+                                                                                                                <td>sulfonamides(ug/kg)</td>
+                                                                                                                <td><input type="text" class="form-control" disabled value="{{ $item->sulfonamides }}"></td>
+                                                                                                                <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
+                                                                                                            </tr>
+                                                                                                            <tr>
                                                                                                                 <td>tetracycline(ug/kg)</td>
                                                                                                                 <td><input type="text" class="form-control" disabled value="{{ $item->tetracycline }}"></td>
                                                                                                                 <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
@@ -3509,37 +3625,42 @@
                                                                                                                 <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
                                                                                                             </tr>
                                                                                                             <tr>
-                                                                                                                <td>sulfonamides(ug/kg)</td>
-                                                                                                                <td><input type="text" class="form-control" disabled value="{{ $item->sulfonamides }}"></td>
+                                                                                                                <td>macrolides(ug/kg)</td>
+                                                                                                                <td><input type="text" class="form-control" disabled value="{{ $item->macrolides }}"></td>
+                                                                                                                <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td>betalactams(ug/kg)</td>
+                                                                                                                <td><input type="text" class="form-control" disabled value="{{ $item->betalactams }}"></td>
+                                                                                                                <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td>amphenicols(ug/kg)</td>
+                                                                                                                <td><input type="text" class="form-control" disabled value="{{ $item->amphenicols }}"></td>
+                                                                                                                <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td>steroids(ug/kg)</td>
+                                                                                                                <td><input type="text" class="form-control" disabled value="{{ $item->steroids }}"></td>
+                                                                                                                <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td>zeranol(ug/kg)</td>
+                                                                                                                <td><input type="text" class="form-control" disabled value="{{ $item->zeranol }}"></td>
+                                                                                                                <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td>pesticides(ug/kg)</td>
+                                                                                                                <td><input type="text" class="form-control" disabled value="{{ $item->pesticides }}"></td>
+                                                                                                                <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td>dioxin_furan(ug/kg)</td>
+                                                                                                                <td><input type="text" class="form-control" disabled value="{{ $item->dioxin_furan }}"></td>
                                                                                                                 <td><textarea rows="2" class="form-control" disabled placeholders="Observaciones"></textarea></td>
                                                                                                             </tr>
                                                                                                         </tbody>
                                                                                                     </table>
-                                                                                                </div>
-                                                                                                <div class="col-md-12">
-                                                                                                    <div class="form-group row">
-                                                                                                        <label class="col-sm-12 col-form-label font-weight-bold">Pesticides (mg/kg)</label>
-                                                                                                        <label class="col-sm-12 col-form-label font-weight-bold">Fresh fruits and vegetables, nuts, meat (pork, beef, sheep, poultry), milk, eggs, beans, oats, rice and wheat:</label>
-                                                                                                        <div class="col-sm-12">
-                                                                                                            <input type="text" class="form-control" disabled value="{{ $item->pesticides }}">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-md-12">
-                                                                                                    <div class="form-group row">
-                                                                                                        <label class="col-sm-12 col-form-label font-weight-bold">Dioxin / furan(pg EQT/OMS/g fat):</label>
-                                                                                                        <div class="col-sm-12">
-                                                                                                            <input type="text" class="form-control" disabled value="{{ $item->dioxin_furan }}">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-md-12">
-                                                                                                    <div class="form-group row">
-                                                                                                        <label class="col-sm-12 col-form-label font-weight-bold">STEROIDS(ug/kg):</label>
-                                                                                                        <div class="col-sm-12">
-                                                                                                            <input type="text" class="form-control" disabled value="{{ $item->steroids }}">
-                                                                                                        </div>
-                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -3678,6 +3799,14 @@
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         @endif
+                                                                                                        <div class="col-md-12 ml-3">
+                                                                                                            <div class="form-group row">
+                                                                                                                <label class="col-sm-4 col-form-label">Observaciones:</label>
+                                                                                                                <div class="col-sm-6">
+                                                                                                                    <textarea name="observacion_f[{{$producto->id}}][{{$certificacion->id}}]" class="form-control" placeholder="Observacion"rows="2" style="resize: none">{{!empty($certificaciones_fijas_producto[$producto->id][$certificacion->id]->observacion) ? $certificaciones_fijas_producto[$producto->id][$certificacion->id]->observacion : ''}}</textarea>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
                                                                                                         <div class="col-md-12">
                                                                                                             <hr>
                                                                                                         </div>

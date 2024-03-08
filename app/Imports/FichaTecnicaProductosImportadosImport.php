@@ -240,6 +240,7 @@ class FichaTecnicaProductosImportadosImport implements ToCollection
                 $selenium_serving_c = (empty($selenium_serving) && !empty($selenium_100)) ? $selenium_100*$serving_size/100 : (!empty($selenium_serving) ? $selenium_serving : NULL);
             }
         ////////////////////////////////////////////
+        
         $existingRecord->update([
             #PRIMERA PARTE
                 'sap' => $rows->get(11)[2],
@@ -262,10 +263,10 @@ class FichaTecnicaProductosImportadosImport implements ToCollection
                 'method_preparation' => $rows->get(28)[2],
                 'name_supplier' => $rows->get(29)[2],
                 'ingredients' => $rows->get(30)[2],
-                'porcent_organic_ingredients' => $rows->get(31)[2],
-                'porcent_characterizing_ingredients' => $rows->get(32)[2],
+                'porcent_organic_ingredients' => (!empty($rows->get(31)[2]) && $rows->get(31)[2] > 0) ? $rows->get(31)[2]*100 : null,
+                'porcent_characterizing_ingredients' => (!empty($rows->get(32)[2]) && $rows->get(32)[2] > 0) ? $rows->get(32)[2]*100 : null,
                 'name_additive' => $rows->get(33)[2],#NUEVO CAMPO
-                'porcent_additive' => $rows->get(34)[2],#NUEVO CAMPO
+                'porcent_additive' => (!empty($rows->get(34)[2]) && $rows->get(34)[2] > 0) ? $rows->get(34)[2]*100 : null,#NUEVO CAMPO
                 'quantity_additive' => $rows->get(35)[2],
                 'indicate_additive_code' =>  $rows->get(36)[2],#NUEVO CAMPO
                 'indicate_additive_functionality' => $rows->get(37)[2],#NUEVO CAMPO
@@ -282,20 +283,28 @@ class FichaTecnicaProductosImportadosImport implements ToCollection
                 'brix_final_product_without_added_sugar' => $rows->get(48)[2],
                 'brix_fruit_greater_proportion_drink' => $rows->get(49)[2],
                 'names_colourings' => $rows->get(50)[2],
-                'minimum_porcent_cocoa_solids' => $rows->get(51)[2],
-                'porcent_cocoa_butter_cocoa_mass' => $rows->get(52)[2],
+                'minimum_porcent_cocoa_solids' => (!empty($rows->get(51)[2]) && $rows->get(51)[2] > 0) ? $rows->get(51)[2]*100 : null,
+                'porcent_cocoa_butter_cocoa_mass' => (!empty($rows->get(52)[2]) && $rows->get(52)[2] > 0) ? $rows->get(52)[2]*100 : null,
             
             #SEGUNDA PARTE
-                'contain_potential_allergens' => (!empty($rows->get(60)[2])) ? $rows->get(60)[2] : ((!empty($rows->get(60)[3])) ? $rows->get(60)[3] : null),#$rows->get(56)[2],#$rows->get(56)[3]
+                'contain_potential_allergens' => (!empty($rows->get(60)[2])) ? 'SI' : ((!empty($rows->get(60)[3])) ? 'NO' : null),#$rows->get(56)[2],#$rows->get(56)[3]
                 #'list_contain_potential_allergens' => $rows->get(13)[2],
-                'cereals_gluten' => $rows->get(63)[4],
-                'crustacean_products' => $rows->get(64)[4],
-                'egg_derivatives' => $rows->get(65)[4],
-                'fish_derivatives' => $rows->get(66)[4],
-                'peanuts_soy_derivatives' => $rows->get(67)[4],
-                'milk_dairy_derivatives' => $rows->get(68)[4],
-                'nuts_derivatives' => $rows->get(69)[4],
-                'sulfites_derivatives' => $rows->get(70)[4],
+                'cereals_gluten' => (!empty($rows->get(72)[2])) ? 'SI' : ((!empty($rows->get(63)[3])) ? 'NO' : null),
+                'cereals_gluten_list' => $rows->get(63)[4],
+                'crustacean_products' => (!empty($rows->get(72)[2])) ? 'SI' : ((!empty($rows->get(64)[3])) ? 'NO' : null),
+                'crustacean_products_list' => $rows->get(64)[4],
+                'egg_derivatives' => (!empty($rows->get(72)[2])) ? 'SI' : ((!empty($rows->get(65)[3])) ? 'NO' : null),
+                'egg_derivatives_list' => $rows->get(65)[4],
+                'fish_derivatives' => (!empty($rows->get(72)[2])) ? 'SI' : ((!empty($rows->get(66)[3])) ? 'NO' : null),
+                'fish_derivatives_list' => $rows->get(66)[4],
+                'peanuts_soy_derivatives' => (!empty($rows->get(72)[2])) ? 'SI' : ((!empty($rows->get(67)[3])) ? 'NO' : null),
+                'peanuts_soy_derivatives_list' => $rows->get(67)[4],
+                'milk_dairy_derivatives' => (!empty($rows->get(72)[2])) ? 'SI' : ((!empty($rows->get(68)[3])) ? 'NO' : null),
+                'milk_dairy_derivatives_list' => $rows->get(68)[4],
+                'nuts_derivatives' => (!empty($rows->get(72)[2])) ? 'SI' : ((!empty($rows->get(69)[3])) ? 'NO' : null),
+                'nuts_derivatives_list' => $rows->get(69)[4],
+                'sulfites_derivatives' => (!empty($rows->get(72)[2])) ? 'SI' : ((!empty($rows->get(70)[3])) ? 'NO' : null),
+                'sulfites_derivatives_list' => $rows->get(70)[4],
             #TERCERA PARTE
                 #'health_certificate' => (!empty($rows->get(72)[2])) ? $rows->get(72)[2] : ((!empty($rows->get(72)[3])) ? $rows->get(72)[3] : null),
                 #'organic_certification' => (!empty($rows->get(76)[2])) ? $rows->get(76)[2] : ((!empty($rows->get(76)[3])) ? $rows->get(76)[3] : null),
@@ -326,7 +335,7 @@ class FichaTecnicaProductosImportadosImport implements ToCollection
                 'cronobacter_10g' => $rows->get(136)[2],
             #QUINTA PARTE
                 'ph' => $rows->get(140)[2],
-                'porcent_aw' => $rows->get(141)[2],
+                'porcent_aw' => (!empty($rows->get(141)[2]) && $rows->get(141)[2] > 0) ? $rows->get(141)[2]*100 : null,
             #SEXTA PARTE
                 'type_primary_packaging' => $rows->get(145)[2],
                 'type_secundary_packaging' => $rows->get(146)[2],

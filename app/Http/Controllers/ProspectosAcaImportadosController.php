@@ -281,13 +281,21 @@ class ProspectosAcaImportadosController extends Controller
                         $contain_potential_allergens = $request->input('contain_potential_allergens');
                         $list_contain_potential_allergens = $request->input('list_contain_potential_allergens');
                         $cereals_gluten = $request->input('cereals_gluten');
+                        $cereals_gluten_list = $request->input('cereals_gluten_list');
                         $crustacean_products = $request->input('crustacean_products');
+                        $crustacean_products_list = $request->input('crustacean_products_list');
                         $egg_derivatives = $request->input('egg_derivatives');
+                        $egg_derivatives_list = $request->input('egg_derivatives_list');
                         $fish_derivatives = $request->input('fish_derivatives');
+                        $fish_derivatives_list = $request->input('fish_derivatives_list');
                         $peanuts_soy_derivatives = $request->input('peanuts_soy_derivatives');
+                        $peanuts_soy_derivatives_list = $request->input('peanuts_soy_derivatives_list');
                         $milk_dairy_derivatives = $request->input('milk_dairy_derivatives');
+                        $milk_dairy_derivatives_list = $request->input('milk_dairy_derivatives_list');
                         $nuts_derivatives = $request->input('nuts_derivatives');
+                        $nuts_derivatives_list = $request->input('nuts_derivatives_list');
                         $sulfites_derivatives = $request->input('sulfites_derivatives');
+                        $sulfites_derivatives_list = $request->input('sulfites_derivatives_list');
                         $health_certificate = $request->input('health_certificate');
                         $health_certificate_file = $request->input('health_certificate_file');
                         $organic_certification = $request->input('organic_certification');
@@ -326,6 +334,7 @@ class ProspectosAcaImportadosController extends Controller
                         $type_secundary_packaging = $request->input('type_secundary_packaging');
                         $type_controls_sealing_air_tightness_primary_packaging = $request->input('type_controls_sealing_air_tightness_primary_packaging');
                         $product_type = $request->input('product_type');
+                        $home_measure = $request->input('home_measure');
                         $serving_size = $request->input('serving_size');
                         $servings_per_container = $request->input('servings_per_container');
                         $energy_100 = $request->input('energy_100');
@@ -364,6 +373,7 @@ class ProspectosAcaImportadosController extends Controller
                         $insoluble_fiber_serving = $request->input('insoluble_fiber_serving');
                         $sodium_100 = $request->input('sodium_100');
                         $sodium_serving = $request->input('sodium_serving');
+                        $home_measure_reconstitued  = $request->input('home_measure_reconstitued ');
                         $serving_size_reconstitued = $request->input('serving_size_reconstitued');
                         $servings_per_container_reconstitued = $request->input('servings_per_container_reconstitued');
                         $energy_100_reconstitued = $request->input('energy_100_reconstitued');
@@ -651,10 +661,11 @@ class ProspectosAcaImportadosController extends Controller
                         $id_exist_certificacion_fija = $request->input('id_exist_certificacion_fija');
                         $nombre_laboratorio_f = $request->input('nombre_laboratorio_f');
                         $numero_certificado_f = $request->input('numero_certificado_f');
+                        $observacion_f = $request->input('observacion_f');
                         $adjunto_f = $request->file('adjunto_f');
                         $flow_chart_file = $request->file('flow_chart_file');
                         $label_design_file = $request->file('label_design_file');
-
+                    
                     foreach ($id_producto as $key => $value) {
                         $producto=ProductosSolicitudImportadosAca::find($value);
                         $old_data_prod = $producto->getOriginal();
@@ -710,13 +721,21 @@ class ProspectosAcaImportadosController extends Controller
                                 'porcent_cocoa_butter_cocoa_mass' => $old_data_prod['porcent_cocoa_butter_cocoa_mass'],
                                 'contain_potential_allergens' => $old_data_prod['contain_potential_allergens'],
                                 'cereals_gluten' => $old_data_prod['cereals_gluten'],
+                                'cereals_gluten_list' => $old_data_prod['cereals_gluten_list'],
                                 'crustacean_products' => $old_data_prod['crustacean_products'],
+                                'crustacean_products_list' => $old_data_prod['crustacean_products_list'],
                                 'egg_derivatives' => $old_data_prod['egg_derivatives'],
+                                'egg_derivatives_list' => $old_data_prod['egg_derivatives_list'],
                                 'fish_derivatives' => $old_data_prod['fish_derivatives'],
+                                'fish_derivatives_list' => $old_data_prod['fish_derivatives_list'],
                                 'peanuts_soy_derivatives' => $old_data_prod['peanuts_soy_derivatives'],
+                                'peanuts_soy_derivatives_list' => $old_data_prod['peanuts_soy_derivatives_list'],
                                 'milk_dairy_derivatives' => $old_data_prod['milk_dairy_derivatives'],
+                                'milk_dairy_derivatives_list' => $old_data_prod['milk_dairy_derivatives_list'],
                                 'nuts_derivatives' => $old_data_prod['nuts_derivatives'],
+                                'nuts_derivatives_list' => $old_data_prod['nuts_derivatives_list'],
                                 'sulfites_derivatives' => $old_data_prod['sulfites_derivatives'],
+                                'sulfites_derivatives_list' => $old_data_prod['sulfites_derivatives_list'],
                                 'total_plate_count' => $old_data_prod['total_plate_count'],
                                 'coliform' => $old_data_prod['coliform'],
                                 'e_coli' => $old_data_prod['e_coli'],
@@ -746,6 +765,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'type_secundary_packaging' => $old_data_prod['type_secundary_packaging'],
                                 'type_controls_sealing_air_tightness_primary_packaging' => $old_data_prod['type_controls_sealing_air_tightness_primary_packaging'],
                                 'product_type' => $old_data_prod['product_type'],
+                                'home_measure' => $old_data['home_measure'],
                                 'serving_size' => $old_data_prod['serving_size'],
                                 'servings_per_container' => $old_data_prod['servings_per_container'],
                                 'energy_100' => $old_data_prod['energy_100'],
@@ -784,6 +804,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'insoluble_fiber_serving' => $old_data_prod['insoluble_fiber_serving'],
                                 'sodium_100' => $old_data_prod['sodium_100'],
                                 'sodium_serving' => $old_data_prod['sodium_serving'],
+                                //'home_measure_reconstitued' => $old_data['home_measure_reconstitued'],
                                 'serving_size_reconstitued' => $old_data_prod['serving_size_reconstitued'],
                                 'servings_per_container_reconstitued' => $old_data_prod['servings_per_container_reconstitued'],
                                 'energy_100_reconstitued' => $old_data_prod['energy_100_reconstitued'],
@@ -983,13 +1004,21 @@ class ProspectosAcaImportadosController extends Controller
                                 'contain_potential_allergens' => $contain_potential_allergens[$value],
                                 ##'list_contain_potential_allergens' => $list_contain_potential_allergens[$value],
                                 'cereals_gluten' => $cereals_gluten[$value],
+                                'cereals_gluten_list' => $cereals_gluten_list[$value],
                                 'crustacean_products' => $crustacean_products[$value],
+                                'crustacean_products_list' => $crustacean_products_list[$value],
                                 'egg_derivatives' => $egg_derivatives[$value],
+                                'egg_derivatives_list' => $egg_derivatives_list[$value],
                                 'fish_derivatives' => $fish_derivatives[$value],
+                                'fish_derivatives_list' => $fish_derivatives_list[$value],
                                 'peanuts_soy_derivatives' => $peanuts_soy_derivatives[$value],
+                                'peanuts_soy_derivatives_list' => $peanuts_soy_derivatives_list[$value],
                                 'milk_dairy_derivatives' => $milk_dairy_derivatives[$value],
+                                'milk_dairy_derivatives_list' => $milk_dairy_derivatives_list[$value],
                                 'nuts_derivatives' => $nuts_derivatives[$value],
+                                'nuts_derivatives_list' => $nuts_derivatives_list[$value],
                                 'sulfites_derivatives' => $sulfites_derivatives[$value],
+                                'sulfites_derivatives_list' => $sulfites_derivatives_list[$value],
                                 #'health_certificate' => $health_certificate[$value],
                                 #'health_certificate_file' => $health_certificate_file[$value],
                                 #'organic_certification' => $organic_certification[$value],
@@ -1028,6 +1057,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'type_secundary_packaging' => $type_secundary_packaging[$value],
                                 'type_controls_sealing_air_tightness_primary_packaging' => $type_controls_sealing_air_tightness_primary_packaging[$value],
                                 'product_type' => $product_type[$value],
+                                'home_measure' => $home_measure[$value],
                                 'serving_size' => $serving_size[$value],
                                 'servings_per_container' => $servings_per_container[$value],
                                 'energy_100' => $energy_100[$value],
@@ -1066,6 +1096,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'insoluble_fiber_serving' => $insoluble_fiber_serving[$value],
                                 'sodium_100' => $sodium_100[$value],
                                 'sodium_serving' => $sodium_serving[$value],
+                                //'home_measure_reconstitued' => $home_measure_reconstitued[$value],
                                 'serving_size_reconstitued' => $serving_size_reconstitued[$value],
                                 'servings_per_container_reconstitued' => $servings_per_container_reconstitued[$value],
                                 'energy_100_reconstitued' => $energy_100_reconstitued[$value],
@@ -1510,6 +1541,7 @@ class ProspectosAcaImportadosController extends Controller
                                     'id_documento' => $v,
                                     'nombre_laboratorio' => $nombre_laboratorio_f[$value][$v],
                                     'numero_certificado' => $numero_certificado_f[$value][$v],
+                                    'observacion' => $observacion_f[$value][$v],
                                 ]);
                             }
                             if(!empty($id_exist_certificacion_fija[$value][$v])){
@@ -1517,6 +1549,7 @@ class ProspectosAcaImportadosController extends Controller
                                 $certificacion_fija->update([
                                     'nombre_laboratorio' => $nombre_laboratorio_f[$value][$v],
                                     'numero_certificado' => $numero_certificado_f[$value][$v],
+                                    'observacion' => $observacion_f[$value][$v],
                                 ]);
                             }
                             if(!empty($adjunto_f[$value][$v])){
