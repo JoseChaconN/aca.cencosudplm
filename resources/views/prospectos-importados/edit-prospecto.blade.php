@@ -201,6 +201,42 @@
                                                                                 <label class="custom-control-label" for="customCheckboxInline2_{{ $producto->id }}">Nueva Versión</label>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="row">
+                                                                                <label class="col-sm-4 col-form-label font-weight-bold">Motivo del cambio:</label>
+                                                                                <div class="col-md-8">
+                                                                                    <textarea name="observacion_solicitud[{{$producto->id}}]" class="form-control form-control-sm" placeholder="Motivo del cambio" rows="5" style="resize: none"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12 mt-4">
+                                                                            <h6 class="font-weight-bold text-primary">Tabla de revisión</h6>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <table class="table table-bordered table-stripped table-hover table-sm">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th width="20%">Numero de revisión</th>
+                                                                                        <th width="40%">Fecha de revisión</th>
+                                                                                        <th width="40%">Descripción del cambio</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td>{{ $producto->version }}</td>
+                                                                                        <td>{{ $producto->created_at }}</td>
+                                                                                        <td>{{ $producto->version_description }}</td>
+                                                                                    </tr>
+                                                                                    @foreach ($producto->versiones as $item)
+                                                                                        <tr>
+                                                                                            <td>{{ $item->version }}</td>
+                                                                                            <td>{{ $item->created_at }}</td>
+                                                                                            <td>{{ $item->version_description }}</td>
+                                                                                        </tr>
+                                                                                    @endforeach
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -2210,6 +2246,70 @@
                                                                                     <div class="card-body">
                                                                                         <div class="row">
                                                                                             <div class="col-md-12">
+                                                                                                <h6 class="mb-2 font-weight-bold text-primary">9.- Sellos altos en</h6>
+                                                                                            </div>
+                                                                                            <div class="col-md-12">
+                                                                                                <table class="table table-bordered table-stripped table-hover table-sm">
+                                                                                                    <thead>
+                                                                                                        <tr>
+                                                                                                            <th>Sello alto en</th>
+                                                                                                            <th>Si/No</th>
+                                                                                                            <th>No Aplica</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <td>Alto en calorías</td>
+                                                                                                            <td>
+                                                                                                                {{ (($producto->product_type == 'ml' && $producto->energy_100 > $sellos_alto_en['alto_en_calorias_liquido']) || ($producto->product_type == 'gr' && $producto->energy_100 > $sellos_alto_en['alto_en_calorias_solido'])) ? 'SI' : 'NO' }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                                                                                    <input type="checkbox" id="customCheckboxInline3_{{ $producto->id }}" name="alto_en_calorias[{{ $producto->id }}]" class="custom-control-input" value="1">
+                                                                                                                    <label class="custom-control-label" for="customCheckboxInline3_{{ $producto->id }}">No Aplica</label>
+                                                                                                                </div>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Alto en azúcares totales</td>
+                                                                                                            <td>
+                                                                                                                {{ (($producto->product_type == 'ml' && $producto->total_sugars_100 > $sellos_alto_en['alto_en_azucares_liquido']) || ($producto->product_type == 'gr' && $producto->total_sugars_100 > $sellos_alto_en['alto_en_azucares_solido'])) ? 'SI' : 'NO' }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                                                                                    <input type="checkbox" id="customCheckboxInline4_{{ $producto->id }}" name="alto_en_azucares[{{ $producto->id }}]" class="custom-control-input" value="1">
+                                                                                                                    <label class="custom-control-label" for="customCheckboxInline4_{{ $producto->id }}">No Aplica</label>
+                                                                                                                </div>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Alto en sodio</td>
+                                                                                                            <td>
+                                                                                                                {{ (($producto->product_type == 'ml' && $producto->sodium_100 > $sellos_alto_en['alto_en_sodio_liquido']) || ($producto->product_type == 'gr' && $producto->sodium_100 > $sellos_alto_en['alto_en_sodio_solido'])) ? 'SI' : 'NO' }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                                                                                    <input type="checkbox" id="customCheckboxInline5_{{ $producto->id }}" name="alto_en_sodio[{{ $producto->id }}]" class="custom-control-input" value="1">
+                                                                                                                    <label class="custom-control-label" for="customCheckboxInline5_{{ $producto->id }}">No Aplica</label>
+                                                                                                                </div>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Alto en grasas saturadas</td>
+                                                                                                            <td>
+                                                                                                                {{ (($producto->product_type == 'ml' && $producto->satured_fat_100 > $sellos_alto_en['alto_en_grasas_liquido']) || ($producto->product_type == 'gr' && $producto->satured_fat_100 > $sellos_alto_en['alto_en_grasas_solido'])) ? 'SI' : 'NO' }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                                                                                    <input type="checkbox" id="customCheckboxInline6_{{ $producto->id }}" name="alto_en_grasas[{{ $producto->id }}]" class="custom-control-input" value="1">
+                                                                                                                    <label class="custom-control-label" for="customCheckboxInline6_{{ $producto->id }}">No Aplica</label>
+                                                                                                                </div>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                            <div class="col-md-12">
                                                                                                 <h6 class="mb-2 font-weight-bold text-primary">9.- Nutritional information</h6>
                                                                                             </div>
                                                                                             <div class="col-md-12">
@@ -2355,7 +2455,10 @@
                                                                                                             <td><textarea rows="3" class="form-control" name="insoluble_fiber_obs[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->insoluble_fiber }}</textarea></td>
                                                                                                         </tr>
                                                                                                         <tr>
-                                                                                                            <td>Sodium (mg)</td>
+                                                                                                            <td>
+                                                                                                                Sodium (mg) <br>
+                                                                                                                <span class="text-danger text-sm">* Verificar si el valor indicado es en Sodio o equivalente en Sal</span>
+                                                                                                            </td>
                                                                                                             <td><input type="text" class="form-control" name="sodium_100[{{ $producto->id }}]" value="{{ intval($producto->sodium_100) }}"></td>
                                                                                                             <td><input type="text" class="form-control" name="sodium_serving[{{ $producto->id }}]" value="{{ $producto->sodium_serving }}"></td>
                                                                                                             <td><textarea rows="3" class="form-control" name="sodium_obs[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->sodium }}</textarea></td>
@@ -3747,6 +3850,54 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="row">
+                                                                                            <div class="col-md-12">
+                                                                                                <table class="table table-bordered table-stripped table-hover table-sm">
+                                                                                                    <thead>
+                                                                                                        <tr>
+                                                                                                            <th>Item</th>
+                                                                                                            <th>Si/No</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <td>
+                                                                                                                Gluten Free ( Crossed out spike on main face)
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <select name="glute_free_spike_main_face[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->glute_free_spike_main_face == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->glute_free_spike_main_face == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>
+                                                                                                                Gluten Free ( Crossed out spike on another face)
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <select name="glute_free_spike_another_face[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->glute_free_spike_another_face == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->glute_free_spike_another_face == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>
+                                                                                                                Gluten Free ( It does not have a crossed out spike)
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <select name="glute_free_no_spike[{{ $producto->id }}]" class="form-control">
+                                                                                                                    <option value="">Seleccione</option>
+                                                                                                                    <option value="SI" {{ ($producto->glute_free_no_spike == 'SI') ? 'selected' : '' }}>Si</option>
+                                                                                                                    <option value="NO" {{ ($producto->glute_free_no_spike == 'NO') ? 'selected' : '' }}>No</option>
+                                                                                                                </select>                                                                                                                
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
                                                                                             @foreach ($certificaciones_fijas as $certificacion)
                                                                                                 <input type="hidden" name="id_certificacion_fija[{{$producto->id}}][{{$certificacion->id}}]" value="{{$certificacion->id}}">
                                                                                                 <input type="hidden" name="id_exist_certificacion_fija[{{$producto->id}}][{{$certificacion->id}}]" value="{{!empty($certificaciones_fijas_producto[$producto->id][$certificacion->id]->id) ? $certificaciones_fijas_producto[$producto->id][$certificacion->id]->id : ''}}">

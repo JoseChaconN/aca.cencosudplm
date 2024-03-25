@@ -88,7 +88,7 @@ class ListadoDocumentosSeeder extends Seeder
         ListadoDocumentos::insert($documentos_auditorias_visita_inspectivas);
         //////////////CERTIFICACIONES IMPORTADOS///////////////////////////
         $certificaciones_fijas_importados = [
-            ['nombre' => 'Health', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            ['nombre' => 'Health', 'mostrar_prospecto_importados' => NULL, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
             ['nombre' => 'Free of AFP', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
             ['nombre' => 'Hidroxianthracene', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
             ['nombre' => 'Aloine', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
@@ -101,9 +101,9 @@ class ListadoDocumentosSeeder extends Seeder
             ['nombre' => 'Organic Master Certificate', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
             ['nombre' => 'Transactional Certificate', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
             ['nombre' => 'Gluten Free', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
-            ['nombre' => 'Gluten Free ( Crossed out spike on main face)', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
-            ['nombre' => 'Gluten Free ( Crossed out spike on another face)', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
-            ['nombre' => 'Gluten Free ( It does not have a crossed out spike)', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            //['nombre' => 'Gluten Free ( Crossed out spike on main face)', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            //['nombre' => 'Gluten Free ( Crossed out spike on another face)', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
+            //['nombre' => 'Gluten Free ( It does not have a crossed out spike)', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
             ['nombre' => 'Lactose Free', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
             ['nombre' => 'Aloine', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],
             ['nombre' => 'Alcohol Free', 'mostrar_prospecto_importados' => 1, 'tipo_documento' => 2, 'file' => 1, 'validar_vencimiento' => NULL],

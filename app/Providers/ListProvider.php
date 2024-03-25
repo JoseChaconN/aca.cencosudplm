@@ -75,9 +75,19 @@ class ListProvider extends ServiceProvider
         $area_documentos[] = ['val' => 'tercero', 'text' => 'Terceros'];
         $area_documentos[] = ['val' => 'elaboracion_propia', 'text' => 'Elaboracion Propia'];
 
+        ///VALORES PARA SELLOS ALTO EN
+        $sellos_alto_en['alto_en_calorias_solido'] = 275;
+        $sellos_alto_en['alto_en_calorias_liquido'] = 70;
+        $sellos_alto_en['alto_en_azucares_solido'] = 10;
+        $sellos_alto_en['alto_en_azucares_liquido'] = 5;
+        $sellos_alto_en['alto_en_sodio_solido'] = 100;
+        $sellos_alto_en['alto_en_sodio_liquido'] = 400;
+        $sellos_alto_en['alto_en_grasas_solido'] = 3;
+        $sellos_alto_en['alto_en_grasas_liquido'] = 4;
         
         // Compartir la variable de países con todas las vistas
         $view = view();
+        $view->share('sellos_alto_en', $sellos_alto_en);
         $view->share('unidades_medida', $unidades_medida);
         $view->share('meses_array', $meses_array);
         $view->share('zonas_tienda', $zonas_tienda);

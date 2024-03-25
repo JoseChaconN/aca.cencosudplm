@@ -32,16 +32,19 @@ class FormatoCargaMasivaProductosImportadosImport implements ToCollection, WithH
         //
        #dd($row);
        foreach ($row as $key => $value) {
-            if(!empty($value['nombre_producto']) && !empty($value['codigo_seccion'])){
+            if(!empty($value['descripcion']) && !empty($value['codigo_seccion'])){
                 $seccion = Seccion::where('codigo',$value['codigo_seccion'])->latest()
                 ->first();
                 $producto_prospecto=ProductosSolicitudImportadosAca::create([
                     'id_solicitud' => $this->id_solicitud,
                     'id_proveedor' => $this->id_proveedor,
-                    'product_name' =>$value['nombre_producto'],
+                    'upc_bar_code' =>$value['ean_13'],
+                    'product_name' =>$value['descripcion'],
                     'id_seccion' => $value['codigo_seccion'],
+                    'net_weight' => $value['contenido_neto'],
                     'seccion' => $seccion->nombre,
                     'version' => '0000',
+                    'version_description' => 'Versión inicial',
                 ]);
                 ProductosSolicitudImportadosAca2::create([
                     'id_solicitud' => $this->id_solicitud,

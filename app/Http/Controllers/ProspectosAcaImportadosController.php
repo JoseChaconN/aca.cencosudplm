@@ -120,6 +120,7 @@ class ProspectosAcaImportadosController extends Controller
                             'seccion' => $seccion->nombre,
                             'sap' => $sap_producto_array[$key],
                             'version' => '0000',
+                            'version_description' => 'Versión inicial',
                         ]);
                         $obs_producto_prospecto=ProductosSolicitudImportadosAca2::create([
                             'id_solicitud' => $solicitud->id,
@@ -234,6 +235,7 @@ class ProspectosAcaImportadosController extends Controller
 
                     #Variables
                         $nueva_version = $request->input('nueva_version');
+                        $version_description = $request->input('version_description');
                         $id_producto = $request->input('id_producto');
                         $ficha_excel = $request->file('ficha_excel');
                         $sap_producto = $request->input('sap_producto');
@@ -296,6 +298,9 @@ class ProspectosAcaImportadosController extends Controller
                         $nuts_derivatives_list = $request->input('nuts_derivatives_list');
                         $sulfites_derivatives = $request->input('sulfites_derivatives');
                         $sulfites_derivatives_list = $request->input('sulfites_derivatives_list');
+                        $glute_free_spike_main_face = $request->input('glute_free_spike_main_face');
+                        $glute_free_spike_another_face = $request->input('glute_free_spike_another_face');
+                        $glute_free_no_spike = $request->input('glute_free_no_spike');
                         $health_certificate = $request->input('health_certificate');
                         $health_certificate_file = $request->input('health_certificate_file');
                         $organic_certification = $request->input('organic_certification');
@@ -334,6 +339,10 @@ class ProspectosAcaImportadosController extends Controller
                         $type_secundary_packaging = $request->input('type_secundary_packaging');
                         $type_controls_sealing_air_tightness_primary_packaging = $request->input('type_controls_sealing_air_tightness_primary_packaging');
                         $product_type = $request->input('product_type');
+                        $alto_en_calorias = $request->input('alto_en_calorias');
+                        $alto_en_azucares = $request->input('alto_en_azucares');
+                        $alto_en_sodio = $request->input('alto_en_sodio');
+                        $alto_en_grasas = $request->input('alto_en_grasas');
                         $home_measure = $request->input('home_measure');
                         $serving_size = $request->input('serving_size');
                         $servings_per_container = $request->input('servings_per_container');
@@ -677,6 +686,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'id_solicitud' => $id,
                                 'producto_id' => $value,
                                 'version' => $producto->version,
+                                'version_description' => $old_data_prod['version_description'],
                                 'sap' => $old_data_prod['sap'],
                                 'product_name' => $old_data_prod['product_name'],
                                 'product_name_spanish' => $old_data_prod['product_name_spanish'],
@@ -736,6 +746,9 @@ class ProspectosAcaImportadosController extends Controller
                                 'nuts_derivatives_list' => $old_data_prod['nuts_derivatives_list'],
                                 'sulfites_derivatives' => $old_data_prod['sulfites_derivatives'],
                                 'sulfites_derivatives_list' => $old_data_prod['sulfites_derivatives_list'],
+                                'glute_free_spike_main_face' => $old_data_prod['glute_free_spike_main_face'],
+                                'glute_free_spike_another_face' => $old_data_prod['glute_free_spike_another_face'],
+                                'glute_free_no_spike' => $old_data_prod['glute_free_no_spike'],
                                 'total_plate_count' => $old_data_prod['total_plate_count'],
                                 'coliform' => $old_data_prod['coliform'],
                                 'e_coli' => $old_data_prod['e_coli'],
@@ -765,6 +778,10 @@ class ProspectosAcaImportadosController extends Controller
                                 'type_secundary_packaging' => $old_data_prod['type_secundary_packaging'],
                                 'type_controls_sealing_air_tightness_primary_packaging' => $old_data_prod['type_controls_sealing_air_tightness_primary_packaging'],
                                 'product_type' => $old_data_prod['product_type'],
+                                'alto_en_calorias' => $old_data_prod['alto_en_calorias'],
+                                'alto_en_azucares' => $old_data_prod['alto_en_azucares'],
+                                'alto_en_sodio' => $old_data_prod['alto_en_sodio'],
+                                'alto_en_grasas' => $old_data_prod['alto_en_grasas'],
                                 'home_measure' => $old_data['home_measure'],
                                 'serving_size' => $old_data_prod['serving_size'],
                                 'servings_per_container' => $old_data_prod['servings_per_container'],
@@ -948,6 +965,7 @@ class ProspectosAcaImportadosController extends Controller
                             $nueva_version = str_pad($num_version + 1, 4, '0', STR_PAD_LEFT);
                             $producto->update([
                                 'version' => $nueva_version,
+                                'version_description' => $producto->version_description,
                             ]);
                         }
                         if(!empty($ficha_excel[$value])){                            
@@ -1019,6 +1037,9 @@ class ProspectosAcaImportadosController extends Controller
                                 'nuts_derivatives_list' => $nuts_derivatives_list[$value],
                                 'sulfites_derivatives' => $sulfites_derivatives[$value],
                                 'sulfites_derivatives_list' => $sulfites_derivatives_list[$value],
+                                'glute_free_spike_main_face' => $glute_free_spike_main_face[$value],
+                                'glute_free_spike_another_face' => $glute_free_spike_another_face[$value],
+                                'glute_free_no_spike' => $glute_free_no_spike[$value],
                                 #'health_certificate' => $health_certificate[$value],
                                 #'health_certificate_file' => $health_certificate_file[$value],
                                 #'organic_certification' => $organic_certification[$value],
@@ -1057,6 +1078,10 @@ class ProspectosAcaImportadosController extends Controller
                                 'type_secundary_packaging' => $type_secundary_packaging[$value],
                                 'type_controls_sealing_air_tightness_primary_packaging' => $type_controls_sealing_air_tightness_primary_packaging[$value],
                                 'product_type' => $product_type[$value],
+                                'alto_en_calorias' => $alto_en_calorias[$value],
+                                'alto_en_azucares' => $alto_en_azucares[$value],
+                                'alto_en_sodio' => $alto_en_sodio[$value],
+                                'alto_en_grasas' => $alto_en_grasas[$value],
                                 'home_measure' => $home_measure[$value],
                                 'serving_size' => $serving_size[$value],
                                 'servings_per_container' => $servings_per_container[$value],
