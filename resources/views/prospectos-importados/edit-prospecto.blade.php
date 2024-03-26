@@ -205,7 +205,7 @@
                                                                             <div class="row">
                                                                                 <label class="col-sm-4 col-form-label font-weight-bold">Motivo del cambio:</label>
                                                                                 <div class="col-md-8">
-                                                                                    <textarea name="observacion_solicitud[{{$producto->id}}]" class="form-control form-control-sm" placeholder="Motivo del cambio" rows="5" style="resize: none"></textarea>
+                                                                                    <textarea name="version_description[{{$producto->id}}]" class="form-control form-control-sm" placeholder="Motivo del cambio" rows="5" style="resize: none"></textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
