@@ -80,13 +80,45 @@ class ListProvider extends ServiceProvider
         $sellos_alto_en['alto_en_calorias_liquido'] = 70;
         $sellos_alto_en['alto_en_azucares_solido'] = 10;
         $sellos_alto_en['alto_en_azucares_liquido'] = 5;
-        $sellos_alto_en['alto_en_sodio_solido'] = 100;
-        $sellos_alto_en['alto_en_sodio_liquido'] = 400;
-        $sellos_alto_en['alto_en_grasas_solido'] = 3;
-        $sellos_alto_en['alto_en_grasas_liquido'] = 4;
-        
+        $sellos_alto_en['alto_en_sodio_solido'] = 400;
+        $sellos_alto_en['alto_en_sodio_liquido'] = 100;
+        $sellos_alto_en['alto_en_grasas_solido'] = 4;
+        $sellos_alto_en['alto_en_grasas_liquido'] = 3;
+        ///VALORES PARA VITAMINAS Y MINERALES/////////
+        $vitaminas['A'] = 800;
+        $vitaminas['D'] = 5;
+        $vitaminas['E'] = 20;
+        $vitaminas['K'] = 80;
+        $vitaminas['C'] = 60;
+        $vitaminas['B1'] = 1.4;
+        $vitaminas['B2'] = 1.6;
+        $vitaminas['niacina'] = 18;
+        $vitaminas['B6'] = 2;
+        $vitaminas['folato'] = 200;
+        $vitaminas['B12'] = 1;
+        $vitaminas['pantotenico'] = 10;
+        $vitaminas['biotina'] = 300;
+        $vitaminas['colina'] = 550;
+        $vitaminas['calcio'] = 800;
+        $vitaminas['fosforo'] = 800;
+        $vitaminas['magnesio'] = 300;
+        $vitaminas['hierro'] = 14;
+        $vitaminas['zinc'] = 15;
+        $vitaminas['cobre'] = 2;
+        $vitaminas['selenio'] = 70;
+        $vitaminas['cromo'] = 35;
+        $vitaminas['yodo'] = 150;
+        $vitaminas['manganeso'] = 2;
+        $vitaminas['molibdeno'] = 50;
+        $vitaminas['betacaroteno'] = 1;
+
+
+
+
+
         // Compartir la variable de países con todas las vistas
         $view = view();
+        $view->share('vitaminas', $vitaminas);
         $view->share('sellos_alto_en', $sellos_alto_en);
         $view->share('unidades_medida', $unidades_medida);
         $view->share('meses_array', $meses_array);

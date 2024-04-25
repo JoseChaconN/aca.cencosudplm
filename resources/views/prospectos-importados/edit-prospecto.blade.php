@@ -79,14 +79,14 @@
                                         <div class="line"></div>
                                         <div class="step" data-target="#test-l-8">
                                             <button type="button" class="btn step-trigger">
-                                                <span class="bs-stepper-circle">7</span>
+                                                <span class="bs-stepper-circle">8</span>
                                                 <span class="bs-stepper-label">Paso 6</span>
                                             </button>
                                         </div>
                                         <div class="line"></div>
                                         <div class="step" data-target="#test-l-9">
                                             <button type="button" class="btn step-trigger">
-                                                <span class="bs-stepper-circle">7</span>
+                                                <span class="bs-stepper-circle">9</span>
                                                 <span class="bs-stepper-label">Conclusiones</span>
                                             </button>
                                         </div>
@@ -217,8 +217,9 @@
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th width="20%">Numero de revisión</th>
-                                                                                        <th width="40%">Fecha de revisión</th>
+                                                                                        <th width="20%">Fecha de revisión</th>
                                                                                         <th width="40%">Descripción del cambio</th>
+                                                                                        <th width="20%">-</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
@@ -226,12 +227,14 @@
                                                                                         <td>{{ $producto->version }}</td>
                                                                                         <td>{{ $producto->created_at }}</td>
                                                                                         <td>{{ $producto->version_description }}</td>
+                                                                                        <td><a class="btn btn-success btn-sm" href="{{route('prospectos.importados.pdf',$producto->id)}}" target="_blank">Ficha PDF Versión {{$producto->version}}</a></td>
                                                                                     </tr>
                                                                                     @foreach ($producto->versiones as $item)
                                                                                         <tr>
                                                                                             <td>{{ $item->version }}</td>
                                                                                             <td>{{ $item->created_at }}</td>
                                                                                             <td>{{ $item->version_description }}</td>
+                                                                                            <td><a class="btn btn-success btn-sm" href="{{route('prospectos.importados.pdf',$item->id)}}" target="_blank">Ficha PDF Versión {{$item->version}}</a></td>
                                                                                         </tr>
                                                                                     @endforeach
                                                                                 </tbody>
@@ -1313,7 +1316,7 @@
                                                                                                                     <option value="">Seleccione</option>
                                                                                                                     <option value="SI" {{ ($producto->cereals_gluten == 'SI') ? 'selected' : '' }}>Si</option>
                                                                                                                     <option value="NO" {{ ($producto->cereals_gluten == 'NO') ? 'selected' : '' }}>No</option>
-                                                                                                                </select>                                                                                                                
+                                                                                                                </select>       
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <textarea name="cereals_gluten_list[{{ $producto->id }}]" rows="2" class="form-control" style="resize: none">{{ $producto->cereals_gluten_list }}</textarea>
@@ -2265,7 +2268,7 @@
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                                                                                                    <input type="checkbox" id="customCheckboxInline3_{{ $producto->id }}" name="alto_en_calorias[{{ $producto->id }}]" class="custom-control-input" value="1">
+                                                                                                                    <input type="checkbox" id="customCheckboxInline3_{{ $producto->id }}"{{ ($producto->alto_en_calorias == 1) ? 'checked' : '' }} name="alto_en_calorias[{{ $producto->id }}]" class="custom-control-input" value="1">
                                                                                                                     <label class="custom-control-label" for="customCheckboxInline3_{{ $producto->id }}">No Aplica</label>
                                                                                                                 </div>
                                                                                                             </td>
@@ -2277,7 +2280,7 @@
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                                                                                                    <input type="checkbox" id="customCheckboxInline4_{{ $producto->id }}" name="alto_en_azucares[{{ $producto->id }}]" class="custom-control-input" value="1">
+                                                                                                                    <input type="checkbox" id="customCheckboxInline4_{{ $producto->id }}"{{ ($producto->alto_en_azucares == 1) ? 'checked' : '' }} name="alto_en_azucares[{{ $producto->id }}]" class="custom-control-input" value="1">
                                                                                                                     <label class="custom-control-label" for="customCheckboxInline4_{{ $producto->id }}">No Aplica</label>
                                                                                                                 </div>
                                                                                                             </td>
@@ -2289,7 +2292,7 @@
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                                                                                                    <input type="checkbox" id="customCheckboxInline5_{{ $producto->id }}" name="alto_en_sodio[{{ $producto->id }}]" class="custom-control-input" value="1">
+                                                                                                                    <input type="checkbox" id="customCheckboxInline5_{{ $producto->id }}"{{ ($producto->alto_en_sodio == 1) ? 'checked' : '' }} name="alto_en_sodio[{{ $producto->id }}]" class="custom-control-input" value="1">
                                                                                                                     <label class="custom-control-label" for="customCheckboxInline5_{{ $producto->id }}">No Aplica</label>
                                                                                                                 </div>
                                                                                                             </td>
@@ -2301,7 +2304,7 @@
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                                                                                                    <input type="checkbox" id="customCheckboxInline6_{{ $producto->id }}" name="alto_en_grasas[{{ $producto->id }}]" class="custom-control-input" value="1">
+                                                                                                                    <input type="checkbox" id="customCheckboxInline6_{{ $producto->id }}"{{ ($producto->alto_en_grasas == 1) ? 'checked' : '' }} name="alto_en_grasas[{{ $producto->id }}]" class="custom-control-input" value="1">
                                                                                                                     <label class="custom-control-label" for="customCheckboxInline6_{{ $producto->id }}">No Aplica</label>
                                                                                                                 </div>
                                                                                                             </td>
@@ -2480,11 +2483,11 @@
                                                                                                         </tr>
                                                                                                         <tr>
                                                                                                             <td>Serving Size:</td>
-                                                                                                            <td colspan="4"><input type="text" class="form-control" name="serving_size_reconstitued[{{ $producto->id }}]" value="{{ $producto->serving_size }}"></td>
+                                                                                                            <td colspan="4"><input type="text" class="form-control" name="serving_size_reconstitued[{{ $producto->id }}]" value="{{ $producto->serving_size_reconstitued }}"></td>
                                                                                                         </tr>
                                                                                                         <tr>
                                                                                                             <td>Servings per Container:</td>
-                                                                                                            <td colspan="4"><input type="text" class="form-control" name="servings_per_container_reconstitued[{{ $producto->id }}]" value="{{ $producto->servings_per_container }}"></td>
+                                                                                                            <td colspan="4"><input type="text" class="form-control" name="servings_per_container_reconstitued[{{ $producto->id }}]" value="{{ $producto->servings_per_container_reconstitued }}"></td>
                                                                                                         </tr>
                                                                                                         <tr>
                                                                                                             <th width="20%">Campo</th>
@@ -3479,42 +3482,6 @@
                                                                                                             <td><textarea rows="2" class="form-control" name="chloramphenicol_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->chloramphenicol }}</textarea></td>
                                                                                                         </tr>
                                                                                                         <tr>
-                                                                                                            <td>tetracycline(ug/kg)</td>
-                                                                                                            <td><input type="text" class="form-control" name="tetracycline[{{ $producto->id }}]" value="{{ $producto->tetracycline }}"></td>
-                                                                                                            <td><textarea rows="2" class="form-control" name="tetracycline_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->tetracycline }}</textarea></td>
-                                                                                                        </tr>
-                                                                                                        <tr>
-                                                                                                            <td>quinolones(ug/kg)</td>
-                                                                                                            <td><input type="text" class="form-control" name="quinolones[{{ $producto->id }}]" value="{{ $producto->quinolones }}"></td>
-                                                                                                            <td><textarea rows="2" class="form-control" name="quinolones_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->quinolones }}</textarea></td>
-                                                                                                        </tr>
-                                                                                                        <tr>
-                                                                                                            <td>sulfonamides(ug/kg)</td>
-                                                                                                            <td><input type="text" class="form-control" name="sulfonamides[{{ $producto->id }}]" value="{{ $producto->sulfonamides }}"></td>
-                                                                                                            <td><textarea rows="2" class="form-control" name="sulfonamides_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->sulfonamides }}</textarea></td>
-                                                                                                        </tr>
-                                                                                                    </tbody>
-                                                                                                </table>
-                                                                                            </div>
-                                                                                            <div class="col-md-12">
-                                                                                                <table class="table table-bordered table-stripped table-hover table-sm">
-                                                                                                    <thead>
-                                                                                                        <tr>
-                                                                                                            <th>Veterinary Drugs</th>
-                                                                                                        </tr>
-                                                                                                        <tr>
-                                                                                                            <th width="20%">Campo</th>
-                                                                                                            <th width="40%">Valor</th>
-                                                                                                            <th width="40%">Observaciones</th>
-                                                                                                        </tr>
-                                                                                                    </thead>
-                                                                                                    <tbody>
-                                                                                                        <tr>
-                                                                                                            <td>chloramphenicol(ug/kg)</td>
-                                                                                                            <td><input type="text" class="form-control" name="chloramphenicol[{{ $producto->id }}]" value="{{ $producto->chloramphenicol }}"></td>
-                                                                                                            <td><textarea rows="2" class="form-control" name="chloramphenicol_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->chloramphenicol }}</textarea></td>
-                                                                                                        </tr>
-                                                                                                        <tr>
                                                                                                             <td>sulfonamides(ug/kg)</td>
                                                                                                             <td><input type="text" class="form-control" name="sulfonamides[{{ $producto->id }}]" value="{{ $producto->sulfonamides }}"></td>
                                                                                                             <td><textarea rows="2" class="form-control" name="sulfonamides_obs[{{ $producto->id }}]" placeholders="Observaciones">{{ $producto->obs->sulfonamides }}</textarea></td>
@@ -3975,6 +3942,20 @@
                                                                                                     <label class="custom-file-label" >Buscar Archivo</label>
                                                                                                   </div>
                                                                                             </div>
+                                                                                            @if (!empty($adjunto_certificaciones_fijas_producto[$producto->id][64]))
+                                                                                                <div class="col-md-12 mt-4">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                                <a class="btn btn-primary btn-sm" download="" href="{{$adjunto_certificaciones_fijas_producto[$producto->id][64]['url']}}" target="_blank">
+                                                                                                                    Descargar Adjunto
+                                                                                                                </a>
+                                                                                                                {{-- @if (($prospecto->estado_solicitud == 0 && Auth::user()->hasRole('comercial')) || Auth::user()->hasRole('calidad'))
+                                                                                                                    <button class="btn btn-danger btn-sm" type="button" onclick="fnDeleteBibliotecaFile_2('{{ route('biblioteca.delete') }}',{{ $item->id }},null,'documento_fijo_{{ $item->id }}')">Eliminar Adjunto</button>
+                                                                                                                @endif --}}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @endif
                                                                                         </div>
                                                                                         <div class="row mt-4">
                                                                                             <div class="col-md-12">
@@ -3986,6 +3967,20 @@
                                                                                                     <label class="custom-file-label" >Buscar Archivo</label>
                                                                                                   </div>
                                                                                             </div>
+                                                                                            @if (!empty($adjunto_certificaciones_fijas_producto[$producto->id][65]))
+                                                                                                <div class="col-md-12 mt-4">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-12">
+                                                                                                                <a class="btn btn-primary btn-sm" download="" href="{{$adjunto_certificaciones_fijas_producto[$producto->id][65]['url']}}" target="_blank">
+                                                                                                                    Descargar Adjunto
+                                                                                                                </a>
+                                                                                                                {{-- @if (($prospecto->estado_solicitud == 0 && Auth::user()->hasRole('comercial')) || Auth::user()->hasRole('calidad'))
+                                                                                                                    <button class="btn btn-danger btn-sm" type="button" onclick="fnDeleteBibliotecaFile_2('{{ route('biblioteca.delete') }}',{{ $item->id }},null,'documento_fijo_{{ $item->id }}')">Eliminar Adjunto</button>
+                                                                                                                @endif --}}
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @endif
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -4121,7 +4116,7 @@
                                                                         </div>
                                                                         <div class="col-md-12">
                                                                             <!--a class="btn btn-success" href="{{route('prospectos.pdf',$producto->id)}}" target="_blank">PDF de {{$producto->product_name}}</a-->
-                                                                            <a class="btn btn-success" href="{{route('prospectos.importados.excel.ficha-tecnica',$producto->id)}}" target="_blank">Ficha de {{$producto->product_name}}</a>
+                                                                            <a class="btn btn-success" href="{{route('prospectos.importados.pdf',$producto->id)}}" target="_blank">Ficha PDF Versión {{$producto->version}}</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>

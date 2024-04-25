@@ -159,7 +159,7 @@ class ProspectosAcaImportadosController extends Controller
         $data['certificaciones_fijas'] = ListadoDocumentos::where('mostrar_prospecto_importados', 1)->where('tipo_documento', 2)->get();
 
         foreach ($data['prospecto']->productos_solicitud_prospecto as $producto) {
-            $producto_q = ProductosSolicitudImportadosAca::find($producto->id);            
+            $producto_q = ProductosSolicitudImportadosAca::find($producto->id);
             foreach ($data['certificaciones_fijas'] as $certificacion) {
                 $certificacion_exist = BibliotecaDocumentos::where('id_prospecto_importado',$producto->id)->where('id_documento',$certificacion->id)->latest()->first();
                 if(!empty($certificacion_exist->id_documento)){
@@ -170,6 +170,22 @@ class ProspectosAcaImportadosController extends Controller
                     }
                 }
             }
+            $flow_chart = BibliotecaDocumentos::where('id_prospecto_importado',$producto->id)->where('id_documento',64)->latest()->first();
+                if(!empty($flow_chart->id_documento)){
+                    $data['certificaciones_fijas_producto'][$producto->id][$flow_chart->id_documento] = $flow_chart;
+                    $adjunto_certificacion_fija = $flow_chart->getMedia('certificaciones_fijas_producto_importado')->last();
+                    if(!empty($adjunto_certificacion_fija->id)){
+                        $data['adjunto_certificaciones_fijas_producto'][$producto->id][$flow_chart->id_documento] = ['id' => $adjunto_certificacion_fija->id , 'url' => $adjunto_certificacion_fija->getUrl()];
+                    }
+                }
+            $label_design = BibliotecaDocumentos::where('id_prospecto_importado',$producto->id)->where('id_documento',65)->latest()->first();
+                if(!empty($label_design->id_documento)){
+                    $data['certificaciones_fijas_producto'][$producto->id][$label_design->id_documento] = $label_design;
+                    $adjunto_certificacion_fija = $label_design->getMedia('certificaciones_fijas_producto_importado')->last();
+                    if(!empty($adjunto_certificacion_fija->id)){
+                        $data['adjunto_certificaciones_fijas_producto'][$producto->id][$label_design->id_documento] = ['id' => $adjunto_certificacion_fija->id , 'url' => $adjunto_certificacion_fija->getUrl()];
+                    }
+                }
         }
         return view('prospectos-importados.edit-prospecto', $data);
     }
@@ -382,7 +398,7 @@ class ProspectosAcaImportadosController extends Controller
                         $insoluble_fiber_serving = $request->input('insoluble_fiber_serving');
                         $sodium_100 = $request->input('sodium_100');
                         $sodium_serving = $request->input('sodium_serving');
-                        $home_measure_reconstitued  = $request->input('home_measure_reconstitued ');
+                        $home_measure_reconstitued  = $request->input('home_measure_reconstitued');
                         $serving_size_reconstitued = $request->input('serving_size_reconstitued');
                         $servings_per_container_reconstitued = $request->input('servings_per_container_reconstitued');
                         $energy_100_reconstitued = $request->input('energy_100_reconstitued');
@@ -821,7 +837,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'insoluble_fiber_serving' => $old_data_prod['insoluble_fiber_serving'],
                                 'sodium_100' => $old_data_prod['sodium_100'],
                                 'sodium_serving' => $old_data_prod['sodium_serving'],
-                                //'home_measure_reconstitued' => $old_data['home_measure_reconstitued'],
+                                'home_measure_reconstitued' => $old_data['home_measure_reconstitued'],
                                 'serving_size_reconstitued' => $old_data_prod['serving_size_reconstitued'],
                                 'servings_per_container_reconstitued' => $old_data_prod['servings_per_container_reconstitued'],
                                 'energy_100_reconstitued' => $old_data_prod['energy_100_reconstitued'],
@@ -965,7 +981,7 @@ class ProspectosAcaImportadosController extends Controller
                             $nueva_version = str_pad($num_version + 1, 4, '0', STR_PAD_LEFT);
                             $producto->update([
                                 'version' => $nueva_version,
-                                'version_description' => $producto->version_description,
+                                'version_description' => $version_description[$value],
                             ]);
                         }
                         if(!empty($ficha_excel[$value])){                            
@@ -1078,10 +1094,10 @@ class ProspectosAcaImportadosController extends Controller
                                 'type_secundary_packaging' => $type_secundary_packaging[$value],
                                 'type_controls_sealing_air_tightness_primary_packaging' => $type_controls_sealing_air_tightness_primary_packaging[$value],
                                 'product_type' => $product_type[$value],
-                                #'alto_en_calorias' => $alto_en_calorias[$value],
-                                #'alto_en_azucares' => $alto_en_azucares[$value],
-                                #'alto_en_sodio' => $alto_en_sodio[$value],
-                                #'alto_en_grasas' => $alto_en_grasas[$value],
+                                'alto_en_calorias' => !empty($alto_en_calorias[$value]) ? $alto_en_calorias[$value] : NULL,
+                                'alto_en_azucares' => !empty($alto_en_azucares[$value]) ? $alto_en_azucares[$value] : NULL,
+                                'alto_en_sodio' => !empty($alto_en_sodio[$value]) ? $alto_en_sodio[$value] : NULL,
+                                'alto_en_grasas' => !empty($alto_en_grasas[$value]) ? $alto_en_grasas[$value] : NULL,
                                 'home_measure' => $home_measure[$value],
                                 'serving_size' => $serving_size[$value],
                                 'servings_per_container' => $servings_per_container[$value],
@@ -1121,7 +1137,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'insoluble_fiber_serving' => $insoluble_fiber_serving[$value],
                                 'sodium_100' => $sodium_100[$value],
                                 'sodium_serving' => $sodium_serving[$value],
-                                //'home_measure_reconstitued' => $home_measure_reconstitued[$value],
+                                'home_measure_reconstitued' => (!empty($home_measure_reconstitued[$value]) ? $home_measure_reconstitued[$value] : null),
                                 'serving_size_reconstitued' => $serving_size_reconstitued[$value],
                                 'servings_per_container_reconstitued' => $servings_per_container_reconstitued[$value],
                                 'energy_100_reconstitued' => $energy_100_reconstitued[$value],
@@ -1431,7 +1447,7 @@ class ProspectosAcaImportadosController extends Controller
                                         'id_documento' => 60,
                                     ]);
                                     if ($health_certificate_file[$value]->isValid()) {
-                                        $health_certificate_q->addMedia($health_certificate_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                        $health_certificate_q->addMedia($health_certificate_file[$value])->toMediaCollection('certificaciones_fijas_producto_importado');
                                     }
                                 }
                                 /*
@@ -1536,7 +1552,7 @@ class ProspectosAcaImportadosController extends Controller
                                         'id_documento' => 64,
                                     ]);
                                     if ($flow_chart_file[$value]->isValid()) {
-                                        $flow_chart_q->addMedia($flow_chart_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                        $flow_chart_q->addMedia($flow_chart_file[$value])->toMediaCollection('certificaciones_fijas_producto_importado');
                                     }
                                 }
                                 ##label_design_file
@@ -1549,7 +1565,7 @@ class ProspectosAcaImportadosController extends Controller
                                         'id_documento' => 65,
                                     ]);
                                     if ($label_design_file[$value]->isValid()) {
-                                        $label_design_file_q->addMedia($label_design_file[$value])->toMediaCollection('certificaciones_fijas_producto');
+                                        $label_design_file_q->addMedia($label_design_file[$value])->toMediaCollection('certificaciones_fijas_producto_importado');
                                     }
                                 }
                         }
@@ -1691,7 +1707,51 @@ class ProspectosAcaImportadosController extends Controller
         return view('prospectos-importados.list-cerrado-prospectos', $data);
     }
     public function prospecto_PDF($id)
-    {}
+    {
+        #User::with('sections','cc','tiendas')->findOrFail($id);
+        //SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto.obs','productos_solicitud_prospecto.versiones')->findOrFail($id);
+        $data = ProductosSolicitudImportadosAca::with('versiones')->findOrFail($id);
+        $proveedor = Proveedor::find($data->id_proveedor);
+        $flow_chart = BibliotecaDocumentos::where('id_prospecto_importado',$id)->where('id_documento',64)->latest()->first();
+        $flow_chart_data = null;
+        $label_design_data = null;
+        $certificaciones_fijas = ListadoDocumentos::where('mostrar_prospecto_importados', 1)->where('tipo_documento', 2)->get();
+        
+        $adjunto_certificaciones_fijas_producto = [];
+        foreach ($certificaciones_fijas as $certificacion) {
+            $certificacion_exist = BibliotecaDocumentos::where('id_prospecto_importado',$id)->where('id_documento',$certificacion->id)->latest()->first();
+            if(!empty($certificacion_exist->id_documento)){
+                $adjunto_certificacion_fija = $certificacion_exist->getMedia('certificaciones_fijas_producto_importado')->last();
+                if(!empty($adjunto_certificacion_fija->id)){
+                    $adjunto_certificaciones_fijas_producto[] = ['id' => $adjunto_certificacion_fija->id , 'name' => $certificacion->nombre];
+                }
+            }
+        }
+        if(!empty($flow_chart->id_documento)){
+            $adjunto_certificacion_fija_flow_chart = $flow_chart->getMedia('certificaciones_fijas_producto_importado')->last();
+            if(!empty($adjunto_certificacion_fija_flow_chart->id)){
+                $flow_chart_data = ['id' => $adjunto_certificacion_fija_flow_chart->id , 'url' => $adjunto_certificacion_fija_flow_chart->getUrl() ,'type' => $adjunto_certificacion_fija_flow_chart->mime_type];
+            }
+        }
+        $label_design = BibliotecaDocumentos::where('id_prospecto_importado',$id)->where('id_documento',65)->latest()->first();
+        if(!empty($label_design->id_documento)){
+            $adjunto_certificacion_fija_label_design = $label_design->getMedia('certificaciones_fijas_producto_importado')->last();
+            if(!empty($adjunto_certificacion_fija_label_design->id)){
+                $label_design_data = ['id' => $adjunto_certificacion_fija_label_design->id , 'url' => $adjunto_certificacion_fija_label_design->getUrl(), 'type' => $adjunto_certificacion_fija_label_design->mime_type];
+            }
+        }
+        $data = [
+            'date' => date('m/d/Y'),
+            'producto' => $data,
+            'proveedor' => $proveedor,
+            'flow_chart_data' => $flow_chart_data,
+            'label_design_data' => $label_design_data,
+            'adjunto_certificaciones_fijas_producto' => $adjunto_certificaciones_fijas_producto,
+        ];
+        $pdf = Pdf::loadView('prospectos-importados.pdf-prospecto', $data)->setPaper('a4')->setOption(['defaultFont' => 'helvetica']);
+        
+        return $pdf->stream();
+    }
     public function planilla_solicitud_prospecto_excel(string $id){
         /*$mes = (!empty($request->input('mes_excel'))) ? $request->input('mes_excel') : date('m');
         $ano = (!empty($request->input('ano_excel'))) ? $request->input('ano_excel') : date('Y');
