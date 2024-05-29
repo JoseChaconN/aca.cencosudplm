@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('version',10)->nullable();
             $table->string('version_description',150)->nullable();
             $table->string('product_name',50)->nullable();
+            $table->string('product_name_comercial',50)->nullable();
             $table->string('product_name_spanish',50)->nullable();
             $table->string('claims_origin',50)->nullable();
             $table->string('comments',50)->nullable();
@@ -141,6 +142,7 @@ return new class extends Migration
             $table->decimal('soluble_fiber_100', 7, 2)->nullable();
             $table->decimal('insoluble_fiber_100', 7, 2)->nullable();
             $table->decimal('sodium_100', 7, 2)->nullable();
+            $table->decimal('potassium_100', 7, 2)->nullable();
             $table->decimal('energy_serving', 7, 2)->nullable();
             $table->decimal('proteins_serving', 7, 2)->nullable();
             $table->decimal('total_fat_serving', 7, 2)->nullable();
@@ -159,6 +161,7 @@ return new class extends Migration
             $table->decimal('soluble_fiber_serving', 7, 2)->nullable();
             $table->decimal('insoluble_fiber_serving', 7, 2)->nullable();
             $table->decimal('sodium_serving', 7, 2)->nullable();
+            $table->decimal('potassium_100_reconstitued', 7, 2)->nullable();
             $table->string('home_measure_reconstitued',50)->nullable();
             $table->integer('serving_size_reconstitued')->nullable();
             $table->string('servings_per_container_reconstitued', 7)->nullable();
@@ -180,6 +183,7 @@ return new class extends Migration
             $table->decimal('soluble_fiber_100_reconstitued', 7, 2)->nullable();
             $table->decimal('insoluble_fiber_100_reconstitued', 7, 2)->nullable();
             $table->decimal('sodium_100_reconstitued', 7, 2)->nullable();
+            $table->decimal('potassium_serving_reconstitued_r', 7, 2)->nullable();
             $table->decimal('energy_serving_reconstitued', 7, 2)->nullable();
             $table->decimal('proteins_serving_reconstitued', 7, 2)->nullable();
             $table->decimal('total_fat_serving_reconstitued', 7, 2)->nullable();

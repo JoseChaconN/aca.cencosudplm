@@ -116,6 +116,7 @@ return new class extends Migration
             $table->longtext('soluble_fiber')->nullable();
             $table->longtext('insoluble_fiber')->nullable();
             $table->longtext('sodium')->nullable();
+            $table->longtext('potassium')->nullable();
             $table->longtext('serving_size_reconstitued')->nullable();
             $table->longtext('servings_per_container_reconstitued')->nullable();
             $table->longtext('energy_reconstitued')->nullable();
@@ -136,6 +137,7 @@ return new class extends Migration
             $table->longtext('soluble_fiber_reconstitued')->nullable();
             $table->longtext('insoluble_fiber_reconstitued')->nullable();
             $table->longtext('sodium_reconstitued')->nullable();
+            $table->longtext('potassium_reconstitued')->nullable();
             $table->longtext('vitamin_a')->nullable();
             $table->longtext('vitamin_c')->nullable();
             $table->longtext('vitamin_d')->nullable();

@@ -78,14 +78,15 @@ Route::post('prospectos/delete',[ProspectosAcaController::class,'delete'])->name
 Route::resource('prospectos', ProspectosAcaController::class);
 
 //////////PROSPECTOS PRODUCTOS IMPORTADOS ACA///////////////
-Route::match(['get','post'],'prospectos-importados/fichas-tecnicas',[ProspectosAcaImportadosController::class,'buscar_fichas_tecnicas'])->name('prospectos.importados.fichas-tecnicas');
+#Route::match(['get','post'],'prospectos-importados/fichas-tecnicas',[ProspectosAcaImportadosController::class,'buscar_fichas_tecnicas'])->name('prospectos.importados.fichas-tecnicas');
+Route::get('prospectos-importados/fichas-tecnicas', [ProspectosAcaImportadosController::class, 'buscar_fichas_tecnicas'])->name('prospectos.importados.fichas-tecnicas');
 Route::get('prospectos-importados/formato-masivo', [ProspectosAcaImportadosController::class, 'formato_masivo_productos_excel'])->name('prospectos.importados.excel.formato-masivo');
 Route::get('prospectos-importados/proceso',[ProspectosAcaImportadosController::class,'list_prospectos_proceso'])->name('prospectos.importados.list.proceso');
 Route::get('prospectos-importados/cerrado',[ProspectosAcaImportadosController::class,'list_prospectos_cerrado'])->name('prospectos.importados.list.cerrado');
 Route::get('prospectos-importados/pdf/{id}',[ProspectosAcaImportadosController::class,'prospecto_PDF'])->name('prospectos.importados.pdf');
 Route::post('prospectos-importados/delete',[ProspectosAcaImportadosController::class,'delete'])->name('prospectos-importados.delete');
 Route::resource('prospectos-importados', ProspectosAcaImportadosController::class);
-Route::get('prospectos-importados/planilla-solicitud/{id}', [ProspectosAcaImportadosController::class, 'planilla_solicitud_prospecto_excel'])->name('prospectos.importados.excel.planilla-solicitud');
+Route::post('prospectos-importados/planilla-solicitud/{id}', [ProspectosAcaImportadosController::class, 'planilla_solicitud_prospecto_email'])->name('prospectos.importados.email.planilla-solicitud');
 Route::get('prospectos-importados/ficha-tecnica/{id}', [ProspectosAcaImportadosController::class, 'ficha_tecnica_excel'])->name('prospectos.importados.excel.ficha-tecnica');
 
 #Route::match(['get','post'],'prospectos/cerrado',[ProspectosAcaController::class,'list_prospectos_cerrado'])->name('prospectos.list.cerrado');

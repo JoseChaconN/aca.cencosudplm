@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProspectoCreado;
 use App\Exports\FichaTecnicaImportadoExcel;
 use App\Exports\FormatoCargaMasivaProductosImportadosExcel;
 use App\Exports\PlanillaSolicitudImportadoExcel;
@@ -11,6 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExcelImport;
 use App\Imports\FichaTecnicaProductosImportadosImport;
 use App\Imports\FormatoCargaMasivaProductosImportadosImport;
+use App\Mail\EnviarPlanillaSolicitudImportadosMail;
 use App\Models\BibliotecaDocumentos;
 use App\Models\ListadoDocumentos;
 use Spatie\Activitylog\Facades\LogBatch;
@@ -28,7 +30,7 @@ use Spatie\Permission\Models\Role;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -45,7 +47,15 @@ class ProspectosAcaImportadosController extends Controller
     {
         
     }
+    protected function generarRutUnico()
+    {
+        do {
+            $rutAleatorio = mt_rand(10000000, 99999999); // Genera un número aleatorio entre 8 cifras
+            $rutExistente = Proveedor::where('rut', $rutAleatorio)->exists();
+        } while ($rutExistente);  // Continúa hasta que el RUT no exista en la base de datos
 
+        return $rutAleatorio;
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -78,6 +88,9 @@ class ProspectosAcaImportadosController extends Controller
                 }else{
                     #PROVEEDOR NUEVO
                     $rut_proveedor =  str_replace(['.', '-', ','], '', $request->input('rut_proveedor'));
+                    if (empty($rut_proveedor)) {
+                        $rut_proveedor = $this->generarRutUnico();
+                    }
                     $proveedor = Proveedor::where('nombre',strtoupper($request->input('nombre_proveedor')))->where('rut',$rut_proveedor)->latest()->first();
                     if(empty($proveedor->id)){
                        $proveedor = Proveedor::create([
@@ -95,6 +108,7 @@ class ProspectosAcaImportadosController extends Controller
                     'id_proveedor' => $proveedor->id,
                     'nombre_proveedor' => $proveedor->nombre,
                     'rut_proveedor' => $proveedor->rut,
+                    'estado_solicitud' => 2,
                 ]);
                 #INSERT DE PRODUCTOS
                 if(!empty($request->file('formato_masivo'))){
@@ -115,6 +129,7 @@ class ProspectosAcaImportadosController extends Controller
                         $producto_prospecto=ProductosSolicitudImportadosAca::create([
                             'id_solicitud' => $solicitud->id,
                             'id_proveedor' => $request->input('id_proveedor'),
+                            'product_name_comercial' => $productoData,
                             'product_name' => $productoData,
                             'id_seccion' => $seccion_producto_array[$key],
                             'seccion' => $seccion->nombre,
@@ -129,6 +144,7 @@ class ProspectosAcaImportadosController extends Controller
                     }
                 }
                 $nuevaSolicitudId = $solicitud->id;
+                event(new ProspectoCreado($solicitud));
             });
             return redirect()->route('prospectos-importados.edit',$nuevaSolicitudId)->with('notification_type', 'success')->with('notification_message', 'Solicitud creada con exito!');
         
@@ -204,9 +220,10 @@ class ProspectosAcaImportadosController extends Controller
                 $solicitud = SolicitudProspectoProductosImportadosAca::find($id);
                 $old_data = $solicitud->getOriginal();
                 $estado_cl = $request->input('estado_cl');
+                $estado_calidad = $request->input('estado_calidad');
                 $solicitud->update([
                     'estado_solicitud' => $request->input('estado_solicitud'),
-                    'id_calidad' => $request->input('id_calidad'),
+                    'id_calidad' => Auth::user()->id,#$request->input('id_calidad'),
                     'id_comercial' => $request->input('id_comercial'),
                     'nombre_proveedor' => $request->input('nombre_proveedor'),
                     'rut_proveedor' => $request->input('rut_proveedor'),
@@ -255,7 +272,9 @@ class ProspectosAcaImportadosController extends Controller
                         $id_producto = $request->input('id_producto');
                         $ficha_excel = $request->file('ficha_excel');
                         $sap_producto = $request->input('sap_producto');
+                        $product_name_comercial = $request->input('product_name_comercial');
                         $product_name = $request->input('product_name');
+                        $code = $request->input('code');
                         $product_name_spanish = $request->input('product_name_spanish');
                         $claims_origin = $request->input('claims_origin');
                         $comments = $request->input('comments');
@@ -398,6 +417,8 @@ class ProspectosAcaImportadosController extends Controller
                         $insoluble_fiber_serving = $request->input('insoluble_fiber_serving');
                         $sodium_100 = $request->input('sodium_100');
                         $sodium_serving = $request->input('sodium_serving');
+                        $potassium_100 = $request->input('potassium_100');
+                        $potassium_serving = $request->input('potassium_serving');
                         $home_measure_reconstitued  = $request->input('home_measure_reconstitued');
                         $serving_size_reconstitued = $request->input('serving_size_reconstitued');
                         $servings_per_container_reconstitued = $request->input('servings_per_container_reconstitued');
@@ -455,6 +476,9 @@ class ProspectosAcaImportadosController extends Controller
                         $sodium_100_reconstitued = $request->input('sodium_100_reconstitued');
                         $sodium_serving_reconstitued = $request->input('sodium_serving_reconstitued');
                         $sodium_serving_reconstitued_r = $request->input('sodium_serving_reconstitued_r');
+                        $potassium_100_reconstitued = $request->input('potassium_100_reconstitued');
+                        $potassium_serving_reconstitued = $request->input('potassium_serving_reconstitued');
+                        $potassium_serving_reconstitued_r = $request->input('potassium_serving_reconstitued_r');
                         $vitamin_a_100 = $request->input('vitamin_a_100');
                         $vitamin_a_serving = $request->input('vitamin_a_serving');
                         $vitamin_c_100 = $request->input('vitamin_c_100');
@@ -531,6 +555,8 @@ class ProspectosAcaImportadosController extends Controller
                         $steroids = $request->input('steroids');
                         $estado_cl = $request->input('estado_cl');
                         $observacion_solicitud = $request->input('observacion_solicitud');
+                        $estado_calidad = $request->input('estado_calidad');
+                        $observacion_solicitud_calidad = $request->input('observacion_solicitud_calidad');
                     #VARIABLES OBS
                         $sap_obs = $request->input('sap_obs');
                         $product_name_obs = $request->input('product_name_obs');
@@ -705,6 +731,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'version_description' => $old_data_prod['version_description'],
                                 'sap' => $old_data_prod['sap'],
                                 'product_name' => $old_data_prod['product_name'],
+                                #'code' => $old_data_prod['code'],
                                 'product_name_spanish' => $old_data_prod['product_name_spanish'],
                                 'claims_origin' => $old_data_prod['claims_origin'],
                                 'comments' => $old_data_prod['comments'],
@@ -798,7 +825,7 @@ class ProspectosAcaImportadosController extends Controller
                                 'alto_en_azucares' => $old_data_prod['alto_en_azucares'],
                                 'alto_en_sodio' => $old_data_prod['alto_en_sodio'],
                                 'alto_en_grasas' => $old_data_prod['alto_en_grasas'],
-                                'home_measure' => $old_data['home_measure'],
+                                #'home_measure' => $old_data['home_measure'],
                                 'serving_size' => $old_data_prod['serving_size'],
                                 'servings_per_container' => $old_data_prod['servings_per_container'],
                                 'energy_100' => $old_data_prod['energy_100'],
@@ -837,7 +864,9 @@ class ProspectosAcaImportadosController extends Controller
                                 'insoluble_fiber_serving' => $old_data_prod['insoluble_fiber_serving'],
                                 'sodium_100' => $old_data_prod['sodium_100'],
                                 'sodium_serving' => $old_data_prod['sodium_serving'],
-                                'home_measure_reconstitued' => $old_data['home_measure_reconstitued'],
+                                #'potassium_100' => $old_data_prod['potassium_100'],
+                                #'potassium_serving' => $old_data_prod['potassium_serving'],
+                                #'home_measure_reconstitued' => $old_data['home_measure_reconstitued'],
                                 'serving_size_reconstitued' => $old_data_prod['serving_size_reconstitued'],
                                 'servings_per_container_reconstitued' => $old_data_prod['servings_per_container_reconstitued'],
                                 'energy_100_reconstitued' => $old_data_prod['energy_100_reconstitued'],
@@ -894,6 +923,8 @@ class ProspectosAcaImportadosController extends Controller
                                 'sodium_100_reconstitued' => $old_data_prod['sodium_100_reconstitued'],
                                 'sodium_serving_reconstitued' => $old_data_prod['sodium_serving_reconstitued'],
                                 'sodium_serving_reconstitued_r' => $old_data_prod['sodium_serving_reconstitued_r'],
+                                #'potassium_100_reconstitued' => $old_data_prod['potassium_100_reconstitued'],
+                                #'potassium_serving_reconstitued_r' => $old_data_prod['potassium_serving_reconstitued_r'],
                                 'vitamin_a_100' => $old_data_prod['vitamin_a_100'],
                                 'vitamin_a_serving' => $old_data_prod['vitamin_a_serving'],
                                 'vitamin_c_100' => $old_data_prod['vitamin_c_100'],
@@ -994,6 +1025,7 @@ class ProspectosAcaImportadosController extends Controller
                             
                             $producto->update([
                                 'sap' => $sap_producto[$value],
+                                'code' => $code[$value],
                                 'product_name' => $product_name[$value],
                                 'product_name_spanish' => $product_name_spanish[$value],
                                 'claims_origin' => $claims_origin[$value],
@@ -1036,7 +1068,6 @@ class ProspectosAcaImportadosController extends Controller
                                 'minimum_porcent_cocoa_solids' => $minimum_porcent_cocoa_solids[$value],
                                 'porcent_cocoa_butter_cocoa_mass' => $porcent_cocoa_butter_cocoa_mass[$value],
                                 'contain_potential_allergens' => $contain_potential_allergens[$value],
-                                ##'list_contain_potential_allergens' => $list_contain_potential_allergens[$value],
                                 'cereals_gluten' => $cereals_gluten[$value],
                                 'cereals_gluten_list' => $cereals_gluten_list[$value],
                                 'crustacean_products' => $crustacean_products[$value],
@@ -1056,15 +1087,6 @@ class ProspectosAcaImportadosController extends Controller
                                 'glute_free_spike_main_face' => $glute_free_spike_main_face[$value],
                                 'glute_free_spike_another_face' => $glute_free_spike_another_face[$value],
                                 'glute_free_no_spike' => $glute_free_no_spike[$value],
-                                #'health_certificate' => $health_certificate[$value],
-                                #'health_certificate_file' => $health_certificate_file[$value],
-                                #'organic_certification' => $organic_certification[$value],
-                                #'organic_certification_file' => $organic_certification_file[$value],
-                                #'certification_free_afp' => $certification_free_afp[$value],
-                                #'free_afp_file' => $free_afp_file[$value],
-                                #'thermograph' => $thermograph[$value],
-                                #'gmo_information' => $gmo_information[$value],
-                                #'list_gmo_information' => $list_gmo_information[$value],
                                 'total_plate_count' => $total_plate_count[$value],
                                 'coliform' => $coliform[$value],
                                 'e_coli' => $e_coli[$value],
@@ -1137,6 +1159,8 @@ class ProspectosAcaImportadosController extends Controller
                                 'insoluble_fiber_serving' => $insoluble_fiber_serving[$value],
                                 'sodium_100' => $sodium_100[$value],
                                 'sodium_serving' => $sodium_serving[$value],
+                                'potassium_100' => $potassium_100[$value],
+                                'potassium_serving' => $potassium_serving[$value],
                                 'home_measure_reconstitued' => (!empty($home_measure_reconstitued[$value]) ? $home_measure_reconstitued[$value] : null),
                                 'serving_size_reconstitued' => $serving_size_reconstitued[$value],
                                 'servings_per_container_reconstitued' => $servings_per_container_reconstitued[$value],
@@ -1194,6 +1218,9 @@ class ProspectosAcaImportadosController extends Controller
                                 'sodium_100_reconstitued' => $sodium_100_reconstitued[$value],
                                 'sodium_serving_reconstitued' => $sodium_serving_reconstitued[$value],
                                 'sodium_serving_reconstitued_r' => $sodium_serving_reconstitued_r[$value],
+                                'potassium_100_reconstitued' => $potassium_100_reconstitued[$value],
+                                'potassium_serving_reconstitued' => $potassium_serving_reconstitued[$value],
+                                'potassium_serving_reconstitued_r' => $potassium_serving_reconstitued_r[$value],
                                 'vitamin_a_100' => $vitamin_a_100[$value],
                                 'vitamin_a_serving' => $vitamin_a_serving[$value],
                                 'vitamin_c_100' => $vitamin_c_100[$value],
@@ -1270,6 +1297,8 @@ class ProspectosAcaImportadosController extends Controller
                                 'steroids' => $steroids[$value],
                                 'estado_cl' => $estado_cl[$value],
                                 'observacion_solicitud' => $observacion_solicitud[$value],
+                                'estado_calidad' => $estado_calidad[$value],
+                                'observacion_solicitud_calidad' => $observacion_solicitud_calidad[$value],
                             ]);
                             if($estado_cl[$value] > 1){
                                 $producto->update(['fecha_cierre' => date('Y-m-d')]);
@@ -1450,98 +1479,6 @@ class ProspectosAcaImportadosController extends Controller
                                         $health_certificate_q->addMedia($health_certificate_file[$value])->toMediaCollection('certificaciones_fijas_producto_importado');
                                     }
                                 }
-                                /*
-                                ##organic_certification
-                                if(!empty($organic_certification_file[$value])){
-                                    $organic_certification_q=BibliotecaDocumentos::create([
-                                        'id_user' => Auth::user()->id,
-                                        'id_solicitud_importado' => $id,
-                                        'id_prospecto_importado' => $value,
-                                        'id_proveedor' => $producto->id_proveedor,
-                                        'id_documento' => 23,
-                                    ]);
-                                    if ($organic_certification_file[$value]->isValid()) {
-                                        $organic_certification_q->addMedia($organic_certification_file[$value])->toMediaCollection('certificaciones_fijas_producto');
-                                    }
-                                }
-                                ##certification_free_afp
-                                if(!empty($certification_free_afp_file[$value])){
-                                    $certification_free_afp_file_q=BibliotecaDocumentos::create([
-                                        'id_user' => Auth::user()->id,
-                                        'id_solicitud_importado' => $id,
-                                        'id_prospecto_importado' => $value,
-                                        'id_proveedor' => $producto->id_proveedor,
-                                        'id_documento' => 61,
-                                    ]);
-                                    if ($certification_free_afp_file[$value]->isValid()) {
-                                        $certification_free_afp_file_q->addMedia($certification_free_afp_file[$value])->toMediaCollection('certificaciones_fijas_producto');
-                                    }
-                                }
-                                ##haccp
-                                if(!empty($haccp_file[$value])){
-                                    $haccp_q=BibliotecaDocumentos::create([
-                                        'id_user' => Auth::user()->id,
-                                        'id_solicitud_importado' => $id,
-                                        'id_prospecto_importado' => $value,
-                                        'id_proveedor' => $producto->id_proveedor,
-                                        'id_documento' => 37,
-                                    ]);
-                                    if ($haccp_file[$value]->isValid()) {
-                                        $haccp_q->addMedia($haccp_file[$value])->toMediaCollection('certificaciones_fijas_producto');
-                                    }
-                                }
-                                ##others_certifications
-                                if(!empty($others_certifications_file[$value])){
-                                    $others_certifications_q=BibliotecaDocumentos::create([
-                                        'id_user' => Auth::user()->id,
-                                        'id_solicitud_importado' => $id,
-                                        'id_prospecto_importado' => $value,
-                                        'id_proveedor' => $producto->id_proveedor,
-                                        'id_documento' => 22,
-                                    ]);
-                                    if ($others_certifications_file[$value]->isValid()) {
-                                        $others_certifications_q->addMedia($others_certifications_file[$value])->toMediaCollection('certificaciones_fijas_producto');
-                                    }
-                                }
-                                ##gluten_free
-                                if(!empty($gluten_free_file[$value])){
-                                    $gluten_free_q=BibliotecaDocumentos::create([
-                                        'id_user' => Auth::user()->id,
-                                        'id_solicitud_importado' => $id,
-                                        'id_prospecto_importado' => $value,
-                                        'id_proveedor' => $producto->id_proveedor,
-                                        'id_documento' => 27,
-                                    ]);
-                                    if ($gluten_free_file[$value]->isValid()) {
-                                        $gluten_free_q->addMedia($gluten_free_file[$value])->toMediaCollection('certificaciones_fijas_producto');
-                                    }
-                                }
-                                ##hidroxianthracene
-                                if(!empty($hidroxianthracene_file[$value])){
-                                    $hidroxianthracene_q=BibliotecaDocumentos::create([
-                                        'id_user' => Auth::user()->id,
-                                        'id_solicitud_importado' => $id,
-                                        'id_prospecto_importado' => $value,
-                                        'id_proveedor' => $producto->id_proveedor,
-                                        'id_documento' => 62,
-                                    ]);
-                                    if ($hidroxianthracene_file[$value]->isValid()) {
-                                        $hidroxianthracene_q->addMedia($hidroxianthracene_file[$value])->toMediaCollection('certificaciones_fijas_producto');
-                                    }
-                                }
-                                ##aloine
-                                if(!empty($aloine_file[$value])){
-                                    $aloine_q = BibliotecaDocumentos::create([
-                                        'id_user' => Auth::user()->id,
-                                        'id_solicitud_importado' => $id,
-                                        'id_prospecto_importado' => $value,
-                                        'id_proveedor' => $producto->id_proveedor,
-                                        'id_documento' => 63,
-                                    ]);
-                                    if ($aloine_file[$value]->isValid()) {
-                                        $aloine_q->addMedia($aloine_file[$value])->toMediaCollection('certificaciones_fijas_producto');
-                                    }
-                                }*/
                                 ##flow_chart
                                 if(!empty($flow_chart_file[$value])){
                                     $flow_chart_q = BibliotecaDocumentos::create([
@@ -1752,28 +1689,101 @@ class ProspectosAcaImportadosController extends Controller
         
         return $pdf->stream();
     }
-    public function planilla_solicitud_prospecto_excel(string $id){
-        /*$mes = (!empty($request->input('mes_excel'))) ? $request->input('mes_excel') : date('m');
-        $ano = (!empty($request->input('ano_excel'))) ? $request->input('ano_excel') : date('Y');
-        $seccion = $request->input('seccion_excel');
-        $query = Reclamo::with('seccion','tienda')->where('reclamo_fecha','LIKE','%'.$ano.'-'.$mes.'%');
-        if(!empty($seccion)){
-            $query->where('id_seccion',$seccion);
-        };
-        $data['reporte_data'] = $query->get();*/
-        $data['data'] = SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto.obs')->findOrFail($id);
-        #$data['data']=[];
-        return Excel::download(new PlanillaSolicitudImportadoExcel('default', $data), 'Planilla_Solicitud.xlsx');
+    public function planilla_solicitud_prospecto_email(string $id){
+        try {
+            $data['data'] = SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto.obs','responsable_comercial')->findOrFail($id);
+            $nutrients = [
+                'energy', 'proteins', 'total_fat', 'satured_fat', 'trans_fat',
+                'monosatured_fat', 'polyunsatured_fat', 'cholesterol', 'total_carbohydrate',
+                'available_carbohydrates', 'total_sugars', 'sucrose', 'lactos', 'poliols',
+                'total_dietary_fiber', 'soluble_fiber', 'insoluble_fiber', 'sodium', 'potassium'
+            ];
+            
+            // Determine which nutrients are present in any product
+            $nutrient_headers = [];
+
+            $other_fields = [
+                'Indicate net weight' => 'net_weight',
+                'Indicate drained weight' => 'drained_weight',
+                'Indicate country origin' => 'country',
+                'Milking country' => 'milking_country',
+                'Indicate type expiration date used' => 'expiration_date',
+                'Indicate Shelf Life' => 'shelf_life',
+                'Indicate storage conditions' => 'storage_conditions',
+                'Indicate method of preparation' => 'method_preparation',
+                'Indicate name of supplier' => 'name_supplier',
+                'Indicate quantity of additive used by 100G' => 'quantity_additive',
+                'Indicate type of vegetable oil or fat used' => 'vegetable_oil_fat_used',
+                'Indicate name of herbs or spices used' => 'spices_herbs_used',
+                'Indicate quantity of sweetener used per 100g' => 'quantity_sweetener_per_100_gr_ml',
+                'Indicate if flavourings or aroma used are natural or artificial' => 'flavourings_aroma_natural_artificial',
+                'Indicate quantity of xilitol, maltitol, sorbitol, glicerol per 100G' => 'quantity_x_m_s_g',
+                'Indicate of quantity caffeine used' => 'quantity_caffeine',
+                'If any extract is used, to indicate function, chemical process and name of component extracted' => 'extract_details',
+                'Indicate origin of gelatin used' => 'origin_gelatin',
+                'To indicate ° Brix of the final product' => 'brix_final_product',
+                'º Brix of the final product without added sugar' => 'brix_final_product_without_added_sugar',
+                'º Brix of fruit that is in greater proportion in the drink' => 'brix_fruit_greater_proportion_drink',
+                'Indicate name of colourings' => 'names_colourings',
+                'Indicate minimum % of cocoa solids used' => 'minimum_porcent_cocoa_solids',
+                'Indicate the % cocoa butter from recipe' => 'porcent_cocoa_butter_cocoa_mass',
+                'Indicate % of organic ingredient in the formulation' => 'porcent_organic_ingredients',
+                'Chemical values (pH)' => 'ph',
+                'Chemical values (aw)' => 'porcent_aw',
+                'Allergen information' => ['cereals_gluten', 'crustacean_products', 'egg_derivatives', 'fish_derivatives', 'peanuts_soy_derivatives', 'milk_dairy_derivatives', 'nuts_derivatives', 'sulfites_derivatives'],
+                'Type of primary packaging used' => 'type_primary_packaging',
+                'Type of secondary packaging used' => 'type_secundary_packaging',
+                'Indicate type of controls used in sealing or air tightness of primary packaging' => 'type_controls_sealing_air_tightness_primary_packaging'
+            ];
+        
+            // Determine which other fields are present in any product
+            $other_field_headers = [];
+            foreach ($data['data']->productos_solicitud_prospecto as $item) {
+                foreach ($nutrients as $nutrient) {
+                    if (!empty($item->obs->{$nutrient}) || !empty($item->obs->{$nutrient . '_reconstitued'})) {
+                        $nutrient_headers[$nutrient] = true;
+                    }
+                }
+                foreach ($other_fields as $label => $field) {
+                    if (is_array($field)) {
+                        foreach ($field as $subField) {
+                            if (!empty($item->obs->{$subField})) {
+                                $other_field_headers[$label] = true;
+                                break; // Break the inner loop if any subfield is not empty
+                            }
+                        }
+                    } else {
+                        if (!empty($item->obs->{$field})) {
+                            $other_field_headers[$label] = true;
+                        }
+                    }
+                }
+            }
+        
+            $data['nutrients'] = $nutrients;
+            $data['nutrient_headers'] = $nutrient_headers;
+            $data['other_fields'] = $other_fields;
+            $data['other_field_headers'] = $other_field_headers;
+
+            #return view('prospectos-importados.mail.planilla-solicitud', $data);
+            
+            #return Excel::download(new PlanillaSolicitudImportadoExcel('default', $data), 'Planilla_Solicitud.xlsx');
+            $filePath = storage_path('app/public/Planilla_Solicitud_' . $id . '.xlsx');
+            Excel::store(new PlanillaSolicitudImportadoExcel('default', $data), 'public/Planilla_Solicitud_' . $id . '.xlsx');
+
+            #ENVIO DE EMAIL
+            // Preparar los correos CC
+            $emailsCc = User::whereHas('roles', function($query) {
+                $query->whereIn('name', ['aca importado', 'calidad']);
+            }, '=', 2)->pluck('email')->toArray();
+            Mail::to($data['data']->responsable_comercial->email)
+            ->send(new EnviarPlanillaSolicitudImportadosMail($data,$filePath, $emailsCc, null, null));
+            return response()->json(['success' => true, 'message' => 'Correo enviado con el Excel adjunto']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Error al enviar el correo: ' . $e->getMessage()]);
+        }
     }
     public function ficha_tecnica_excel(string $id){
-        /*$mes = (!empty($request->input('mes_excel'))) ? $request->input('mes_excel') : date('m');
-        $ano = (!empty($request->input('ano_excel'))) ? $request->input('ano_excel') : date('Y');
-        $seccion = $request->input('seccion_excel');
-        $query = Reclamo::with('seccion','tienda')->where('reclamo_fecha','LIKE','%'.$ano.'-'.$mes.'%');
-        if(!empty($seccion)){
-            $query->where('id_seccion',$seccion);
-        };
-        $data['reporte_data'] = $query->get();*/
         $data['data'] = ProductosSolicitudImportadosAca::with('obs')->findOrFail($id);
         #$data['data']=[];
         return Excel::download(new FichaTecnicaImportadoExcel('default', $data), 'Ficha_Tecnica.xlsx');
@@ -1786,45 +1796,43 @@ class ProspectosAcaImportadosController extends Controller
     public function buscar_fichas_tecnicas(Request $request)
     {
         //
-        $data=[];       
-        $nombre_producto = (!empty($request->input('nombre_producto'))) ? $request->input('nombre_producto') : '%';
-        $codigo_ean = (!empty($request->input('codigo_ean'))) ? $request->input('codigo_ean') : '%';
-        $codigo_sap = (!empty($request->input('codigo_sap'))) ? $request->input('codigo_sap') : '%';
-        $nombre_proveedor = (!empty($request->input('nombre_proveedor'))) ? $request->input('nombre_proveedor') : '%';
-        $rut_proveedor = (!empty($request->input('rut_proveedor'))) ? $request->input('rut_proveedor') : '%';
-        $data['request'] =$request;
-        $data['fichas_tecnicas']=[];
+        // Verificar si al menos un campo está lleno
+         // Verificar si al menos un campo está lleno
+        $fields = ['rut_proveedor', 'nombre_proveedor', 'nombre_producto', 'codigo_sap', 'codigo_ean'];
+        $filledFields = array_filter($fields, fn($field) => trim($request->input($field)) !== '');
 
-        if($nombre_proveedor != '%' || $rut_proveedor != '%' || $nombre_producto != '%' || $codigo_ean != '%' || $codigo_sap != '%'){
-            /*SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto')
-            ->whereHas('productos_solicitud_prospecto', function ($query) use ($nombre_producto) {
-                $query->where('nombre_producto', $nombre_producto);
-            })
-            ->where('nombre_proveedor', $nombre_proveedor)
-            ->get();*/
-            $fichas_query = SolicitudProspectoProductosImportadosAca::with('productos_solicitud_prospecto');
-            if($nombre_proveedor != '%'){
-                $fichas_query->where('nombre_proveedor','LIKE',"%$nombre_proveedor%");
-            }
-            if($rut_proveedor != '%' ){
-                $fichas_query->where('rut_proveedor','LIKE',"%$rut_proveedor%");
-            }
-            if($nombre_producto != '%'){
-                $fichas_query->whereHas('productos_solicitud_prospecto', function ($query) use ($nombre_producto) {
-                    if($nombre_producto != '%'){
-                        $query->where('product_name', 'LIKE', "%$nombre_producto%");
-                    }
-                    /*if($codigo_ean != '%'){
-                        $query->where('upc_bar_code', 'LIKE', "%$codigo_ean%");
-                    }
-                    if($codigo_sap != '%'){
-                        $query->where('sap', 'LIKE', "%$codigo_sap%");
-                    }*/
-                });               
-            }
-            $data['fichas_tecnicas'] = $fichas_query->get();
+        if (empty($filledFields)) {
+            return view('prospectos-importados.list-fichas-tecnicas', ['products' => []]);
         }
-        
-        return view('prospectos-importados.list-fichas-tecnicas',$data);
+
+        $query = ProductosSolicitudImportadosAca::with('solicitud');
+
+        if ($request->filled('rut_proveedor')) {
+            $query->whereHas('solicitud', function($q) use ($request) {
+                $q->where('rut_proveedor', 'like', '%'.$request->rut_proveedor.'%');
+            });
+        }
+
+        if ($request->filled('nombre_proveedor')) {
+            $query->whereHas('solicitud', function($q) use ($request) {
+                $q->where('nombre_proveedor', 'like', '%'.$request->nombre_proveedor.'%');
+            });
+        }
+
+        if ($request->filled('nombre_producto')) {
+            $query->where('product_name', 'like', '%'.$request->nombre_producto.'%');
+        }
+
+        if ($request->filled('codigo_sap')) {
+            $query->where('sap', 'like', '%'.$request->codigo_sap.'%');
+        }
+
+        if ($request->filled('codigo_ean')) {
+            $query->where('upc_bar_code', 'like', '%'.$request->codigo_ean.'%');
+        }
+
+        $products = $query->get();
+
+        return view('prospectos-importados.list-fichas-tecnicas', compact('products'));
     }
 }

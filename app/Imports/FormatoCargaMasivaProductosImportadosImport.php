@@ -38,8 +38,10 @@ class FormatoCargaMasivaProductosImportadosImport implements ToCollection, WithH
                 $producto_prospecto=ProductosSolicitudImportadosAca::create([
                     'id_solicitud' => $this->id_solicitud,
                     'id_proveedor' => $this->id_proveedor,
+                    'code' =>$value['codigo'],
                     'upc_bar_code' =>$value['ean_13'],
                     'product_name' =>$value['descripcion'],
+                    'product_name_comercial' =>$value['descripcion'],
                     'id_seccion' => $value['codigo_seccion'],
                     'net_weight' => $value['contenido_neto'],
                     'seccion' => $seccion->nombre,

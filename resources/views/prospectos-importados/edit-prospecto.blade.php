@@ -149,9 +149,17 @@
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <div class="form-group row">
-                                                                                <label class="col-sm-4 col-form-label font-weight-bold">Nombre producto:</label>
+                                                                                <label class="col-sm-4 col-form-label font-weight-bold">Nombre producto comercial:</label>
                                                                                 <div class="col-sm-8">
-                                                                                    <input type="text" class="form-control form-control-sm" id="nombre_producto_0_{{$producto->id}}" name="product_name[{{$producto->id}}]" placeholder="Nombre producto" value="{{$producto->product_name}}" onkeyup="$('#nombre_producto_1_{{$producto->id}}').val(this.value)">
+                                                                                    <input type="text" class="form-control form-control-sm" id="nombre_producto_0_{{$producto->id}}" name="product_name_comercial[{{$producto->id}}]" placeholder="Nombre producto" value="{{$producto->product_name_comercial}}">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-4 col-form-label font-weight-bold">Código:</label>
+                                                                                <div class="col-sm-8">
+                                                                                    <input type="text" class="form-control form-control-sm" name="code[{{$producto->id}}]" placeholder="Código" value="{{$producto->code}}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -2313,6 +2321,50 @@
                                                                                                 </table>
                                                                                             </div>
                                                                                             <div class="col-md-12">
+                                                                                                <h6 class="mb-2 font-weight-bold text-primary">9.- Nutritional information aditional</h6>
+                                                                                            </div>
+                                                                                            <div class="col-md-12">
+                                                                                                <table class="table table-bordered table-stripped table-hover table-sm">
+                                                                                                    <thead>
+                                                                                                        <tr>
+                                                                                                            <th colspan="4">Nutritional Facts</th>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <th>Campo</th>
+                                                                                                            <th width="30%">100 g/ml</th>
+                                                                                                            <th width="30%">1 serving</th>
+                                                                                                            <th width="20%">Observación</th>
+                                                                                                        </tr>
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Campo" name="other_nutri_fild_name[{{ $producto->id }}][]"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="100 g/ml" name="other_nutri_100[{{ $producto->id }}][]"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="1 serving" name="other_nutri_serving[{{ $producto->id }}][]"></td>
+                                                                                                            <td><textarea rows="3" class="form-control" placeholder="Observación" name="other_nutri_obs[{{ $producto->id }}][]"></textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Campo" name="other_nutri_fild_name[{{ $producto->id }}][]"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="100 g/ml" name="other_nutri_100[{{ $producto->id }}][]"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="1 serving" name="other_nutri_serving[{{ $producto->id }}][]"></td>
+                                                                                                            <td><textarea rows="3" class="form-control" placeholder="Observación" name="other_nutri_obs[{{ $producto->id }}][]"></textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Campo" name="other_nutri_fild_name[{{ $producto->id }}][]"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="100 g/ml" name="other_nutri_100[{{ $producto->id }}][]"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="1 serving" name="other_nutri_serving[{{ $producto->id }}][]"></td>
+                                                                                                            <td><textarea rows="3" class="form-control" placeholder="Observación" name="other_nutri_obs[{{ $producto->id }}][]"></textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Campo" name="other_nutri_fild_name[{{ $producto->id }}][]"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="100 g/ml" name="other_nutri_100[{{ $producto->id }}][]"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="1 serving" name="other_nutri_serving[{{ $producto->id }}][]"></td>
+                                                                                                            <td><textarea rows="3" class="form-control" placeholder="Observación" name="other_nutri_obs[{{ $producto->id }}][]"></textarea></td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </div>
+                                                                                            <div class="col-md-12">
                                                                                                 <h6 class="mb-2 font-weight-bold text-primary">9.- Nutritional information</h6>
                                                                                             </div>
                                                                                             <div class="col-md-12">
@@ -2465,6 +2517,12 @@
                                                                                                             <td><input type="text" class="form-control" name="sodium_100[{{ $producto->id }}]" value="{{ intval($producto->sodium_100) }}"></td>
                                                                                                             <td><input type="text" class="form-control" name="sodium_serving[{{ $producto->id }}]" value="{{ $producto->sodium_serving }}"></td>
                                                                                                             <td><textarea rows="3" class="form-control" name="sodium_obs[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->sodium }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Potasio</td>
+                                                                                                            <td><input type="text" class="form-control" name="potassium_100[{{ $producto->id }}]" value="{{ intval($producto->potassium_100) }}"></td>
+                                                                                                            <td><input type="text" class="form-control" name="potassium_serving[{{ $producto->id }}]" value="{{ $producto->potassium_serving }}"></td>
+                                                                                                            <td><textarea rows="3" class="form-control" name="potassium_obs[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->potassium }}</textarea></td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                 </table>
@@ -2623,6 +2681,13 @@
                                                                                                             <td><input type="text" class="form-control" name="sodium_serving_reconstitued[{{ $producto->id }}]" value="{{ $producto->sodium_serving_reconstitued }}"></td>
                                                                                                             <td><input type="text" class="form-control" name="sodium_serving_reconstitued_r[{{ $producto->id }}]" value="{{ $producto->sodium_serving_reconstitued_r }}"></td>
                                                                                                             <td><textarea rows="3" class="form-control" name="sodium_obs_reconstitued[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->sodium }}</textarea></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td>Potasio</td>
+                                                                                                            <td><input type="text" class="form-control" name="potassium_100_reconstitued[{{ $producto->id }}]" value="{{ intval($producto->potassium_100_reconstitued) }}"></td>
+                                                                                                            <td><input type="text" class="form-control" name="potassium_serving_reconstitued[{{ $producto->id }}]" value="{{ $producto->potassium_serving_reconstitued }}"></td>
+                                                                                                            <td><input type="text" class="form-control" name="potassium_serving_reconstitued_r[{{ $producto->id }}]" value="{{ $producto->potassium_serving_reconstitued_r }}"></td>
+                                                                                                            <td><textarea rows="3" class="form-control" name="potassium_obs_reconstitued[{{ $producto->id }}]" placeholder="Observaciones">{{ $producto->obs->potassium }}</textarea></td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                     
@@ -4074,7 +4139,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <div class="form-group row">
-                                                                                <label class="col-sm-4 col-form-label font-weight-bold">Estado:</label>
+                                                                                <label class="col-sm-4 col-form-label font-weight-bold">Estado producto comercial:</label>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="row">
                                                                                         @if ((Auth::user()->hasRole('comercial') && $producto->estado_cl == 1) || Auth::user()->hasRole('calidad'))
@@ -4110,6 +4175,50 @@
                                                                                 <label class="col-sm-4 col-form-label font-weight-bold">Observación:</label>
                                                                                 <div class="col-md-8">
                                                                                     <textarea name="observacion_solicitud[{{$producto->id}}]" class="form-control form-control-sm" placeholder="Observaciones" rows="5" style="resize: none" 
+                                                                                   {{  (Auth::user()->hasRole('comercial')) ? 'readonly' : '' }}>{{ $producto->observacion_solicitud }}</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-4 col-form-label font-weight-bold">Estado producto calidad:</label>
+                                                                                <div class="col-sm-8">
+                                                                                    <div class="row">
+                                                                                        @if ((Auth::user()->hasRole('comercial') && $producto->estado_calidad == 1) || Auth::user()->hasRole('calidad'))
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-check form-check-inline">
+                                                                                                    <input {{($producto->estado_calidad == 1) ? 'checked' : ''}}  class="form-check-input" type="radio" name="estado_calidad[{{$producto->id}}]" id="estado_calidad_p_{{$producto->id}}" value="1">
+                                                                                                    <label class="form-check-label badge badge-warning" for="estado_calidad_p_{{$producto->id}}">Pendiente</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        @endif
+                                                                                        @if ((Auth::user()->hasRole('comercial') && $producto->estado_calidad == 2) || Auth::user()->hasRole('calidad'))
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-check form-check-inline">
+                                                                                                    <input {{($producto->estado_calidad == 2) ? 'checked' : ''}}  class="form-check-input" type="radio" name="estado_calidad[{{$producto->id}}]" id="estado_calidad_a_{{$producto->id}}" value="2">
+                                                                                                    <label class="form-check-label badge badge-success" for="estado_calidad_a_{{$producto->id}}">Aprobado</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        @endif
+                                                                                        @if ((Auth::user()->hasRole('comercial') && $producto->estado_calidad == 3) || Auth::user()->hasRole('calidad'))
+                                                                                            <div class="col-md-4">
+                                                                                                <div class="form-check form-check-inline">
+                                                                                                    <input  {{($producto->estado_calidad == 3) ? 'checked' : ''}}  class="form-check-input" type="radio" name="estado_calidad[{{$producto->id}}]" id="estado_calidad_r_{{$producto->id}}" value="3">
+                                                                                                    <label class="form-check-label badge badge-danger" for="estado_calidad_r_{{$producto->id}}">Rechazado</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="row">
+                                                                                <label class="col-sm-4 col-form-label font-weight-bold">Observación:</label>
+                                                                                <div class="col-md-8">
+                                                                                    <textarea name="observacion_solicitud_calidad[{{$producto->id}}]" class="form-control form-control-sm" placeholder="Observaciones" rows="5" style="resize: none" 
                                                                                    {{  (Auth::user()->hasRole('comercial')) ? 'readonly' : '' }}>{{ $producto->observacion_solicitud }}</textarea>
                                                                                 </div>
                                                                             </div>
@@ -4163,26 +4272,15 @@
                             <button class="btn btn-primary" type="button" onclick="stepper.previous()">Atras</button>
                             <button class="btn btn-primary" type="button" onclick="stepper.next()">Siguiente</button>
                         </div>
-                        <div class="col-md-4 text-center">
-                            @hasrole('comercial')
-                                @if (empty($prospecto->id_comercial) || $prospecto->id_comercial != Auth::user()->id)
-                                    <button class="btn btn-danger" type="button" onclick="$('#id_comercial').val({{Auth::user()->id}});$('#solicitudForm').submit();">Ser Responsable Comercial</button>    
-                                @endif
-                            @endhasrole
-                            @hasrole('calidad')
-                                @if (empty($prospecto->id_calidad) || $prospecto->id_calidad != Auth::user()->id)
-                                    <button class="btn btn-danger" type="button" onclick="$('#id_calidad').val({{Auth::user()->id}});$('#solicitudForm').submit();">Ser Responsable Calidad</button>    
-                                @endif
-                            @endhasrole
+                        <div class="col-md-2 text-center">
                         </div>
-                        <div class="col-md-4 text-right">
+                        <div class="col-md-6 text-right">
                            @if (($prospecto->estado_solicitud > 0 && Auth::user()->hasRole('calidad')) || ($prospecto->estado_solicitud == 0 && Auth::user()->hasRole('comercial')))
                                 @hasrole('calidad')
                                     @if ($prospecto->estado_solicitud != 1 && $prospecto->estado_solicitud != 0 && $prospecto->status != 2)
                                         <button class="btn btn-warning" type="button" onclick="$('#estado_solicitud').val(1);$('#solicitudForm').submit();">Enviar a Comercial</button>
                                     @endif
-                                    <a class="btn btn-secondary" href="{{ route('prospectos.importados.excel.planilla-solicitud',$prospecto->id) }}">Planilla Solicitud</a>
-                                    
+                                    <button class="btn btn-secondary" type="button" id="sendEmailButton">Enviar Planilla Solicitud</button>
                                 @endhasrole
                                 @hasrole('comercial')
                                     @if (($prospecto->estado_solicitud == 2 || $prospecto->estado_solicitud == 0) && $prospecto->status != 2 )
@@ -4273,6 +4371,27 @@
     <script>
 		jQuery(document).ready(function(){
 			$('#collapseProspectosProductos').addClass('show');
+            $('#sendEmailButton').click(function() {
+                const id = {{ $prospecto->id }}
+                const url = '{{ route('prospectos.importados.email.planilla-solicitud', ':id') }}'.replace(':id', id);
+                const token = '{{ csrf_token() }}';
+
+                $.post(url, { _token: token })
+                    .done(response => {
+                        Swal.fire({
+                            icon: response.success ? 'success' : 'error',
+                            title: response.success ? '¡Éxito!' : 'Error',
+                            text: response.message
+                        });
+                    })
+                    .fail(response => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message, //'Hubo un problema al enviar el correo.'
+                        });
+                    });
+            });
 		});
 	</script>
 </x-layout>
